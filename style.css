@@ -140,7 +140,7 @@ button:hover {
    5. PIED DE PAGE (FOOTER) - COULEUR GRIS CLAIR
    =============================== */
 footer {
-    background-color: #111; /* Fond noir très léger pour contraster avec le corps */
+    background-color: #111; 
     color: #eee; /* Texte en gris clair/blanc */
     text-align: center;
     padding: 30px 20px;
@@ -160,14 +160,14 @@ footer a:hover {
 
 
 /* ===============================
-   6. STYLES DU MENU DÉROULANT (SETTINGS)
+   6. STYLES DU MENU DÉROULANT (SETTINGS) - Niveau 1
    =============================== */
 .dropdown {
     position: relative;
 }
 
 .dropdown-content {
-    /* Styles pour cacher et positionner le sous-menu */
+    /* Styles pour cacher et positionner le sous-menu (Paramètres) */
     display: none; 
     position: absolute;
     top: 100%;
@@ -196,17 +196,42 @@ footer a:hover {
     color: #0ff;
 }
 
-/* Classe ajoutée par JS pour afficher le sous-menu */
+/* Classe ajoutée par JS pour afficher le sous-menu Paramètres */
 .dropdown.show .dropdown-content {
+    display: block; 
+}
+
+/* ===============================
+   7. STYLES DU SOUS-MENU LANGUE - Niveau 2
+   =============================== */
+.dropdown-language {
+    position: relative; /* Base de positionnement pour le 2e niveau */
+}
+
+.language-content {
+    /* Cache par défaut, positionné à droite du lien "Langue" */
+    display: none;
+    position: absolute;
+    top: 0; 
+    left: 100%; /* S'affiche juste à droite de l'élément parent */
+    min-width: 150px;
+    background-color: #000;
+    border: 1px solid #0ff;
+    padding: 10px 0;
+    z-index: 60; 
+    list-style: none;
+    text-align: left;
+}
+
+/* Classe ajoutée par JS pour afficher le sous-menu Langue */
+.dropdown-language.show .language-content {
     display: block; 
 }
 
 
 /* ===============================
-   7. RESPONSIVE & MENU MOBILE
+   8. RESPONSIVE & MENU MOBILE
    =============================== */
-
-/* Le bouton hamburger est caché par défaut sur les grands écrans */
 .menu-toggle {
     display: none; 
     background: none;
@@ -221,16 +246,12 @@ footer a:hover {
     z-index: 100;
 }
 
-
-/* Styles qui s'appliquent lorsque l'écran est petit (téléphone) */
 @media (max-width: 768px) {
     
-    /* Afficher le bouton menu-toggle sur mobile */
     .menu-toggle {
         display: block; 
     }
 
-    /* Le menu principal (main-nav) est caché par défaut sur mobile */
     #main-nav ul {
         display: none;
         flex-direction: column;
@@ -243,17 +264,16 @@ footer a:hover {
         z-index: 90;
     }
     
-    /* Quand le menu a la classe 'active', il s'affiche */
     #main-nav.active ul {
         display: flex;
     }
 
-    /* Style des liens empilés */
+    /* Styles pour tous les niveaux de liens empilés sur mobile */
     #main-nav ul li {
         margin: 0;
         border-bottom: 1px solid #111;
         text-align: center;
-        width: 100%; /* Prend toute la largeur */
+        width: 100%;
     }
 
     #main-nav ul li a {
@@ -261,11 +281,13 @@ footer a:hover {
         padding: 15px;
     }
 
-    /* Sur mobile, le sous-menu Langue doit prendre toute la largeur */
-    .dropdown-content {
+    /* Sur mobile, les sous-menus doivent être verticaux */
+    .dropdown-content, .language-content {
         position: static;
         border: none;
         width: 100%;
         box-shadow: none;
+        padding: 0;
+        background-color: #222; /* Fond plus sombre pour les sous-menus */
     }
-      }
+       }
