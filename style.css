@@ -1,6 +1,7 @@
 /* ====================================================================
    FEUILLE DE STYLE UNIFIÉE : DASHBOARD DARK THEME
    Base Néon (Accentuation) + Structure en Cartes (Design Moderne)
+   Navigation : Menu Déroulant (Hamburger) Unique
    ==================================================================== */
 
 /* ===============================
@@ -14,7 +15,7 @@
 
 body {
     background-color: #000; /* Fond noir */
-    color: #eee; /* CHANGEMENT: Texte par défaut en Gris Clair pour lisibilité */
+    color: #eee; /* Texte par défaut en Gris Clair pour lisibilité */
     font-family: Arial, sans-serif;
     line-height: 1.6;
     min-height: 100vh;
@@ -36,7 +37,7 @@ h1, h2 {
 
 /* Liens hypertexte */
 a {
-    color: #0ff; /* CHANGEMENT: Liens en couleur d'accentuation */
+    color: #0ff; /* Liens en couleur d'accentuation */
     text-decoration: none;
     transition: color 0.3s, text-shadow 0.3s;
 }
@@ -48,7 +49,7 @@ a:hover {
 
 
 /* ===============================
-   2. HEADER ET NAVIGATION
+   2. HEADER ET NAVIGATION (PANNEAU LATÉRAL)
    =============================== */
 header {
     background-color: #000;
@@ -57,27 +58,52 @@ header {
     position: relative; 
 }
 
-/* La navigation principale sur grand écran */
-nav ul {
+/* ************ NOUVELLES RÈGLES POUR MENU DÉROULANT UNIQUE ************ */
+
+/* Conteneur du menu (masqué par défaut) */
+#main-nav ul {
     list-style: none;
-    display: flex;
-    justify-content: center; 
+    display: none; /* MASQUÉ PAR DÉFAUT (actif seulement avec .active par JS) */
+    flex-direction: column;
+    background-color: #000;
+    position: fixed; /* Fixé pour rester visible au défilement */
+    width: 250px; /* Largeur du panneau latéral */
+    height: 100vh; /* Remplir la hauteur de l'écran */
+    top: 60px; /* Commence juste sous le header */
+    left: 0;
+    box-shadow: 5px 0 15px rgba(0, 255, 255, 0.5); /* Ombre sur le côté droit */
+    z-index: 90;
+    padding-top: 20px;
 }
 
-nav ul li {
-    margin: 0 20px;
+/* Liens du panneau */
+#main-nav ul li {
+    margin: 0; 
+    width: 100%; 
+    text-align: left;
+    border-bottom: 1px solid #111; 
 }
 
-nav ul li a {
-    color: #eee; /* CHANGEMENT: Liens de navigation en Gris Clair */
+/* Zone de clic des liens */
+#main-nav ul li a {
+    display: block;
+    color: #eee; 
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 15px 20px; 
 }
 
-nav ul li a:hover {
+#main-nav ul li a:hover {
     color: #0ff;
-    text-shadow: 0 0 10px #0ff;
+    background-color: #111; /* Léger fond pour le survol */
+    text-shadow: none;
 }
+
+/* Activation via JS (Hamburger cliqué) */
+#main-nav.active ul {
+    display: flex; 
+}
+
+/* ************************************************************* */
 
 
 /* ===============================
@@ -87,7 +113,6 @@ section {
     background-color: #111; /* Fond des grandes sections */
     padding: 40px;
     border-radius: 10px;
-    /* ATTÉNUATION de l'effet néon pour un look dashboard plus propre */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
     margin: 40px auto;
     max-width: 800px; 
@@ -96,7 +121,6 @@ section {
 /* Grille de conteneur pour les cartes de dashboard */
 .dashboard-grid {
     display: grid;
-    /* 3 colonnes sur grand écran, minimum 280px par carte */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
     gap: 20px;
     padding: 20px 0;
@@ -115,37 +139,32 @@ section ul {
    3.5. CARTES D'INFORMATION (Dashboard Cards)
    =============================== */
 .data-card {
-    background-color: #111; /* Couleur de la carte */
+    background-color: #111; 
     padding: 25px; 
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); /* Ombre de carte douce */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
     color: #eee;
-    /* Vous pouvez ajouter une bordure pour accentuer la couleur néon si vous voulez: 
-    border-left: 4px solid #0ff; */
 }
 
 .data-card h3 {
-    /* Titre de la carte (ex: "Balance", "Referrals") */
-    color: #eee; /* Titre plus discret */
+    color: #eee; 
     margin-bottom: 5px;
     font-size: 1em;
 }
 
 .data-value {
-    /* Valeur principale (le solde, les sessions) */
     font-size: 2.2em;
     font-weight: bold;
-    color: #0ff; /* Fait ressortir la valeur avec la couleur d'accentuation */
+    color: #0ff; /* Accentuation */
     display: block; 
     margin-top: 5px;
 }
 
-/* Style pour un indicateur de statut OFF (comme le jaune/orange dans l'image) */
+/* Indicateurs de statut */
 .status-offline {
     color: #ff9900; /* Orange/Ambre */
     font-weight: bold;
 }
-/* Style pour un indicateur de statut ON (comme le vert/néon) */
 .status-online {
     color: #0ff; /* Bleu Néon */
     font-weight: bold;
@@ -164,9 +183,9 @@ form {
 
 input[type="text"], input[type="email"], textarea {
     padding: 10px;
-    border: 1px solid #0ff; /* Bordure néon */
+    border: 1px solid #0ff; 
     background-color: #000;
-    color: #eee; /* CHANGEMENT: Couleur de texte du champ en clair */
+    color: #eee; 
     border-radius: 5px;
     font-family: inherit;
     box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
@@ -177,8 +196,8 @@ textarea {
 }
 
 button {
-    background-color: #0ff; /* Bouton principal en couleur d'accentuation */
-    color: #000; /* Texte noir sur le bouton néon */
+    background-color: #0ff; 
+    color: #000; 
     border: none;
     padding: 12px 20px;
     cursor: pointer;
@@ -190,11 +209,10 @@ button {
 button:hover {
     background-color: #0ff;
     color: #000;
-    opacity: 0.85; /* Survol plus subtil */
+    opacity: 0.85; 
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-/* Bouton secondaire (pour des actions moins prioritaires ou pour "Add Coins") */
 .btn-primary {
     background-color: #0ff;
     color: #000;
@@ -234,41 +252,45 @@ footer a:hover {
 
 
 /* ===============================
-   6. STYLES DU MENU DÉROULANT (DROPDOWN) - Niveau 1 & 2 (Inchangé)
+   6. STYLES DU MENU DÉROULANT (SOUS-MENUS - Verticalisation)
    =============================== */
 .dropdown {
     position: relative;
+    /* Règle pour ouvrir le sous-menu sur le même axe vertical */
+    width: 100%; 
 }
 
 .dropdown-content {
     display: none; 
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 150px;
-    background-color: #000;
-    border: 1px solid #0ff;
-    padding: 10px 0;
+    /* CHANGEMENT: Positionnement statique pour affichage vertical */
+    position: static; 
+    min-width: 100%;
+    background-color: #1a1a1a; /* Fond légèrement plus clair */
+    border: none;
+    padding: 0;
     z-index: 50; 
     list-style: none;
     text-align: left;
 }
 
 .dropdown-content li {
-    padding: 5px 15px;
+    padding: 0; /* Réinitialiser le padding global, ajusté dans li a */
     margin: 0;
+    border-top: 1px solid #222;
 }
 
 .dropdown-content li a {
     display: block;
-    color: #0ff;
+    color: #0ff; /* Texte du sous-menu en accentuation */
+    padding: 10px 30px; /* Décalage pour le niveau 1 */
 }
 
 .dropdown-content li a:hover {
-    background-color: #111;
+    background-color: #222;
     color: #fff;
 }
 
+/* Classe ajoutée par JS pour afficher le sous-menu Paramètres */
 .dropdown.show .dropdown-content {
     display: block; 
 }
@@ -280,16 +302,20 @@ footer a:hover {
 
 .language-content {
     display: none;
-    position: absolute;
-    top: 0; 
-    left: 100%; 
-    min-width: 150px;
-    background-color: #000;
-    border: 1px solid #0ff;
-    padding: 10px 0;
+    /* CHANGEMENT: Positionnement statique pour affichage vertical */
+    position: static;
+    min-width: 100%;
+    background-color: #2a2a2a; /* Encore plus clair pour le niveau 2 */
+    border: none;
+    padding: 0;
     z-index: 60; 
     list-style: none;
     text-align: left;
+}
+
+.language-content li a {
+    /* Décalage supplémentaire pour le sous-menu de Langue */
+    padding: 10px 50px; 
 }
 
 .dropdown-language.show .language-content {
@@ -298,3 +324,32 @@ footer a:hover {
 
 
 /* ===============================
+   7. MENU HAMBURGER (Toujours Visible)
+   =============================== */
+.menu-toggle {
+    display: block; /* Toujours visible */
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #0ff;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute; 
+    top: 10px;
+    left: 20px; /* CHANGEMENT: Positionné à gauche pour un panneau latéral */
+    z-index: 100;
+    border: 2px solid #0ff; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0ff;
+}
+
+/* Sur mobile, on s'assure que le menu s'affiche bien */
+@media (max-width: 768px) {
+    /* Règle pour le menu mobile déjà couverte par la règle #main-nav ul position: fixed */
+
+    /* S'assurer que les liens à l'intérieur du menu déroulant ont le padding correct */
+    .dropdown-content li, .language-content li {
+        width: 100%;
+        text-align: left;
+    }
+}
