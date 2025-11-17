@@ -233,6 +233,7 @@ footer a:hover {
    8. RESPONSIVE & MENU MOBILE
    =============================== */
 .menu-toggle {
+    /* Cache par défaut sur grand écran */
     display: none; 
     background: none;
     border: none;
@@ -244,29 +245,37 @@ footer a:hover {
     top: 10px;
     right: 20px;
     z-index: 100;
+    /* Ajout d'une bordure néon pour correspondre au design */
+    border: 2px solid #0ff; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0ff;
 }
 
 @media (max-width: 768px) {
     
     .menu-toggle {
-        display: block; 
+        display: block; /* Affiche le bouton hamburger sur mobile */
     }
 
     #main-nav ul {
+        /* Cacher la liste par défaut sur mobile */
         display: none;
         flex-direction: column;
         background-color: #000;
         position: absolute;
         width: 100%;
-        top: 60px;
+        top: 60px; /* Commence juste en dessous du header */
         left: 0;
         box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
         z-index: 90;
     }
     
+    /* ************************************************************* */
+    /* CETTE RÈGLE DOIT S'ACTIVER QUAND LA CLASSE 'active' EST AJOUTÉE PAR JS */
     #main-nav.active ul {
-        display: flex;
+        display: flex; 
     }
+    /* ************************************************************* */
 
     /* Styles pour tous les niveaux de liens empilés sur mobile */
     #main-nav ul li {
@@ -281,13 +290,29 @@ footer a:hover {
         padding: 15px;
     }
 
-    /* Sur mobile, les sous-menus doivent être verticaux */
+    /* Sur mobile, les sous-menus doivent être verticaux (pas en cascade) */
     .dropdown-content, .language-content {
-        position: static;
+        position: static; /* Annule le positionnement absolute/relative */
         border: none;
         width: 100%;
         box-shadow: none;
         padding: 0;
         background-color: #222; /* Fond plus sombre pour les sous-menus */
     }
-       }
+
+    /* S'assurer que les liens à l'intérieur du menu déroulant ont le padding correct */
+    .dropdown-content li, .language-content li {
+        padding: 0; /* Réinitialise le padding horizontal */
+        border-top: 1px solid #333;
+    }
+    
+    /* Augmenter le padding des liens à l'intérieur des sous-menus pour la zone de clic */
+    .dropdown-content li a, .language-content li a {
+         padding-left: 30px; /* Décalage pour les sous-menus */
+    }
+    
+    /* Décalage supplémentaire pour le sous-menu de Langue */
+    .language-content li a {
+         padding-left: 50px; 
+    }
+}
