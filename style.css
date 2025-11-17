@@ -1,94 +1,251 @@
-/* Réinitialisation de base */
+/* ===============================
+   1. RÉINITIALISATION ET FONDAMENTAUX
+   =============================== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
 }
 
-/* Styles de base du BODY et du MAIN */
 body {
-  background-color: #000;
-  color: #00f;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  min-height: 100vh;
+    background-color: #000; /* Fond noir */
+    color: #00f; /* Texte bleu (couleur par défaut) */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
 main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* HEADER et NAVIGATION */
+/* Titres */
+h1, h2 {
+    color: #0ff; /* Titre bleu néon */
+    text-shadow: 0 0 10px #0ff; /* Ombre néon */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Liens hypertexte */
+a {
+    color: #00f;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+a:hover {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff; 
+}
+
+
+/* ===============================
+   2. HEADER ET NAVIGATION
+   =============================== */
 header {
     background-color: #000;
     padding: 10px 0;
     border-bottom: 2px solid #0ff; 
+    position: relative; 
 }
-/* ... (le reste du code CSS pour nav, ul, li, a:hover) */
 
-/* TITRES et SECTIONS */
-h1, h2 {
+/* La navigation principale sur grand écran */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; 
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #00f;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
     color: #0ff;
     text-shadow: 0 0 10px #0ff;
-    text-align: center;
-    margin-bottom: 20px;
 }
-/* ... (le reste du code CSS pour section, form, input, button) */
 
-/* FOOTER */
-footer {
+
+/* ===============================
+   3. SECTIONS (Contenu Principal)
+   =============================== */
+section {
+    background-color: #111;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #0ff;
+    margin: 40px auto;
+    max-width: 800px; 
+}
+
+/* Styles pour les listes dans les sections */
+section ul {
+    list-style: square; 
+    padding-left: 20px;
+    margin-top: 15px;
+}
+
+/* ===============================
+   4. FORMULAIRE DE CONTACT
+   =============================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+input[type="text"], input[type="email"], textarea {
+    padding: 10px;
+    border: 1px solid #00f;
     background-color: #000;
-    color: #00f;
+    color: #0ff;
+    border-radius: 5px;
+    font-family: inherit;
+    box-shadow: 0 0 5px rgba(0, 0, 255, 0.5);
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #00f; 
+    color: #000;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    background-color: #0ff;
+    color: #000;
+    box-shadow: 0 0 10px #0ff;
+}
+
+
+/* ===============================
+   5. PIED DE PAGE (FOOTER) - COULEUR GRIS CLAIR
+   =============================== */
+footer {
+    background-color: #111; /* Fond noir très léger pour contraster avec le corps */
+    color: #eee; /* Texte en gris clair/blanc */
     text-align: center;
     padding: 30px 20px;
     border-top: 2px solid #0ff;
     margin-top: 50px;
 }
-/* ... (le reste du code CSS pour footer a:hover) */
+
+footer a {
+    color: #0ff; 
+    margin: 0 10px;
+}
+
+footer a:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+}
+
 
 /* ===============================
-   6. RESPONSIVE & MENU MOBILE
+   6. STYLES DU MENU DÉROULANT (SETTINGS)
+   =============================== */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    /* Styles pour cacher et positionner le sous-menu */
+    display: none; 
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+    background-color: #000;
+    border: 1px solid #0ff;
+    padding: 10px 0;
+    z-index: 50; 
+    list-style: none;
+    text-align: left;
+}
+
+.dropdown-content li {
+    padding: 5px 15px;
+    margin: 0;
+}
+
+.dropdown-content li a {
+    display: block;
+    color: #00f;
+}
+
+.dropdown-content li a:hover {
+    background-color: #111;
+    color: #0ff;
+}
+
+/* Classe ajoutée par JS pour afficher le sous-menu */
+.dropdown.show .dropdown-content {
+    display: block; 
+}
+
+
+/* ===============================
+   7. RESPONSIVE & MENU MOBILE
    =============================== */
 
 /* Le bouton hamburger est caché par défaut sur les grands écrans */
 .menu-toggle {
     display: none; 
-    /* Ajoutons ici quelques styles néon pour le bouton, si visible */
     background: none;
     border: none;
     font-size: 30px;
     color: #0ff;
     cursor: pointer;
     padding: 10px;
+    position: absolute; 
+    top: 10px;
+    right: 20px;
+    z-index: 100;
 }
+
 
 /* Styles qui s'appliquent lorsque l'écran est petit (téléphone) */
 @media (max-width: 768px) {
-    /* Afficher le bouton menu-toggle */
+    
+    /* Afficher le bouton menu-toggle sur mobile */
     .menu-toggle {
-        display: block;
-        position: absolute; /* Place le bouton en haut à droite */
-        top: 10px;
-        right: 20px;
-        z-index: 100; /* Assure qu'il est au-dessus du reste */
+        display: block; 
     }
 
-    /* Le menu principal (main-nav) est caché par défaut */
+    /* Le menu principal (main-nav) est caché par défaut sur mobile */
     #main-nav ul {
-        display: none; /* Cache les liens de la navigation */
-        flex-direction: column; /* Les liens s'empilent verticalement */
+        display: none;
+        flex-direction: column;
         background-color: #000;
         position: absolute;
         width: 100%;
-        top: 60px; /* Commence sous le header */
+        top: 60px;
+        left: 0;
         box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
+        z-index: 90;
     }
     
     /* Quand le menu a la classe 'active', il s'affiche */
     #main-nav.active ul {
-        display: flex; 
+        display: flex;
     }
 
     /* Style des liens empilés */
@@ -96,10 +253,19 @@ footer {
         margin: 0;
         border-bottom: 1px solid #111;
         text-align: center;
+        width: 100%; /* Prend toute la largeur */
     }
 
     #main-nav ul li a {
         display: block;
         padding: 15px;
     }
-}
+
+    /* Sur mobile, le sous-menu Langue doit prendre toute la largeur */
+    .dropdown-content {
+        position: static;
+        border: none;
+        width: 100%;
+        box-shadow: none;
+    }
+      }
