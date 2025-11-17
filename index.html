@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAULYON</title>
+    <title id="title-tag">PAULYON</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,20 +14,26 @@
         
         <nav id="main-nav">
             <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#produits">Produits</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#accueil" id="nav-accueil">Accueil</a></li>
+                <li><a href="#produits" id="nav-produits">Produits</a></li>
+                <li><a href="#services" id="nav-services">Services</a></li>
+                <li><a href="#contact" id="nav-contact">Contact</a></li>
                 
                 <li class="dropdown" id="settings-menu">
-                    <a href="#" class="dropdown-toggle">Paramètres</a>
+                    <a href="#" class="dropdown-toggle" id="nav-settings">Paramètres</a>
                     
-                    <ul class="dropdown-content">
-                        <li class="submenu-item">Langue :</li>
-                        <li><a href="#" data-lang="fr">Français (FR)</a></li>
-                        <li><a href="#" data-lang="en">English (EN)</a></li>
-                        <li><a href="#" data-lang="es">Español (ES)</a></li>
-                        <li><a href="#" data-lang="ht">Kreyòl (HT)</a></li>
+                    <ul class="dropdown-content settings-dropdown">
+                        
+                        <li class="dropdown-language">
+                            <a href="#" class="language-toggle" id="nav-language-toggle">Langue</a> 
+                            
+                            <ul class="language-content">
+                                <li><a href="#" data-lang="fr" class="lang-option">Français (FR)</a></li>
+                                <li><a href="#" data-lang="en" class="lang-option">English (EN)</a></li>
+                                <li><a href="#" data-lang="es" class="lang-option">Español (ES)</a></li>
+                                <li><a href="#" data-lang="ht" class="lang-option">Kreyòl (HT)</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -35,53 +41,53 @@
     </header>
 
     <section id="accueil">
-        <h1>Bienvenue chez PAULYON</h1>
-        <p>Nous offrons des produits et services de haute qualité.</p>
+        <h1 id="h1-accueil">Bienvenue chez PAULYON</h1>
+        <p id="p-slogan">Nous offrons des produits et services de haute qualité.</p>
     </section>
 
     <section id="produits">
-        <h2>Nos Produits</h2>
+        <h2 id="h2-produits">Nos Produits</h2>
         <ul>
-            <li>Produit 1</li>
-            <li>Produit 2</li>
-            <li>Produit 3</li>
+            <li data-key="produit-1">Produit 1</li>
+            <li data-key="produit-2">Produit 2</li>
+            <li data-key="produit-3">Produit 3</li>
         </ul>
     </section>
 
     <section id="services">
-        <h2>Nos Services</h2>
+        <h2 id="h2-services">Nos Services</h2>
         <ul>
-            <li>Service 1</li>
-            <li>Service 2</li>
-            <li>Service 3</li>
+            <li data-key="service-1">Service 1</li>
+            <li data-key="service-2">Service 2</li>
+            <li data-key="service-3">Service 3</li>
         </ul>
     </section>
 
     <section id="contact">
-        <h2>Contactez-nous</h2>
-        <p>Envoyez-nous un message à <a href="mailto:contact.paulyon@gmail.com">contact.paulyon@gmail.com</a> !</p>
-        <p>Vous pouvez également nous contacter directement via <a href="https://wa.me/+50941172815">WhatsApp</a>.</p>
+        <h2 id="h2-contact">Contactez-nous</h2>
+        <p id="p-contact-email">Envoyez-nous un message à <a href="mailto:contact.paulyon@gmail.com">contact.paulyon@gmail.com</a> !</p>
+        <p id="p-contact-whatsapp">Vous pouvez également nous contacter directement via <a href="https://wa.me/+50941172815">WhatsApp</a>.</p>
         
-        <form action="https://formspree.io/f/VOTRE_EMAIL@gmail.com" method="POST">
-            <input type="text" name="name" placeholder="Nom" required> 
-            <input type="email" name="_replyto" placeholder="Email" required>
-            <textarea name="message" placeholder="Message" required></textarea>
-            <button type="submit">Envoyer</button>
+        <form action="https://formspree.io/f/contact.paulyon@gmail.com" method="POST">
+            <input type="text" name="name" placeholder="Nom" required id="input-name"> 
+            <input type="email" name="_replyto" placeholder="Email" required id="input-email">
+            <textarea name="message" placeholder="Message" required id="input-message"></textarea>
+            <button type="submit" id="btn-submit">Envoyer</button>
         </form>
     </section>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 PAULYON. Tous droits réservés.</p>
+            <p id="footer-copyright">&copy; 2025 PAULYON. Tous droits réservés.</p>
             <div class="social-links">
                 <a href="#">Facebook</a> |
                 <a href="#">Instagram</a> |
-                <a href="mailto:contact.paulyon@gmail.com">Email</a>
+                <a href="mailto:contact.paulyon@gmail.com" id="footer-email">Email</a>
             </div>
-            <p>Adresse : [Votre Adresse ici si applicable]</p>
+            <p id="footer-address">Adresse : Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I</p>
         </div>
     </footer>
 
     <script src="script.js"></script> 
 </body>
-                  </html>
+                                                                       </html>
