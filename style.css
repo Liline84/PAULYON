@@ -1,11 +1,14 @@
 /* ====================================================================
-   FEUILLE DE STYLE UNIFIÉE : DASHBOARD DARK THEME
-   Base Néon (Accentuation) + Structure en Cartes (Design Moderne)
-   Navigation : Menu Déroulant (Hamburger) Unique
+   FEUILLE DE STYLE UNIFIÉE : DASHBOARD HIGH-TECH
+   Palette: Sombre (#0F0F0F) & Bleu Électrique (#00BFFF)
+   Typographie: Poppins (Moderne & Géométrique)
    ==================================================================== */
 
+/* Importation de la police Poppins (A DÉPLACER DANS LE HTML SI POSSIBLE) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 /* ===============================
-   1. RÉINITIALISATION ET FONDAMENTAUX
+   1. FONDAMENTAUX (MODIFIÉ)
    =============================== */
 * {
     margin: 0;
@@ -14,87 +17,92 @@
 }
 
 body {
-    background-color: #000; /* Fond noir */
-    color: #eee; /* Texte par défaut en Gris Clair pour lisibilité */
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    /* Fond très sombre pour le mode sombre "High-Tech" */
+    background-color: #0F0F0F; 
+    color: #EAEAEA; /* Texte par défaut en Gris très clair */
+    font-family: 'Poppins', sans-serif; /* Nouvelle police moderne */
+    line-height: 1.7; /* Légère augmentation pour meilleure lisibilité */
     min-height: 100vh;
 }
 
 main {
-    max-width: 1200px;
+    max-width: 1400px; /* Augmentation de la largeur */
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Titres */
+/* Titres (MODIFIÉ) */
 h1, h2 {
-    color: #0ff; /* Titre bleu néon (Accentuation) */
-    text-shadow: 0 0 5px #0ff; /* Ombre néon subtile */
-    text-align: center;
-    margin-bottom: 20px;
+    /* Bleu Électrique riche */
+    color: #00BFFF; 
+    /* Effet néon plus intense */
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7); 
+    text-align: left; /* Aligner les titres à gauche */
+    margin-bottom: 30px;
+    font-weight: 600; /* Semi-Bold */
 }
 
-/* Liens hypertexte */
+/* Liens hypertexte (MODIFIÉ) */
 a {
-    color: #0ff; /* Liens en couleur d'accentuation */
+    color: #00BFFF; 
     text-decoration: none;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
 a:hover {
     color: #fff; /* Blanc pur au survol */
-    text-shadow: 0 0 10px #0ff; 
+    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8); 
 }
 
 
 /* ===============================
-   2. HEADER ET NAVIGATION (PANNEAU LATÉRAL)
+   2. HEADER ET NAVIGATION (PANNEAU LATÉRAL) (MODIFIÉ)
    =============================== */
 header {
-    background-color: #000;
+    background-color: #0F0F0F;
     padding: 10px 0;
-    border-bottom: 2px solid #0ff; 
+    border-bottom: none; /* Retirer la bordure */
     position: relative; 
 }
 
-/* ************ NOUVELLES RÈGLES POUR MENU DÉROULANT UNIQUE ************ */
-
-/* Conteneur du menu (masqué par défaut) */
+/* Conteneur du menu (MODIFIÉ) */
 #main-nav ul {
     list-style: none;
-    display: none; /* MASQUÉ PAR DÉFAUT (actif seulement avec .active par JS) */
+    display: none; 
     flex-direction: column;
-    background-color: #000;
-    position: fixed; /* Fixé pour rester visible au défilement */
-    width: 250px; /* Largeur du panneau latéral */
-    height: 100vh; /* Remplir la hauteur de l'écran */
-    top: 60px; /* Commence juste sous le header */
+    background-color: #1A1A1A; /* Fond légèrement plus clair pour le panneau */
+    position: fixed; 
+    width: 280px; 
+    height: 100vh; 
+    top: 0; 
     left: 0;
-    box-shadow: 5px 0 15px rgba(0, 255, 255, 0.5); /* Ombre sur le côté droit */
+    /* Ombre subtile et néon à la fois */
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2); 
     z-index: 90;
-    padding-top: 20px;
+    padding-top: 80px; 
 }
 
-/* Liens du panneau */
+/* Liens du panneau (MODIFIÉ) */
 #main-nav ul li {
     margin: 0; 
     width: 100%; 
     text-align: left;
-    border-bottom: 1px solid #111; 
+    border-bottom: 1px solid #282828; /* Ligne de séparation plus douce */
 }
 
-/* Zone de clic des liens */
+/* Zone de clic des liens (MODIFIÉ) */
 #main-nav ul li a {
     display: block;
-    color: #eee; 
-    font-weight: bold;
-    padding: 15px 20px; 
+    color: #EAEAEA; 
+    font-weight: 400; /* Poids normal */
+    padding: 15px 25px; 
+    transition: all 0.2s ease-in-out;
 }
 
 #main-nav ul li a:hover {
-    color: #0ff;
-    background-color: #111; /* Léger fond pour le survol */
+    color: #00BFFF; /* Nouveau bleu électrique */
+    background-color: #282828; 
+    border-left: 5px solid #00BFFF; /* Indicateur d'activité moderne */
     text-shadow: none;
 }
 
@@ -103,76 +111,96 @@ header {
     display: flex; 
 }
 
-/* ************************************************************* */
-
 
 /* ===============================
-   3. SECTIONS (Contenu Principal) & GRILLE DE DASHBOARD
+   3. SECTIONS (Contenu Principal) & GRILLE DE DASHBOARD (MODIFIÉ)
    =============================== */
 section {
-    background-color: #111; /* Fond des grandes sections */
+    background-color: #1A1A1A; 
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+    border-radius: 12px; /* Arrondis plus marqués pour un look moderne */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); 
     margin: 40px auto;
-    max-width: 800px; 
+    max-width: 100%; 
 }
 
-/* Grille de conteneur pour les cartes de dashboard */
+/* Grille de conteneur pour les cartes (MODIFIÉ) */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cartes légèrement plus grandes */
+    gap: 30px; /* Espacement plus grand */
     padding: 20px 0;
     margin-top: 20px;
 }
 
 /* Styles pour les listes dans les sections */
 section ul {
-    list-style: square; 
-    padding-left: 20px;
+    list-style: none; /* Retrait des puces par défaut */
+    padding-left: 0;
     margin-top: 15px;
+}
+section ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+section ul li:before {
+    content: "◇"; /* Puce moderne */
+    color: #00BFFF; 
+    font-weight: bold;
+    position: absolute;
+    left: 0;
 }
 
 
 /* ===============================
-   3.5. CARTES D'INFORMATION (Dashboard Cards)
+   3.5. CARTES D'INFORMATION (Dashboard Cards) (MODIFIÉ)
    =============================== */
 .data-card {
-    background-color: #111; 
-    padding: 25px; 
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); 
-    color: #eee;
+    background-color: #1A1A1A; 
+    padding: 30px; 
+    border-radius: 12px;
+    border: 1px solid #282828; /* Bordure subtile pour le look technologique */
+    /* Box-shadow double : ombre douce et lueur néon subtile */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 191, 255, 0.1); 
+    color: #EAEAEA;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Effet au survol des cartes : Élévation et lueur plus intense */
+.data-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 0.5); 
 }
 
 .data-card h3 {
-    color: #eee; 
-    margin-bottom: 5px;
-    font-size: 1em;
+    color: #00BFFF; 
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    font-weight: 400; 
 }
 
 .data-value {
-    font-size: 2.2em;
-    font-weight: bold;
-    color: #0ff; /* Accentuation */
+    font-size: 2.5em; 
+    font-weight: 700;
+    color: #00BFFF; 
     display: block; 
     margin-top: 5px;
 }
 
-/* Indicateurs de statut */
+/* Indicateurs de statut (MODIFIÉ) */
 .status-offline {
-    color: #ff9900; /* Orange/Ambre */
-    font-weight: bold;
+    color: #FF7043; /* Rouge-Orange plus moderne pour "Offline" */
+    font-weight: 600;
 }
 .status-online {
-    color: #0ff; /* Bleu Néon */
-    font-weight: bold;
+    color: #39FF14; /* Vert néon pour l'état "Online" */
+    font-weight: 600;
 }
 
 
 /* ===============================
-   4. FORMULAIRE DE CONTACT & BOUTONS
+   4. FORMULAIRE DE CONTACT & BOUTONS (MODIFIÉ)
    =============================== */
 form {
     display: flex;
@@ -182,13 +210,19 @@ form {
 }
 
 input[type="text"], input[type="email"], textarea {
-    padding: 10px;
-    border: 1px solid #0ff; 
-    background-color: #000;
-    color: #eee; 
-    border-radius: 5px;
-    font-family: inherit;
-    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    padding: 12px;
+    border: 1px solid #00BFFF; /* Nouveau bleu électrique */
+    background-color: #0F0F0F;
+    color: #EAEAEA; 
+    border-radius: 8px; /* Bords plus arrondis */
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); /* Ombre néon plus douce */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8); /* Lueur plus forte au focus */
+    outline: none;
 }
 
 textarea {
@@ -196,77 +230,76 @@ textarea {
 }
 
 button {
-    background-color: #0ff; 
-    color: #000; 
+    background-color: #00BFFF; 
+    color: #0F0F0F; /* Texte du bouton en fond sombre */
     border: none;
-    padding: 12px 20px;
+    padding: 14px 25px; /* Bouton plus grand */
     cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s, opacity 0.3s;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 button:hover {
-    background-color: #0ff;
-    color: #000;
-    opacity: 0.85; 
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    background-color: #00FFFF; /* Bleu plus clair au survol */
+    color: #0F0F0F;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
 }
 
 .btn-primary {
-    background-color: #0ff;
-    color: #000;
+    background-color: #00BFFF;
+    color: #0F0F0F;
 }
 .btn-secondary {
-    background-color: #111;
-    color: #0ff;
-    border: 1px solid #0ff;
+    background-color: transparent;
+    color: #00BFFF;
+    border: 2px solid #00BFFF;
+    font-weight: 400;
 }
 .btn-secondary:hover {
-    background-color: #0ff;
-    color: #000;
+    background-color: #00BFFF;
+    color: #0F0F0F;
 }
 
 
 /* ===============================
-   5. PIED DE PAGE (FOOTER) 
+   5. PIED DE PAGE (FOOTER) (MODIFIÉ)
    =============================== */
 footer {
-    background-color: #111; 
-    color: #eee; 
+    background-color: #1A1A1A; 
+    color: #EAEAEA; 
     text-align: center;
     padding: 30px 20px;
-    border-top: 2px solid #0ff;
+    border-top: 1px solid #282828; /* Bordure de séparation plus subtile */
     margin-top: 50px;
 }
 
 footer a {
-    color: #0ff; 
-    margin: 0 10px;
+    color: #00BFFF; 
+    margin: 0 15px;
 }
 
 footer a:hover {
     color: #fff;
-    text-shadow: 0 0 5px #fff;
+    text-shadow: 0 0 8px #00BFFF;
 }
 
 
 /* ===============================
-   6. STYLES DU MENU DÉROULANT (SOUS-MENUS - Verticalisation)
+   6. STYLES DU MENU DÉROULANT (SOUS-MENUS)
+   (Pas de changements majeurs, ajustements de couleur)
    =============================== */
 .dropdown {
     position: relative;
-    /* Règle pour ouvrir le sous-menu sur le même axe vertical */
     width: 100%; 
 }
 
 .dropdown-content {
     display: none; 
-    /* CHANGEMENT: Positionnement statique pour affichage vertical */
     position: static; 
     min-width: 100%;
-    background-color: #1a1a1a; /* Fond légèrement plus clair */
-    border: none;
+    background-color: #202020; /* Fond légèrement plus clair */
     padding: 0;
     z-index: 50; 
     list-style: none;
@@ -274,23 +307,23 @@ footer a:hover {
 }
 
 .dropdown-content li {
-    padding: 0; /* Réinitialiser le padding global, ajusté dans li a */
+    padding: 0;
     margin: 0;
-    border-top: 1px solid #222;
+    border-top: 1px solid #333333;
 }
 
 .dropdown-content li a {
     display: block;
-    color: #0ff; /* Texte du sous-menu en accentuation */
-    padding: 10px 30px; /* Décalage pour le niveau 1 */
+    color: #00BFFF; 
+    padding: 10px 30px; 
 }
 
 .dropdown-content li a:hover {
-    background-color: #222;
+    background-color: #333333;
     color: #fff;
 }
 
-/* Classe ajoutée par JS pour afficher le sous-menu Paramètres */
+/* Classe ajoutée par JS pour afficher le sous-menu */
 .dropdown.show .dropdown-content {
     display: block; 
 }
@@ -302,11 +335,9 @@ footer a:hover {
 
 .language-content {
     display: none;
-    /* CHANGEMENT: Positionnement statique pour affichage vertical */
     position: static;
     min-width: 100%;
-    background-color: #2a2a2a; /* Encore plus clair pour le niveau 2 */
-    border: none;
+    background-color: #282828; /* Encore plus clair pour le niveau 2 */
     padding: 0;
     z-index: 60; 
     list-style: none;
@@ -314,7 +345,6 @@ footer a:hover {
 }
 
 .language-content li a {
-    /* Décalage supplémentaire pour le sous-menu de Langue */
     padding: 10px 50px; 
 }
 
@@ -324,32 +354,34 @@ footer a:hover {
 
 
 /* ===============================
-   7. MENU HAMBURGER (Toujours Visible)
+   7. MENU HAMBURGER (Toujours Visible) (MODIFIÉ)
    =============================== */
 .menu-toggle {
-    display: block; /* Toujours visible */
+    display: block; 
     background: none;
     border: none;
     font-size: 30px;
-    color: #0ff;
+    color: #00BFFF; /* Nouveau bleu électrique */
     cursor: pointer;
     padding: 10px;
     position: absolute; 
-    top: 10px;
-    left: 20px; /* CHANGEMENT: Positionné à gauche pour un panneau latéral */
+    top: 20px; /* Centrage vertical dans le header implicite */
+    left: 20px; 
     z-index: 100;
-    border: 2px solid #0ff; 
-    border-radius: 5px;
-    box-shadow: 0 0 10px #0ff;
+    border: 2px solid #00BFFF; 
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7); /* Lueur intense */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.menu-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.9);
 }
 
-/* Sur mobile, on s'assure que le menu s'affiche bien */
+/* Media Query pour les petits écrans (MODIFIÉ) */
 @media (max-width: 768px) {
-    /* Règle pour le menu mobile déjà couverte par la règle #main-nav ul position: fixed */
-
-    /* S'assurer que les liens à l'intérieur du menu déroulant ont le padding correct */
-    .dropdown-content li, .language-content li {
-        width: 100%;
-        text-align: left;
+    /* S'assurer que le body a un padding pour éviter d'être sous le menu latéral */
+    body {
+        /* Pas de modification ici, car le menu est superposé (position: fixed) */
     }
 }
