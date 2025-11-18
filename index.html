@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="title-tag">PAULYON</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -40,27 +41,67 @@
         </nav>
     </header>
 
-    <section id="accueil">
+    <section id="accueil" class="hero-section">
         <h1 id="h1-accueil">Bienvenue chez PAULYON</h1>
-        <p id="p-slogan">Nous transformons le néant en chef-d'oeuvre .</p>
+        <p id="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
     </section>
 
     <section id="produits">
         <h2 id="h2-produits">Nos Produits</h2>
-        <ul>
-            <li data-key="produit-1">Produit 1</li>
-            <li data-key="produit-2">Produit 2</li>
-            <li data-key="produit-3">Produit 3</li>
-        </ul>
+        
+        <div class="dashboard-grid">
+            
+            <div class="data-card product-card">
+                <h3>Flyer Design (Produit 1)</h3>
+                <p>Conception de flyers promotionnels percutants.</p>
+                <div class="data-value">$XX.XX</div>
+                <a href="#" class="btn-primary">Voir détails</a>
+            </div>
+            
+            <div class="data-card product-card">
+                <h3>Mug Personnalisé (Produit 2)</h3>
+                <p>Tasses et mugs avec vos logos et graphismes.</p>
+                <div class="data-value">$XX.XX</div>
+                <a href="#" class="btn-primary">Commander</a>
+            </div>
+            
+            <div class="data-card product-card">
+                <h3>Cartes de Visite (Produit 3)</h3>
+                <p>Design de cartes professionnelles modernes et élégantes.</p>
+                <div class="data-value">$XX.XX</div>
+                <a href="#" class="btn-primary">Devis</a>
+            </div>
+            
+        </div>
     </section>
 
     <section id="services">
         <h2 id="h2-services">Nos Services</h2>
-        <ul>
-            <li data-key="service-1">Service 1</li>
-            <li data-key="service-2">Service 2</li>
-            <li data-key="service-3">Service 3</li>
-        </ul>
+        
+        <div class="dashboard-grid">
+            
+            <div class="data-card service-card">
+                <h3>Création de Logo (Service 1)</h3>
+                <p>Identité visuelle complète et conception de logo unique.</p>
+                <p class="status-online">Disponible</p>
+                <a href="#" class="btn-secondary">Démarrer un projet</a>
+            </div>
+            
+            <div class="data-card service-card">
+                <h3>Design Web/UI (Service 2)</h3>
+                <p>Conception de miniatures (Thumbnails) YouTube et interfaces utilisateur.</p>
+                <p class="status-online">Disponible</p>
+                <a href="#" class="btn-secondary">Démarrer un projet</a>
+            </div>
+            
+            <div class="data-card service-card">
+                <h3>Cartes de Vœux (Service 3)</h3>
+                <p>Design personnalisé pour fêtes et événements.</p>
+                <p class="status-offline">Sur demande</p>
+                <a href="#" class="btn-secondary">Détails</a>
+            </div>
+            
+        </div>
     </section>
 
     <section id="contact">
@@ -90,4 +131,4 @@
 
     <script src="script.js"></script> 
 </body>
-                                                                       </html>
+</html>
