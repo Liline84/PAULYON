@@ -10,23 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100); 
 
     // ==========================================================
-    // 1. SÉLECTION DES ÉLÉMENTS (INCHANGÉ)
+    // 1. SÉLECTION DES ÉLÉMENTS (CONSOLIDÉ)
     // ==========================================================
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.getElementById('main-nav');
     const navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
 
-    const settingsMenu = document.getElementById('settings-menu');
-    const dropdownToggle = settingsMenu ? settingsMenu.querySelector('.dropdown-toggle') : null;
+    // Nouveaux éléments pour la gestion des sous-menus (utilisant les IDs du nouveau fichier)
+    const settingsToggle = document.getElementById('nav-settings');
+    const languageToggle = document.getElementById('nav-language-toggle');
+    const settingsMenu = settingsToggle ? settingsToggle.parentElement : null; // Référence au <li> parent
+    const languageDropdown = languageToggle ? languageToggle.parentElement : null; // Référence au <li> parent
 
-    const languageDropdown = document.querySelector('.dropdown-language');
-    const languageToggle = document.querySelector('.language-toggle');
     const langOptions = document.querySelectorAll('.lang-option');
+    
+    // Nouveaux éléments pour la Recherche
+    const searchToggleBtn = document.getElementById('search-toggle-btn');
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = document.getElementById('search-input');
     
 
     // ==========================================================
-    // [NOUVELLE FONCTION] Gestion Générale de la Fermeture
-    // Réduit la répétition de code dans les sections 2, 3 et 4
+    // [FONCTION COMMUNE] Gestion Générale de la Fermeture
     // ==========================================================
     function closeAllMenus() {
         if (mainNav) mainNav.classList.remove('active');
@@ -36,10 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (settingsMenu) settingsMenu.classList.remove('show');
         if (languageDropdown) languageDropdown.classList.remove('show');
+        
+        // Fermeture de la recherche
+        if (searchContainer) searchContainer.classList.remove('active');
+        if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
+        if (searchInput) searchInput.value = '';
     }
 
     // ==========================================================
-    // 2. GESTION DU MENU HAMBURGER (MOBILE) (MODIFIÉ)
+    // 2. GESTION DU MENU HAMBURGER (MOBILE)
     // ==========================================================
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
@@ -55,19 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isExpanded) {
                  if (settingsMenu) settingsMenu.classList.remove('show');
                  if (languageDropdown) languageDropdown.classList.remove('show');
+                 // Ajout de la fermeture de la recherche
+                 if (searchContainer) searchContainer.classList.remove('active');
+                 if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
             }
         });
     }
     
     // ==========================================================
-    // 3. FERMER LE MENU APRÈS AVOIR CLIQUÉ SUR UN LIEN PRINCIPAL (MODIFIÉ)
+    // 3. FERMER LE MENU APRÈS AVOIR CLIQUÉ SUR UN LIEN PRINCIPAL
     // ==========================================================
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             // Seuls les liens qui ne sont PAS dans un sous-menu déroulant (dropdown) ferment le menu principal
             if (!link.closest('.dropdown')) {
                 closeAllMenus();
-                // [AJOUT MODERNE] Met en évidence le lien actif (ARIA)
+                // Met en évidence le lien actif (ARIA)
                 navLinks.forEach(l => l.removeAttribute('aria-current'));
                 link.setAttribute('aria-current', 'page');
             }
@@ -75,141 +88,292 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================
-    // 4. GESTION DU SOUS-MENU PARAMÈTRES (Niveau 1) (MODIFIÉ)
+    // 4. GESTION DES SOUS-MENUS PARAMÈTRES ET LANGUE
     // ==========================================================
-    if (dropdownToggle && settingsMenu) {
-        dropdownToggle.addEventListener('click', (event) => {
+    if (settingsToggle && settingsMenu) {
+        settingsToggle.addEventListener('click', (event) => {
             event.preventDefault(); 
             event.stopPropagation();
-            
-            // Toggle de la classe 'show'
             settingsMenu.classList.toggle('show'); 
             
-            // Ferme le sous-menu Langue s'il est ouvert et si Paramètres se ferme
+            // Si Paramètres se ferme, ferme aussi Langue
             if (!settingsMenu.classList.contains('show') && languageDropdown) {
                 languageDropdown.classList.remove('show');
             }
         });
     }
 
-    // ==========================================================
-    // 5. GESTION DU SOUS-MENU LANGUE (Niveau 2) (INCHANGÉ)
-    // ==========================================================
     if (languageToggle && languageDropdown) {
         languageToggle.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
-            
             languageDropdown.classList.toggle('show');
         });
     }
 
     // ==========================================================
-    // 6. FERMER LES MENUS SI L'UTILISATEUR CLIQUE EN DEHORS (MODIFIÉ)
-    // Utilisation de la fonction centralisée closeAllMenus() pour plus de fluidité.
+    // 5. GESTION DU BOUTON DE RECHERCHE (NOUVEAU)
+    // ==========================================================
+    if (searchToggleBtn && searchContainer && searchInput) {
+        searchToggleBtn.addEventListener('click', function() {
+            searchContainer.classList.toggle('active');
+            
+            const isExpanded = searchContainer.classList.contains('active');
+            searchToggleBtn.setAttribute('aria-expanded', isExpanded);
+
+            if (isExpanded) {
+                searchInput.focus();
+                // Ferme le menu principal si la recherche s'ouvre
+                if (mainNav && mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.textContent = '☰';
+                }
+            } else {
+                searchInput.value = ''; // Efface le contenu à la fermeture
+            }
+        });
+    }
+    
+    // ==========================================================
+    // 6. FERMER LES MENUS SI L'UTILISATEUR CLIQUE EN DEHORS
     // ==========================================================
     document.addEventListener('click', (event) => {
-        // Vérifie si l'utilisateur a cliqué en dehors du menu principal (nav) et du bouton hamburger
-        if (mainNav && !mainNav.contains(event.target) && menuToggle && !menuToggle.contains(event.target)) {
+        const isOutsideMenu = mainNav && !mainNav.contains(event.target) && menuToggle && !menuToggle.contains(event.target);
+        const isOutsideSearch = searchContainer && !searchContainer.contains(event.target) && searchToggleBtn && !searchToggleBtn.contains(event.target);
+        
+        // Ferme TOUT si on clique en dehors de la navigation principale et de la zone de recherche
+        if (isOutsideMenu && isOutsideSearch) {
             closeAllMenus();
         }
     });
 
 
     // ==========================================================
-    // 7. LOGIQUE DE TRADUCTION (LÉGÈRES MODIFICATIONS)
+    // 7. LOGIQUE DE TRADUCTION (UTILISATION DE LA NOUVELLE STRUCTURE)
     // ==========================================================
-
-    // A. Le Dictionnaire de Traduction (INCHANGÉ)
+    
+    // A. Le Dictionnaire de Traduction (Nouveau Dictionnaire)
     const translations = {
-        'title-tag': { fr: 'PAULYON', en: 'PAULYON', es: 'PAULYON', ht: 'PAULYON' },
-        'nav-accueil': { fr: 'Accueil', en: 'Home', es: 'Inicio', ht: 'Akèy' },
-        'nav-produits': { fr: 'Produits', en: 'Products', es: 'Productos', ht: 'Pwodwi' },
-        'nav-services': { fr: 'Services', en: 'Services', es: 'Servicios', ht: 'Sèvis' },
-        'nav-contact': { fr: 'Contact', en: 'Contact', es: 'Contacto', ht: 'Kontak' },
-        'nav-settings': { fr: 'Paramètres', en: 'Settings', es: 'Ajustes', ht: 'Anviwònman' },
-        'nav-language-toggle': { fr: 'Langue', en: 'Language', es: 'Idioma', ht: 'Lang' },
-        'h1-accueil': { fr: 'Bienvenue chez PAULYON', en: 'Welcome to PAULYON', es: 'Bienvenido a PAULYON', ht: 'Byenvini nan PAULYON' },
-        'p-slogan': { fr: 'Nous offrons des produits et services de haute qualité.', en: 'We offer high-quality products and services.', es: 'Ofrecemos productos y servicios de alta calidad.', ht: 'Nou ofri pwodwi ak sèvis gwo kalite.' },
-        'h2-produits': { fr: 'Nos Produits', en: 'Our Products', es: 'Nuestros Productos', ht: 'Pwodwi nou yo' },
-        'produit-1': { fr: 'Produit 1', en: 'Product 1', es: 'Producto 1', ht: 'Pwodwi 1' },
-        'produit-2': { fr: 'Produit 2', en: 'Product 2', es: 'Producto 2', ht: 'Pwodwi 2' },
-        'produit-3': { fr: 'Produit 3', en: 'Product 3', es: 'Producto 3', ht: 'Pwodwi 3' },
-        'h2-services': { fr: 'Nos Services', en: 'Our Services', es: 'Nuestros Servicios', ht: 'Sèvis nou yo' },
-        'service-1': { fr: 'Service 1', en: 'Service 1', es: 'Servicio 1', ht: 'Sèvis 1' },
-        'service-2': { fr: 'Service 2', en: 'Service 2', es: 'Servicio 2', ht: 'Sèvis 2' },
-        'service-3': { fr: 'Service 3', en: 'Service 3', es: 'Servicio 3', ht: 'Sèvis 3' },
-        'h2-contact': { fr: 'Contactez-nous', en: 'Contact Us', es: 'Contáctanos', ht: 'Kontakte nou' },
-        'p-contact-email': { fr: 'Envoyez-nous un message à ', en: 'Send us a message at ', es: 'Envíanos un mensaje a ', ht: 'Voye yon mesaj pou nou nan ' },
-        'p-contact-whatsapp': { fr: 'Vous pouvez également nous contacter directement via ', en: 'You can also contact us directly via ', es: 'También puede contactarnos directamente a través de ', ht: 'Ou ka kontakte nou dirèktement via ' },
-        'input-name': { fr: 'Nom', en: 'Name', es: 'Nombre', ht: 'Non' },
-        'input-email': { fr: 'Email', en: 'Email', es: 'Correo', ht: 'Imèl' },
-        'input-message': { fr: 'Message', en: 'Message', es: 'Mensaje', ht: 'Mesaj' },
-        'btn-submit': { fr: 'Envoyer', en: 'Send', es: 'Enviar', ht: 'Voye' },
-        'footer-copyright': { fr: '© 2025 PAULYON. Tous droits réservés.', en: '© 2025 PAULYON. All rights reserved.', es: '© 2025 PAULYON. Todos los derechos reservados.', ht: '© 2025 PAULYON. Tout dwa rezève.' },
-        'footer-email': { fr: 'Email', en: 'Email', es: 'Correo', ht: 'Imèl' },
-        'footer-address': { fr: 'Adresse : Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I', en: 'Address: Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I', es: 'Dirección: Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I', ht: 'Adrès : Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I' }
+        'fr': {
+            'title-tag': 'PAULYON',
+            'nav-accueil': 'Accueil',
+            'nav-produits': 'Produits',
+            'nav-services': 'Services',
+            'nav-contact': 'Contact',
+            'nav-settings': 'Paramètres',
+            'nav-language-toggle': 'Langue',
+            'h1-accueil': 'Bienvenue chez PAULYON',
+            'p-slogan': 'Nous transformons le néant en chef-d\'œuvre.',
+            'h2-produits': 'Nos Produits',
+            'prod-vetements-title': 'Vêtements (Homme & Femme)',
+            'prod-vetements-p': 'T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.',
+            'prod-vetements-btn': 'Voir la collection',
+            'prod-bijoux-title': 'Bijoux Personnalisés',
+            'prod-bijoux-p': 'Création de bijoux uniques (colliers, bracelets, bagues).',
+            'prod-bijoux-btn': 'Découvrir',
+            'prod-cosmetiques-title': 'Produits Cosmétiques',
+            'prod-cosmetiques-p': 'Maquillage, soins de la peau et parfums de qualité supérieure.',
+            'prod-cosmetiques-btn': 'Acheter',
+            'prod-electronique-title': 'Appareils Électroniques',
+            'prod-electronique-p': 'Gadgets et équipements électroniques modernes et fiables.',
+            'prod-electronique-btn': 'Voir la sélection',
+            'h2-services': 'Nos Services',
+            'serv-conception-title': 'Conception Graphique (Logos, Flyers, Tasses, etc.)',
+            'serv-conception-p': 'Design créatif pour tous vos supports marketing : bidons, calendriers, et plus.',
+            'serv-conception-btn': 'Demander un devis',
+            'serv-webdev-title': 'Développement Web (Front-end & Back-end)',
+            'serv-webdev-p': 'Création de sites internet professionnels, modernes et optimisés pour mobile.',
+            'serv-webdev-btn': 'Démarrer un projet',
+            'serv-codage-prog-title': 'Codage & Programmation',
+            'serv-codage-prog-p': 'Développement de scripts, logiciels et solutions spécifiques.',
+            'serv-codage-prog-btn': 'Détails',
+            'h2-contact': 'Contactez-nous',
+            // NOTE: Le nouveau dictionnaire gère le texte et le lien dans la fonction setLanguage.
+            'p-contact-email': 'Envoyez-nous un message à contact.paulyon@gmail.com !', 
+            'p-contact-whatsapp': 'Vous pouvez également nous contacter directement via WhatsApp.',
+            'input-name-placeholder': 'Nom',
+            'input-email-placeholder': 'Email',
+            'input-message-placeholder': 'Message',
+            'btn-submit': 'Envoyer',
+            'footer-copyright': '© 2025 PAULYON. Tous droits réservés.',
+            'footer-email': 'Email',
+            'footer-address': 'Adresse : Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I'
+
+        },
+        'en': {
+            'title-tag': 'PAULYON',
+            'nav-accueil': 'Home',
+            'nav-produits': 'Products',
+            'nav-services': 'Services',
+            'nav-contact': 'Contact',
+            'nav-settings': 'Settings',
+            'nav-language-toggle': 'Language',
+            'h1-accueil': 'Welcome to PAULYON',
+            'p-slogan': 'We transform nothingness into a masterpiece.',
+            'h2-produits': 'Our Products',
+            'prod-vetements-title': 'Clothing (Men & Women)',
+            'prod-vetements-p': 'High-quality custom t-shirts, hoodies, and other apparel.',
+            'prod-vetements-btn': 'View Collection',
+            'prod-bijoux-title': 'Custom Jewelry',
+            'prod-bijoux-p': 'Creation of unique jewelry (necklaces, bracelets, rings).',
+            'prod-bijoux-btn': 'Discover',
+            'prod-cosmetiques-title': 'Cosmetic Products',
+            'prod-cosmetiques-p': 'High-quality makeup, skincare, and perfumes.',
+            'prod-cosmetiques-btn': 'Shop Now',
+            'prod-electronique-title': 'Electronic Devices',
+            'prod-electronique-p': 'Modern and reliable electronic gadgets and equipment.',
+            'prod-electronique-btn': 'View Selection',
+            'h2-services': 'Our Services',
+            'serv-conception-title': 'Graphic Design (Logos, Flyers, Mugs, etc.)',
+            'serv-conception-p': 'Creative design for all your marketing materials: bottles, calendars, and more.',
+            'serv-conception-btn': 'Request a Quote',
+            'serv-webdev-title': 'Web Development (Front-end & Back-end)',
+            'serv-webdev-p': 'Creation of professional, modern, and mobile-optimized websites.',
+            'serv-webdev-btn': 'Start a Project',
+            'serv-codage-prog-title': 'Coding & Programming',
+            'serv-codage-prog-p': 'Development of scripts, software, and specific solutions.',
+            'serv-codage-prog-btn': 'Details',
+            'h2-contact': 'Contact Us',
+            'p-contact-email': 'Send us a message at contact.paulyon@gmail.com!',
+            'p-contact-whatsapp': 'You can also contact us directly via WhatsApp.',
+            'input-name-placeholder': 'Name',
+            'input-email-placeholder': 'Email',
+            'input-message-placeholder': 'Message',
+            'btn-submit': 'Send',
+            'footer-copyright': '© 2025 PAULYON. All rights reserved.',
+            'footer-email': 'Email',
+            'footer-address': 'Address: Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haiti, W.I'
+        },
+        'ht': {
+            'title-tag': 'PAULYON',
+            'nav-accueil': 'Lakay',
+            'nav-produits': 'Pwodwi',
+            'nav-services': 'Sèvis',
+            'nav-contact': 'Kontak',
+            'nav-settings': 'Paramèt',
+            'nav-language-toggle': 'Lang',
+            'h1-accueil': 'Byenveni lakay PAULYON',
+            'p-slogan': 'Nou transfòme anyen an yon chèf d’èv.',
+            'h2-produits': 'Pwodwi Nou Yo',
+            'prod-vetements-title': 'Rad (Gason & Fanm)',
+            'prod-vetements-p': 'T-shirt, hoodie, ak tout lòt rad pèsonalize ki gen bon jan kalite.',
+            'prod-vetements-btn': 'Gade koleksyon an',
+            'prod-bijoux-title': 'Bijou Pèsonalize',
+            'prod-bijoux-p': 'Kreyasyon bijou inik (kolye, braslè, bag).',
+            'prod-bijoux-btn': 'Dekouvri',
+            'prod-cosmetiques-title': 'Pwodwi Kosmetik',
+            'prod-cosmetiques-p': 'Pwodwi pou makiyaj, swen po ak pafen ki gen siperyè kalite.',
+            'prod-cosmetiques-btn': 'Achte Kounye a',
+            'prod-electronique-title': 'Aparèy Elektwonik',
+            'prod-electronique-p': 'Gadjèt ak ekipman elektwonik modèn ki fyab.',
+            'prod-electronique-btn': 'Gade seleksyon an',
+            'h2-services': 'Sèvis Nou Yo',
+            'serv-conception-title': 'Konsepsyon Grafik (Logo, Flyer, Tas, elatriye)',
+            'serv-conception-p': 'Konsepsyon kreyatif pou tout materyèl maketing ou yo: bidon, kalandriye, ak plis ankò.',
+            'serv-conception-btn': 'Mande yon pri',
+            'serv-webdev-title': 'Devlopman Web (Front-end & Back-end)',
+            'serv-webdev-p': 'Kreyasyon sit entènèt pwofesyonèl, modèn ak optimize pou mobil.',
+            'serv-webdev-btn': 'Kòmanse yon pwojè',
+            'serv-codage-prog-title': 'Kodaj & Pwogramasyon',
+            'serv-codage-prog-p': 'Devlopman script, lojisyèl, ak solisyon espesifik.',
+            'serv-codage-prog-btn': 'Detay',
+            'h2-contact': 'Kontakte Nou',
+            'p-contact-email': 'Voye yon mesaj pou nou nan contact.paulyon@gmail.com !',
+            'p-contact-whatsapp': 'Ou ka kontakte nou tou dirèkteman sou WhatsApp.',
+            'input-name-placeholder': 'Non',
+            'input-email-placeholder': 'Imèl',
+            'input-message-placeholder': 'Mesaj',
+            'btn-submit': 'Voye',
+            'footer-copyright': '© 2025 PAULYON. Tout dwa rezève.',
+            'footer-email': 'Imèl',
+            'footer-address': 'Adrès: Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I'
+        }
+        // NOTE: Ajoutez 'es' ici si l'Espagnol est nécessaire
     };
 
-    // B. Fonction de Traduction Principale (Adaptée aux nouveaux éléments HTML)
-    function translatePage(lang) {
-        
-        // 1. Traduction des éléments par ID
-        for (const id in translations) {
+
+    // B. Fonction de Traduction Principale (Adaptée et Améliorée)
+    function setLanguage(langCode) {
+        const currentTranslation = translations[langCode];
+        if (!currentTranslation) return;
+
+        // 1. Traduction des éléments par ID et cas spéciaux
+        for (const id in currentTranslation) {
             const element = document.getElementById(id);
-            if (element && translations[id][lang]) {
-                
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.setAttribute('placeholder', translations[id][lang]);
-                } else if (element.tagName === 'BUTTON') {
-                     element.textContent = translations[id][lang];
-                } else {
-                    element.textContent = translations[id][lang];
+            const value = currentTranslation[id];
+            
+            if (element) {
+                // Titre de la page
+                if (id === 'title-tag') {
+                    document.title = value;
+                } 
+                // Placeholders (gérés par l'ID dédié dans le HTML)
+                else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    if (id.includes('placeholder')) {
+                        element.setAttribute('placeholder', value);
+                    }
+                } 
+                // Liens dans des balises p (Contact)
+                else if (id === 'p-contact-email') {
+                    // Pour garder le lien <a> intact, nous mettons à jour le textNode
+                    const email = 'contact.paulyon@gmail.com'; 
+                    const contactHTML = value.replace(email, `<a href="mailto:${email}">${email}</a>`);
+                    element.innerHTML = contactHTML;
                 }
+                 else if (id === 'p-contact-whatsapp') {
+                    // Pour garder le lien <a> intact
+                    const whatsappLink = element.querySelector('a');
+                    const linkText = whatsappLink ? whatsappLink.outerHTML : 'WhatsApp';
+                    const contactHTML = value.replace('WhatsApp', linkText);
+                    element.innerHTML = contactHTML;
+                }
+                // Contenu standard (h1, p, a, button)
+                else {
+                    element.textContent = value;
+                }
+            } else {
+                // 2. Gestion des Cartes (Produits/Services)
+                // Recherche par la convention 'prod-id-title', 'serv-id-p', etc.
+                if (id.endsWith('-title')) {
+                    const cardId = id.replace('-title', '');
+                    const titleElement = document.querySelector(`#${cardId} h3`);
+                    if (titleElement) titleElement.textContent = value;
+                } else if (id.endsWith('-p')) {
+                    const cardId = id.replace('-p', '');
+                    // Exclure les classes 'status' qui pourraient être dans un <p>
+                    const pElement = document.querySelector(`#${cardId} p:not(.status-online, .status-offline)`);
+                    if (pElement) pElement.textContent = value;
+                } else if (id.endsWith('-btn')) {
+                    const cardId = id.replace('-btn', '');
+                    // Sélectionne un bouton dans la carte
+                    const btnElement = document.querySelector(`#${cardId} .btn-primary, #${cardId} .btn-secondary, #${cardId} button`);
+                    if (btnElement) btnElement.textContent = value;
+                }
+                // Cas de l'input placeholder si l'ID n'est pas sur le placeholder mais sur l'input lui-même (ajustement)
+                 else if (id.includes('placeholder')) {
+                        const inputId = id.replace('-placeholder', '');
+                        const inputElement = document.getElementById(inputId);
+                        if (inputElement) {
+                             inputElement.setAttribute('placeholder', value);
+                        }
+                 }
             }
         }
         
-        // [MODIFICATION CLÉ] : Traduction des cartes Produits et Services
-        // Nous ne traduisons plus les <li> dans les <ul>, mais le texte dans les cartes <h3> et <p>.
+        // Mettre à jour l'attribut lang de la balise HTML
+        document.documentElement.lang = langCode;
         
-        // 2. Traduction des CARTES
-        const allCards = document.querySelectorAll('.product-card, .service-card');
-        
-        allCards.forEach(card => {
-            const h3 = card.querySelector('h3');
-            const p = card.querySelector('p:not(.status-online, .status-offline)'); // Slogan du produit/service
-            
-            // Utilisez la logique de traduction réelle pour les titres (si vous avez des clés spécifiques)
-            // Pour l'instant, on utilise des clés génériques qui étaient dans les anciennes <li>
-            
-            if (h3 && h3.textContent.includes('Flyer Design')) {
-                h3.textContent = translations['produit-1'][lang] || 'Produit 1';
-                p.textContent = (lang === 'fr' ? 'Conception de flyers promotionnels percutants.' : lang === 'en' ? 'Design of impactful promotional flyers.' : '...')
-            }
-            // NOTE: Une logique plus robuste nécessiterait d'ajouter des `data-key` aux `h3` et `p` dans le HTML.
-        });
-        
-        
-        // 3. Cas spécial pour le lien email (INCHANGÉ)
-        const pContactEmail = document.getElementById('p-contact-email');
-        if (pContactEmail) {
-            const emailLink = pContactEmail.querySelector('a');
-            const email = emailLink ? emailLink.href : 'mailto:contact.paulyon@gmail.com'; 
-            const emailText = emailLink ? emailLink.textContent : 'contact.paulyon@gmail.com'; 
-            
-            pContactEmail.innerHTML = translations['p-contact-email'][lang] + `<a href="${email}">${emailText}</a> !`;
-        }
-        
-        // 4. Sauvegarde la langue dans le stockage local (INCHANGÉ)
-        localStorage.setItem('paulyonLang', lang);
+        // Stocker la langue dans le localStorage 
+        localStorage.setItem('paulyon-lang', langCode);
     }
     
-    // C. Initialisation (INCHANGÉ)
-    const defaultLang = localStorage.getItem('paulyonLang') || 'fr';
-    translatePage(defaultLang);
+    // C. Initialisation de la langue
+    const savedLang = localStorage.getItem('paulyon-lang') || 'fr';
+    setLanguage(savedLang);
 
 
-    // D. Gérer les Clics sur les Options de Langue (INCHANGÉ)
+    // D. Gérer les Clics sur les Options de Langue
     langOptions.forEach(option => {
         option.addEventListener('click', (event) => {
             event.preventDefault();
@@ -217,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const newLang = event.target.getAttribute('data-lang');
             
             if (newLang) {
-                translatePage(newLang); 
+                setLanguage(newLang); 
                 
                 // Ferme les menus après la sélection
                 if (settingsMenu) settingsMenu.classList.remove('show');
