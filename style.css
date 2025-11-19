@@ -163,31 +163,25 @@ section {
 }
 
 /* -------------------------------------
-   STYLES DU CONTENEUR D'ICÔNE (Le carré arrondi - Nouveau)
-   ------------------------------------- */
-.icon-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px; /* Taille du carré */
-    height: 50px;
-    border-radius: 10px; /* Bords arrondis */
-    margin-bottom: 20px;
-}
-
-/* -------------------------------------
-   STYLES DE L'ICÔNE À L'INTÉRIEUR (Le symbole - Nouveau)
+   STYLES DE L'ICÔNE OBJET (Simulation de l'encadrement sur la forme de l'icône)
    ------------------------------------- */
 .data-card .icon-feature {
-    /* Couleur du symbole (Clair/Blanc par défaut, les classes de couleur écrasent) */
+    /* Style de base pour les icônes */
+    font-size: 1.8em; /* Taille de l'icône */
+    display: inline-block;
+    
+    /* Simuler l'encadrement et le fond de la référence */
+    padding: 0.7em 0.8em; 
+    margin-bottom: 15px;
+    border-radius: 10px; /* Bords arrondis */
+    line-height: 1;
+    
+    /* La couleur de l'icône sera définie par les classes ci-dessous */
     color: #EAEAEA; 
-    font-size: 1.5em; /* Taille plus petite car encadrée */
-    text-shadow: none; 
-    margin-bottom: 0; 
 }
 
 /* -------------------------------------
-   CLASSES DE COULEURS POUR LES ICONES ENCADRÉES (Inspirées de la référence)
+   CLASSES DE COULEURS POUR LES ICONES OBJET
    ------------------------------------- */
 
 /* Vert (Cosmétiques) */
@@ -195,8 +189,8 @@ section {
     background-color: rgba(57, 255, 20, 0.1);
     border: 1px solid rgba(57, 255, 20, 0.5); 
 }
-.icon-green .icon-feature {
-    color: #39FF14;
+.icon-green:before {
+    color: #39FF14; /* Couleur du symbole */
 }
 
 /* Bleu (Vêtements, Conception) - Basé sur votre #00BFFF */
@@ -204,8 +198,8 @@ section {
     background-color: rgba(0, 191, 255, 0.1); 
     border: 1px solid rgba(0, 191, 255, 0.5); 
 }
-.icon-blue .icon-feature, .icon-blue-light .icon-feature {
-    color: #00BFFF; 
+.icon-blue, .icon-blue-light {
+    color: #00BFFF; /* Couleur du symbole */
 }
 
 /* Violet (Bijoux) */
@@ -213,7 +207,7 @@ section {
     background-color: rgba(180, 0, 255, 0.1);
     border: 1px solid rgba(180, 0, 255, 0.5);
 }
-.icon-purple .icon-feature {
+.icon-purple {
     color: #B400FF;
 }
 
@@ -222,7 +216,7 @@ section {
     background-color: rgba(255, 200, 0, 0.1);
     border: 1px solid rgba(255, 200, 0, 0.5);
 }
-.icon-yellow .icon-feature, .icon-orange .icon-feature {
+.icon-yellow, .icon-orange {
     color: #FFC800;
 }
 
@@ -231,11 +225,10 @@ section {
     background-color: rgba(255, 0, 80, 0.1);
     border: 1px solid rgba(255, 0, 80, 0.5);
 }
-.icon-red .icon-feature {
+.icon-red {
     color: #FF0050;
 }
 /* ------------------------------------- */
-
 
 .data-card h3 {
     color: #00BFFF; 
