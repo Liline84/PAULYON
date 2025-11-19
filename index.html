@@ -11,14 +11,19 @@
     <header>
         
         <div class="header-controls">
+            
             <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">
                 ☰
             </button>
 
-            <form action="#" method="get" class="search-form" role="search">
-                <input type="search" name="q" placeholder="Rechercher un produit ou service..." aria-label="Rechercher sur le site" id="search-input">
-                <button type="submit" id="search-button">Rechercher</button>
-            </form>
+            <div class="search-container" id="search-container">
+                <input type="search" name="q" placeholder="Rechercher..." aria-label="Rechercher sur le site" id="search-input">
+            </div>
+
+            <button class="search-toggle" aria-controls="search-container" aria-expanded="false" id="search-toggle-btn">
+                🔎
+            </button>
+            
         </div>
         
         <nav id="main-nav">
