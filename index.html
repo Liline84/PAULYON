@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="title-tag">PAULYON</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5f49yU/X1/L6Nbd/t2xK11p0n1fX/n7g+l4WjF5s+vH1R0H+f4TfV4Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,8 +22,7 @@
             </div>
 
             <button class="search-toggle" aria-controls="search-container" aria-expanded="false" id="search-toggle-btn">
-                🔎
-            </button>
+                <i class="fa-solid fa-magnifying-glass"></i> </button>
             
         </div>
         
@@ -34,12 +34,12 @@
                 <li><a href="#contact" id="nav-contact">Contact</a></li>
                 
                 <li class="dropdown" id="settings-menu">
-                    <a href="#" class="dropdown-toggle" id="nav-settings">Paramètres</a>
+                    <a href="#" class="dropdown-toggle" id="nav-settings"><i class="fa-solid fa-gear"></i> Paramètres</a>
                     
                     <ul class="dropdown-content settings-dropdown">
                         
                         <li class="dropdown-language">
-                            <a href="#" class="language-toggle" id="nav-language-toggle">Langue</a> 
+                            <a href="#" class="language-toggle" id="nav-language-toggle"><i class="fa-solid fa-language"></i> Langue</a> 
                             
                             <ul class="language-content">
                                 <li><a href="#" data-lang="fr" class="lang-option">Français (FR)</a></li>
@@ -65,31 +65,31 @@
         <div class="dashboard-grid">
             
             <div class="data-card product-card" id="prod-vetements">
-                <h3>Vêtements (Homme & Femme)</h3>
+                <i class="fa-solid fa-shirt icon-feature"></i> <h3>Vêtements (Homme & Femme)</h3>
                 <p>T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.</p>
                 <div class="data-value">$XX.XX</div>
-                <a href="#" class="btn-primary">Voir la collection</a>
+                <a href="#" class="btn-primary" id="prod-vetements-btn">Voir la collection</a>
             </div>
             
             <div class="data-card product-card" id="prod-bijoux">
-                <h3>Bijoux Personnalisés</h3>
+                <i class="fa-solid fa-gem icon-feature"></i> <h3>Bijoux Personnalisés</h3>
                 <p>Création de bijoux uniques (colliers, bracelets, bagues).</p>
                 <div class="data-value">$XX.XX</div>
-                <a href="#" class="btn-primary">Découvrir</a>
+                <a href="#" class="btn-primary" id="prod-bijoux-btn">Découvrir</a>
             </div>
             
             <div class="data-card product-card" id="prod-cosmetiques">
-                <h3>Produits Cosmétiques</h3>
+                <i class="fa-solid fa-flask-vial icon-feature"></i> <h3>Produits Cosmétiques</h3>
                 <p>Maquillage, soins de la peau et parfums de qualité supérieure.</p>
                 <div class="data-value">$XX.XX</div>
-                <a href="#" class="btn-primary">Acheter</a>
+                <a href="#" class="btn-primary" id="prod-cosmetiques-btn">Acheter</a>
             </div>
             
             <div class="data-card product-card" id="prod-electronique">
-                <h3>Appareils Électroniques</h3>
+                <i class="fa-solid fa-mobile-screen-button icon-feature"></i> <h3>Appareils Électroniques</h3>
                 <p>Gadgets et équipements électroniques modernes et fiables.</p>
                 <div class="data-value">$XX.XX</div>
-                <a href="#" class="btn-primary">Voir la sélection</a>
+                <a href="#" class="btn-primary" id="prod-electronique-btn">Voir la sélection</a>
             </div>
             
         </div>
@@ -101,24 +101,24 @@
         <div class="dashboard-grid">
             
             <div class="data-card service-card" id="serv-conception">
-                <h3>Conception Graphique (Logos, Flyers, Tasses, etc.)</h3>
+                <i class="fa-solid fa-palette icon-feature"></i> <h3>Conception Graphique (Logos, Flyers, Tasses, etc.)</h3>
                 <p>Design créatif pour tous vos supports marketing : bidons, calendriers, et plus.</p>
                 <p class="status-online">Disponible</p>
-                <a href="#" class="btn-secondary">Demander un devis</a>
+                <a href="#" class="btn-secondary" id="serv-conception-btn">Demander un devis</a>
             </div>
             
             <div class="data-card service-card" id="serv-webdev">
-                <h3>Développement Web (Front-end & Back-end)</h3>
+                <i class="fa-solid fa-globe icon-feature"></i> <h3>Développement Web (Front-end & Back-end)</h3>
                 <p>Création de sites internet professionnels, modernes et optimisés pour mobile.</p>
                 <p class="status-online">Disponible</p>
-                <a href="#" class="btn-secondary">Démarrer un projet</a>
+                <a href="#" class="btn-secondary" id="serv-webdev-btn">Démarrer un projet</a>
             </div>
             
             <div class="data-card service-card" id="serv-codage-prog">
-                <h3>Codage & Programmation</h3>
+                <i class="fa-solid fa-code icon-feature"></i> <h3>Codage & Programmation</h3>
                 <p>Développement de scripts, logiciels et solutions spécifiques.</p>
                 <p class="status-online">Disponible</p>
-                <a href="#" class="btn-secondary">Détails</a>
+                <a href="#" class="btn-secondary" id="serv-codage-prog-btn">Détails</a>
             </div>
             
         </div>
