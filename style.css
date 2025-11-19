@@ -34,7 +34,8 @@ main {
 /* Titres */
 h1, h2 {
     color: #00BFFF; /* Bleu Électrique riche */
-    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7); /* Effet néon plus intense */
+    /* Effet néon conservé sur les titres pour le look High-Tech */
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7); 
     text-align: left; 
     margin-bottom: 30px;
     font-weight: 600; 
@@ -163,21 +164,22 @@ section {
 }
 
 /* -------------------------------------
-   STYLES DE L'ICÔNE OBJET (Simulation de l'encadrement sur la forme de l'icône)
+   STYLES DE L'ICÔNE OBJET (SANS ENCADREMENT)
    ------------------------------------- */
 .data-card .icon-feature {
-    /* Style de base pour les icônes */
-    font-size: 1.8em; /* Taille de l'icône */
-    display: inline-block;
-    
-    /* Simuler l'encadrement et le fond de la référence */
-    padding: 0.7em 0.8em; 
+    /* Style pour rendre l'objet grand et visible */
+    font-size: 3em; /* Grande taille d'icône */
+    display: block;
     margin-bottom: 15px;
-    border-radius: 10px; /* Bords arrondis */
+    
+    /* SUPPRESSION de l'encadrement, du fond et du padding */
+    padding: 0; 
+    border: none; 
+    background-color: transparent;
     line-height: 1;
     
-    /* La couleur de l'icône sera définie par les classes ci-dessous */
-    color: #EAEAEA; 
+    /* Ajout d'une ombre légère pour l'effet "néon/brillant" */
+    text-shadow: 0 0 8px currentColor;
 }
 
 /* -------------------------------------
@@ -186,49 +188,30 @@ section {
 
 /* Vert (Cosmétiques) */
 .icon-green {
-    background-color: rgba(57, 255, 20, 0.1);
-    border: 1px solid rgba(57, 255, 20, 0.5); 
-}
-.icon-green:before {
-    color: #39FF14; /* Couleur du symbole */
+    color: #39FF14;
 }
 
 /* Bleu (Vêtements, Conception) - Basé sur votre #00BFFF */
 .icon-blue, .icon-blue-light {
-    background-color: rgba(0, 191, 255, 0.1); 
-    border: 1px solid rgba(0, 191, 255, 0.5); 
-}
-.icon-blue, .icon-blue-light {
-    color: #00BFFF; /* Couleur du symbole */
+    color: #00BFFF; 
 }
 
 /* Violet (Bijoux) */
-.icon-purple {
-    background-color: rgba(180, 0, 255, 0.1);
-    border: 1px solid rgba(180, 0, 255, 0.5);
-}
 .icon-purple {
     color: #B400FF;
 }
 
 /* Jaune/Orange (Électronique, WebDev) */
 .icon-yellow, .icon-orange {
-    background-color: rgba(255, 200, 0, 0.1);
-    border: 1px solid rgba(255, 200, 0, 0.5);
-}
-.icon-yellow, .icon-orange {
     color: #FFC800;
 }
 
 /* Rouge (Codage/Prog) */
 .icon-red {
-    background-color: rgba(255, 0, 80, 0.1);
-    border: 1px solid rgba(255, 0, 80, 0.5);
-}
-.icon-red {
     color: #FF0050;
 }
 /* ------------------------------------- */
+
 
 .data-card h3 {
     color: #00BFFF; 
