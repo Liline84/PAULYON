@@ -1,14 +1,14 @@
 /* ====================================================================
-   FEUILLE DE STYLE UNIFIÉE : DASHBOARD HIGH-TECH
+   FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH
    Palette: Sombre (#0F0F0F) & Bleu Électrique (#00BFFF)
    Typographie: Poppins (Moderne & Géométrique)
    ==================================================================== */
 
-/* Importation de la police Poppins (A DÉPLACER DANS LE HTML SI POSSIBLE) */
+/* Note: Si la police Poppins n'est pas déjà dans votre HTML, vous devez la conserver ici. */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* ===============================
-   1. FONDAMENTAUX (MODIFIÉ)
+   1. FONDAMENTAUX 
    =============================== */
 * {
     margin: 0;
@@ -21,28 +21,28 @@ body {
     background-color: #0F0F0F; 
     color: #EAEAEA; /* Texte par défaut en Gris très clair */
     font-family: 'Poppins', sans-serif; /* Nouvelle police moderne */
-    line-height: 1.7; /* Légère augmentation pour meilleure lisibilité */
+    line-height: 1.7; 
     min-height: 100vh;
 }
 
 main {
-    max-width: 1400px; /* Augmentation de la largeur */
+    max-width: 1400px; 
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Titres (MODIFIÉ) */
+/* Titres */
 h1, h2 {
     /* Bleu Électrique riche */
     color: #00BFFF; 
     /* Effet néon plus intense */
     text-shadow: 0 0 10px rgba(0, 191, 255, 0.7); 
-    text-align: left; /* Aligner les titres à gauche */
+    text-align: left; 
     margin-bottom: 30px;
-    font-weight: 600; /* Semi-Bold */
+    font-weight: 600; 
 }
 
-/* Liens hypertexte (MODIFIÉ) */
+/* Liens hypertexte */
 a {
     color: #00BFFF; 
     text-decoration: none;
@@ -56,54 +56,38 @@ a:hover {
 
 
 /* ===============================
-   2. HEADER ET NAVIGATION (PANNEAU LATÉRAL) (MODIFIÉ)
+   2. HEADER ET NAVIGATION 
    =============================== */
 header {
     background-color: #0F0F0F;
     padding: 10px 0;
-    border-bottom: none; /* Retirer la bordure */
     position: relative; 
 }
 
-/* Conteneur du menu (MODIFIÉ) */
+/* Conteneur Flex pour aligner le menu et la recherche */
+.header-controls {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px 20px;
+    position: relative; 
+    z-index: 95; 
+}
+
+/* Panneau de navigation (Menu latéral) */
 #main-nav ul {
     list-style: none;
     display: none; 
     flex-direction: column;
-    background-color: #1A1A1A; /* Fond légèrement plus clair pour le panneau */
+    background-color: #1A1A1A; 
     position: fixed; 
     width: 280px; 
     height: 100vh; 
     top: 0; 
     left: 0;
-    /* Ombre subtile et néon à la fois */
     box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2); 
     z-index: 90;
     padding-top: 80px; 
-}
-
-/* Liens du panneau (MODIFIÉ) */
-#main-nav ul li {
-    margin: 0; 
-    width: 100%; 
-    text-align: left;
-    border-bottom: 1px solid #282828; /* Ligne de séparation plus douce */
-}
-
-/* Zone de clic des liens (MODIFIÉ) */
-#main-nav ul li a {
-    display: block;
-    color: #EAEAEA; 
-    font-weight: 400; /* Poids normal */
-    padding: 15px 25px; 
-    transition: all 0.2s ease-in-out;
-}
-
-#main-nav ul li a:hover {
-    color: #00BFFF; /* Nouveau bleu électrique */
-    background-color: #282828; 
-    border-left: 5px solid #00BFFF; /* Indicateur d'activité moderne */
-    text-shadow: none;
 }
 
 /* Activation via JS (Hamburger cliqué) */
@@ -111,63 +95,63 @@ header {
     display: flex; 
 }
 
+/* Liens du panneau */
+#main-nav ul li {
+    margin: 0; 
+    width: 100%; 
+    text-align: left;
+    border-bottom: 1px solid #282828;
+}
+
+#main-nav ul li a {
+    display: block;
+    color: #EAEAEA; 
+    font-weight: 400; 
+    padding: 15px 25px; 
+    transition: all 0.2s ease-in-out;
+}
+
+#main-nav ul li a:hover {
+    color: #00BFFF; 
+    background-color: #282828; 
+    border-left: 5px solid #00BFFF; 
+    text-shadow: none;
+}
 
 /* ===============================
-   3. SECTIONS (Contenu Principal) & GRILLE DE DASHBOARD (MODIFIÉ)
+   3. SECTIONS & GRILLE DE DASHBOARD 
    =============================== */
 section {
     background-color: #1A1A1A; 
     padding: 40px;
-    border-radius: 12px; /* Arrondis plus marqués pour un look moderne */
+    border-radius: 12px; 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); 
     margin: 40px auto;
     max-width: 100%; 
 }
 
-/* Grille de conteneur pour les cartes (MODIFIÉ) */
+/* Grille pour les cartes Produits/Services */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cartes légèrement plus grandes */
-    gap: 30px; /* Espacement plus grand */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; 
     padding: 20px 0;
     margin-top: 20px;
 }
 
-/* Styles pour les listes dans les sections */
-section ul {
-    list-style: none; /* Retrait des puces par défaut */
-    padding-left: 0;
-    margin-top: 15px;
-}
-section ul li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-section ul li:before {
-    content: "◇"; /* Puce moderne */
-    color: #00BFFF; 
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-}
-
-
 /* ===============================
-   3.5. CARTES D'INFORMATION (Dashboard Cards) (MODIFIÉ)
+   3.5. CARTES D'INFORMATION (Dashboard Cards) 
    =============================== */
 .data-card {
     background-color: #1A1A1A; 
     padding: 30px; 
     border-radius: 12px;
-    border: 1px solid #282828; /* Bordure subtile pour le look technologique */
-    /* Box-shadow double : ombre douce et lueur néon subtile */
+    border: 1px solid #282828; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 191, 255, 0.1); 
     color: #EAEAEA;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Effet au survol des cartes : Élévation et lueur plus intense */
 .data-card:hover {
     transform: translateY(-5px); 
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 0.5); 
@@ -188,19 +172,19 @@ section ul li:before {
     margin-top: 5px;
 }
 
-/* Indicateurs de statut (MODIFIÉ) */
+/* Indicateurs de statut */
 .status-offline {
-    color: #FF7043; /* Rouge-Orange plus moderne pour "Offline" */
+    color: #FF7043; 
     font-weight: 600;
 }
 .status-online {
-    color: #39FF14; /* Vert néon pour l'état "Online" */
+    color: #39FF14; 
     font-weight: 600;
 }
 
 
 /* ===============================
-   4. FORMULAIRE DE CONTACT & BOUTONS (MODIFIÉ)
+   4. FORMULAIRE DE CONTACT & BOUTONS 
    =============================== */
 form {
     display: flex;
@@ -211,17 +195,17 @@ form {
 
 input[type="text"], input[type="email"], textarea {
     padding: 12px;
-    border: 1px solid #00BFFF; /* Nouveau bleu électrique */
+    border: 1px solid #00BFFF; 
     background-color: #0F0F0F;
     color: #EAEAEA; 
-    border-radius: 8px; /* Bords plus arrondis */
+    border-radius: 8px; 
     font-family: 'Poppins', sans-serif;
-    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); /* Ombre néon plus douce */
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); 
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8); /* Lueur plus forte au focus */
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8); 
     outline: none;
 }
 
@@ -231,9 +215,9 @@ textarea {
 
 button {
     background-color: #00BFFF; 
-    color: #0F0F0F; /* Texte du bouton en fond sombre */
+    color: #0F0F0F; 
     border: none;
-    padding: 14px 25px; /* Bouton plus grand */
+    padding: 14px 25px; 
     cursor: pointer;
     border-radius: 8px;
     font-weight: 600;
@@ -242,7 +226,7 @@ button {
 }
 
 button:hover {
-    background-color: #00FFFF; /* Bleu plus clair au survol */
+    background-color: #00FFFF; 
     color: #0F0F0F;
     box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
 }
@@ -250,12 +234,18 @@ button:hover {
 .btn-primary {
     background-color: #00BFFF;
     color: #0F0F0F;
+    padding: 10px 20px; /* Ajusté pour les boutons dans les cartes */
+    display: inline-block;
+    text-align: center;
 }
 .btn-secondary {
     background-color: transparent;
     color: #00BFFF;
     border: 2px solid #00BFFF;
     font-weight: 400;
+    padding: 10px 20px; /* Ajusté pour les boutons dans les cartes */
+    display: inline-block;
+    text-align: center;
 }
 .btn-secondary:hover {
     background-color: #00BFFF;
@@ -264,14 +254,14 @@ button:hover {
 
 
 /* ===============================
-   5. PIED DE PAGE (FOOTER) (MODIFIÉ)
+   5. PIED DE PAGE (FOOTER) 
    =============================== */
 footer {
     background-color: #1A1A1A; 
     color: #EAEAEA; 
     text-align: center;
     padding: 30px 20px;
-    border-top: 1px solid #282828; /* Bordure de séparation plus subtile */
+    border-top: 1px solid #282828; 
     margin-top: 50px;
 }
 
@@ -288,7 +278,6 @@ footer a:hover {
 
 /* ===============================
    6. STYLES DU MENU DÉROULANT (SOUS-MENUS)
-   (Pas de changements majeurs, ajustements de couleur)
    =============================== */
 .dropdown {
     position: relative;
@@ -299,7 +288,7 @@ footer a:hover {
     display: none; 
     position: static; 
     min-width: 100%;
-    background-color: #202020; /* Fond légèrement plus clair */
+    background-color: #202020; 
     padding: 0;
     z-index: 50; 
     list-style: none;
@@ -337,7 +326,7 @@ footer a:hover {
     display: none;
     position: static;
     min-width: 100%;
-    background-color: #282828; /* Encore plus clair pour le niveau 2 */
+    background-color: #282828; 
     padding: 0;
     z-index: 60; 
     list-style: none;
@@ -354,34 +343,101 @@ footer a:hover {
 
 
 /* ===============================
-   7. MENU HAMBURGER (Toujours Visible) (MODIFIÉ)
+   7. MENU HAMBURGER 
    =============================== */
 .menu-toggle {
     display: block; 
     background: none;
     border: none;
     font-size: 30px;
-    color: #00BFFF; /* Nouveau bleu électrique */
+    color: #00BFFF; 
     cursor: pointer;
     padding: 10px;
-    position: absolute; 
-    top: 20px; /* Centrage vertical dans le header implicite */
-    left: 20px; 
+    position: static; /* Géré par le conteneur .header-controls */
     z-index: 100;
     border: 2px solid #00BFFF; 
     border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7); /* Lueur intense */
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7); 
     transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .menu-toggle:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(0, 191, 255, 0.9);
 }
 
-/* Media Query pour les petits écrans (MODIFIÉ) */
+
+/* ===============================
+   8. BOUTON & BARRE DE RECHERCHE 
+   =============================== */
+
+/* Le conteneur permet d'aligner l'input de recherche lorsqu'il est visible */
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end; 
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* État Actif (ajouté par JS) */
+.search-container.active {
+    width: auto;
+    opacity: 1;
+    max-width: 300px; 
+    padding-right: 10px;
+}
+
+/* Style de l'icône de recherche (le bouton que vous vouliez) */
+.search-toggle {
+    background: none;
+    border: 2px solid #00BFFF;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
+    color: #00BFFF; 
+    cursor: pointer;
+    font-size: 24px; 
+    padding: 8px 10px; 
+    transition: transform 0.2s, box-shadow 0.2s;
+    line-height: 1;
+}
+
+.search-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.9);
+}
+
+/* Style du champ de saisie */
+#search-input {
+    width: 100%; 
+    padding: 8px 12px;
+    border: 1px solid #00BFFF;
+    background-color: #1A1A1A;
+    color: #EAEAEA;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+}
+
+/* ===============================
+   9. MEDIA QUERIES 
+   =============================== */
 @media (max-width: 768px) {
-    /* S'assurer que le body a un padding pour éviter d'être sous le menu latéral */
-    body {
-        /* Pas de modification ici, car le menu est superposé (position: fixed) */
+    /* Ajustement de la section pour ne pas coller les bords */
+    section {
+        padding: 20px;
+    }
+    
+    /* Le conteneur de recherche prend plus de place sur mobile */
+    .search-container.active {
+        max-width: calc(100% - 120px); 
+    }
+
+    /* Le bouton de menu et le bouton de recherche sont maintenant côte à côte */
+    .header-controls {
+        gap: 15px;
+        justify-content: flex-start; /* Aligne les deux boutons à gauche sur mobile */
     }
 }
