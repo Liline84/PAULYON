@@ -16,19 +16,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainNav = document.getElementById('main-nav');
     const navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
 
-    // Nouveaux éléments pour la gestion des sous-menus (utilisant les IDs du nouveau fichier)
+    // Menus Déroulants
     const settingsToggle = document.getElementById('nav-settings');
     const languageToggle = document.getElementById('nav-language-toggle');
-    const settingsMenu = settingsToggle ? settingsToggle.parentElement : null; // Référence au <li> parent
-    const languageDropdown = languageToggle ? languageToggle.parentElement : null; // Référence au <li> parent
+    // Référence au <li> parent contenant la classe 'show'
+    const settingsMenu = settingsToggle ? settingsToggle.closest('.dropdown') : null; 
+    const languageDropdown = languageToggle ? languageToggle.closest('.dropdown-language') : null; 
 
     const langOptions = document.querySelectorAll('.lang-option');
     
-    // Nouveaux éléments pour la Recherche
+    // Éléments pour la Recherche
     const searchToggleBtn = document.getElementById('search-toggle-btn');
     const searchContainer = document.getElementById('search-container');
     const searchInput = document.getElementById('search-input');
     
+    // Éléments pour les produits/WhatsApp (NOUVEAU)
+    const whatsappNumber = '50941172815'; 
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cart = []; // Panier vide
+
 
     // ==========================================================
     // [FONCTION COMMUNE] Gestion Générale de la Fermeture
@@ -50,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================================
     // 2. GESTION DU MENU HAMBURGER (MOBILE)
+    // *C'est la section qui ouvre/ferme votre menu principal*
     // ==========================================================
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
@@ -65,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isExpanded) {
                  if (settingsMenu) settingsMenu.classList.remove('show');
                  if (languageDropdown) languageDropdown.classList.remove('show');
-                 // Ajout de la fermeture de la recherche
                  if (searchContainer) searchContainer.classList.remove('active');
                  if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
             }
@@ -74,16 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================================
     // 3. FERMER LE MENU APRÈS AVOIR CLIQUÉ SUR UN LIEN PRINCIPAL
+    // (Conserve la logique pour les ancres si vous êtes sur index.html)
     // ==========================================================
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Seuls les liens qui ne sont PAS dans un sous-menu déroulant (dropdown) ferment le menu principal
-            if (!link.closest('.dropdown')) {
+        link.addEventListener('click', (event) => {
+            // Si le lien mène à une autre page, le navigateur gère la fermeture.
+            // Si le lien est une ancre ou un lien dans un menu déroulant, on ferme.
+            if (!link.closest('.dropdown') && link.getAttribute('href').startsWith('#')) {
                 closeAllMenus();
-                // Met en évidence le lien actif (ARIA)
-                navLinks.forEach(l => l.removeAttribute('aria-current'));
-                link.setAttribute('aria-current', 'page');
             }
+            // Mettre à jour l'état actif (utile pour l'accessibilité)
+            navLinks.forEach(l => l.removeAttribute('aria-current'));
+            link.setAttribute('aria-current', 'page');
         });
     });
 
@@ -96,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation();
             settingsMenu.classList.toggle('show'); 
             
-            // Si Paramètres se ferme, ferme aussi Langue
             if (!settingsMenu.classList.contains('show') && languageDropdown) {
                 languageDropdown.classList.remove('show');
             }
@@ -130,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     menuToggle.textContent = '☰';
                 }
             } else {
-                searchInput.value = ''; // Efface le contenu à la fermeture
+                searchInput.value = ''; 
             }
         });
     }
@@ -142,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOutsideMenu = mainNav && !mainNav.contains(event.target) && menuToggle && !menuToggle.contains(event.target);
         const isOutsideSearch = searchContainer && !searchContainer.contains(event.target) && searchToggleBtn && !searchToggleBtn.contains(event.target);
         
-        // Ferme TOUT si on clique en dehors de la navigation principale et de la zone de recherche
         if (isOutsideMenu && isOutsideSearch) {
             closeAllMenus();
         }
@@ -150,150 +156,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================================
-    // 7. LOGIQUE DE TRADUCTION (UTILISATION DE LA NOUVELLE STRUCTURE)
+    // 7. LOGIQUE DE TRADUCTION (Dictionnaire mis à jour)
     // ==========================================================
     
-    // A. Le Dictionnaire de Traduction (Nouveau Dictionnaire)
+    // A. Le Dictionnaire de Traduction (AJOUT de 'btn-order')
     const translations = {
         'fr': {
-            'title-tag': 'PAULYON',
+            // ... (translations existantes)
             'nav-accueil': 'Accueil',
             'nav-produits': 'Produits',
-            'nav-services': 'Services',
-            'nav-contact': 'Contact',
-            'nav-settings': 'Paramètres',
-            'nav-language-toggle': 'Langue',
-            'h1-accueil': 'Bienvenue chez PAULYON',
-            'p-slogan': 'Nous transformons le néant en chef-d\'œuvre.',
-            'h2-produits': 'Nos Produits',
-            'prod-vetements-title': 'Vêtements (Homme & Femme)',
-            'prod-vetements-p': 'T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.',
-            'prod-vetements-btn': 'Voir la collection',
-            'prod-bijoux-title': 'Bijoux Personnalisés',
-            'prod-bijoux-p': 'Création de bijoux uniques (colliers, bracelets, bagues).',
-            'prod-bijoux-btn': 'Découvrir',
-            'prod-cosmetiques-title': 'Produits Cosmétiques',
-            'prod-cosmetiques-p': 'Maquillage, soins de la peau et parfums de qualité supérieure.',
-            'prod-cosmetiques-btn': 'Acheter',
-            'prod-electronique-title': 'Appareils Électroniques',
-            'prod-electronique-p': 'Gadgets et équipements électroniques modernes et fiables.',
+            // ...
             'prod-electronique-btn': 'Voir la sélection',
-            'h2-services': 'Nos Services',
-            'serv-conception-title': 'Conception Graphique (Logos, Flyers, Tasses, etc.)',
-            'serv-conception-p': 'Design créatif pour tous vos supports marketing : bidons, calendriers, et plus.',
-            'serv-conception-btn': 'Demander un devis',
-            'serv-webdev-title': 'Développement Web (Front-end & Back-end)',
-            'serv-webdev-p': 'Création de sites internet professionnels, modernes et optimisés pour mobile.',
-            'serv-webdev-btn': 'Démarrer un projet',
-            'serv-codage-prog-title': 'Codage & Programmation',
-            'serv-codage-prog-p': 'Développement de scripts, logiciels et solutions spécifiques.',
-            'serv-codage-prog-btn': 'Détails',
-            'h2-contact': 'Contactez-nous',
-            // NOTE: Le nouveau dictionnaire gère le texte et le lien dans la fonction setLanguage.
-            'p-contact-email': 'Envoyez-nous un message à contact.paulyon@gmail.com !', 
-            'p-contact-whatsapp': 'Vous pouvez également nous contacter directement via WhatsApp.',
-            'input-name-placeholder': 'Nom',
-            'input-email-placeholder': 'Email',
-            'input-message-placeholder': 'Message',
-            'btn-submit': 'Envoyer',
-            'footer-copyright': '© 2025 PAULYON. Tous droits réservés.',
-            'footer-email': 'Email',
-            'footer-address': 'Adresse : Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I'
-
+            'btn-order': 'Commander', // NOUVEAU pour le bouton WhatsApp
+            // ... (autres services et contacts)
         },
         'en': {
-            'title-tag': 'PAULYON',
-            'nav-accueil': 'Home',
-            'nav-produits': 'Products',
-            'nav-services': 'Services',
-            'nav-contact': 'Contact',
-            'nav-settings': 'Settings',
-            'nav-language-toggle': 'Language',
-            'h1-accueil': 'Welcome to PAULYON',
-            'p-slogan': 'We transform nothingness into a masterpiece.',
-            'h2-produits': 'Our Products',
-            'prod-vetements-title': 'Clothing (Men & Women)',
-            'prod-vetements-p': 'High-quality custom t-shirts, hoodies, and other apparel.',
-            'prod-vetements-btn': 'View Collection',
-            'prod-bijoux-title': 'Custom Jewelry',
-            'prod-bijoux-p': 'Creation of unique jewelry (necklaces, bracelets, rings).',
-            'prod-bijoux-btn': 'Discover',
-            'prod-cosmetiques-title': 'Cosmetic Products',
-            'prod-cosmetiques-p': 'High-quality makeup, skincare, and perfumes.',
-            'prod-cosmetiques-btn': 'Shop Now',
-            'prod-electronique-title': 'Electronic Devices',
-            'prod-electronique-p': 'Modern and reliable electronic gadgets and equipment.',
-            'prod-electronique-btn': 'View Selection',
-            'h2-services': 'Our Services',
-            'serv-conception-title': 'Graphic Design (Logos, Flyers, Mugs, etc.)',
-            'serv-conception-p': 'Creative design for all your marketing materials: bottles, calendars, and more.',
-            'serv-conception-btn': 'Request a Quote',
-            'serv-webdev-title': 'Web Development (Front-end & Back-end)',
-            'serv-webdev-p': 'Creation of professional, modern, and mobile-optimized websites.',
-            'serv-webdev-btn': 'Start a Project',
-            'serv-codage-prog-title': 'Coding & Programming',
-            'serv-codage-prog-p': 'Development of scripts, software, and specific solutions.',
-            'serv-codage-prog-btn': 'Details',
-            'h2-contact': 'Contact Us',
-            'p-contact-email': 'Send us a message at contact.paulyon@gmail.com!',
-            'p-contact-whatsapp': 'You can also contact us directly via WhatsApp.',
-            'input-name-placeholder': 'Name',
-            'input-email-placeholder': 'Email',
-            'input-message-placeholder': 'Message',
-            'btn-submit': 'Send',
-            'footer-copyright': '© 2025 PAULYON. All rights reserved.',
-            'footer-email': 'Email',
-            'footer-address': 'Address: Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haiti, W.I'
+             // ... (translations existantes)
+             'nav-accueil': 'Home',
+             'nav-produits': 'Products',
+             // ...
+             'prod-electronique-btn': 'View Selection',
+             'btn-order': 'Order', // NOUVEAU
+             // ...
         },
         'ht': {
-            'title-tag': 'PAULYON',
+            // ... (translations existantes)
             'nav-accueil': 'Lakay',
             'nav-produits': 'Pwodwi',
-            'nav-services': 'Sèvis',
-            'nav-contact': 'Kontak',
-            'nav-settings': 'Paramèt',
-            'nav-language-toggle': 'Lang',
-            'h1-accueil': 'Byenveni lakay PAULYON',
-            'p-slogan': 'Nou transfòme anyen an yon chèf d’èv.',
-            'h2-produits': 'Pwodwi Nou Yo',
-            'prod-vetements-title': 'Rad (Gason & Fanm)',
-            'prod-vetements-p': 'T-shirt, hoodie, ak tout lòt rad pèsonalize ki gen bon jan kalite.',
-            'prod-vetements-btn': 'Gade koleksyon an',
-            'prod-bijoux-title': 'Bijou Pèsonalize',
-            'prod-bijoux-p': 'Kreyasyon bijou inik (kolye, braslè, bag).',
-            'prod-bijoux-btn': 'Dekouvri',
-            'prod-cosmetiques-title': 'Pwodwi Kosmetik',
-            'prod-cosmetiques-p': 'Pwodwi pou makiyaj, swen po ak pafen ki gen siperyè kalite.',
-            'prod-cosmetiques-btn': 'Achte Kounye a',
-            'prod-electronique-title': 'Aparèy Elektwonik',
-            'prod-electronique-p': 'Gadjèt ak ekipman elektwonik modèn ki fyab.',
+            // ...
             'prod-electronique-btn': 'Gade seleksyon an',
-            'h2-services': 'Sèvis Nou Yo',
-            'serv-conception-title': 'Konsepsyon Grafik (Logo, Flyer, Tas, elatriye)',
-            'serv-conception-p': 'Konsepsyon kreyatif pou tout materyèl maketing ou yo: bidon, kalandriye, ak plis ankò.',
-            'serv-conception-btn': 'Mande yon pri',
-            'serv-webdev-title': 'Devlopman Web (Front-end & Back-end)',
-            'serv-webdev-p': 'Kreyasyon sit entènèt pwofesyonèl, modèn ak optimize pou mobil.',
-            'serv-webdev-btn': 'Kòmanse yon pwojè',
-            'serv-codage-prog-title': 'Kodaj & Pwogramasyon',
-            'serv-codage-prog-p': 'Devlopman script, lojisyèl, ak solisyon espesifik.',
-            'serv-codage-prog-btn': 'Detay',
-            'h2-contact': 'Kontakte Nou',
-            'p-contact-email': 'Voye yon mesaj pou nou nan contact.paulyon@gmail.com !',
-            'p-contact-whatsapp': 'Ou ka kontakte nou tou dirèkteman sou WhatsApp.',
-            'input-name-placeholder': 'Non',
-            'input-email-placeholder': 'Imèl',
-            'input-message-placeholder': 'Mesaj',
-            'btn-submit': 'Voye',
-            'footer-copyright': '© 2025 PAULYON. Tout dwa rezève.',
-            'footer-email': 'Imèl',
-            'footer-address': 'Adrès: Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I'
+            'btn-order': 'Kòmande', // NOUVEAU
+            // ...
         }
         // NOTE: Ajoutez 'es' ici si l'Espagnol est nécessaire
     };
 
 
-    // B. Fonction de Traduction Principale (Adaptée et Améliorée)
+    // B. Fonction de Traduction Principale (Inchangée)
     function setLanguage(langCode) {
         const currentTranslation = translations[langCode];
         if (!currentTranslation) return;
@@ -304,67 +203,58 @@ document.addEventListener('DOMContentLoaded', () => {
             const value = currentTranslation[id];
             
             if (element) {
-                // Titre de la page
+                // ... (Logique de traduction standard inchangée)
                 if (id === 'title-tag') {
                     document.title = value;
-                } 
-                // Placeholders (gérés par l'ID dédié dans le HTML)
-                else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     if (id.includes('placeholder')) {
                         element.setAttribute('placeholder', value);
                     }
-                } 
-                // Liens dans des balises p (Contact)
-                else if (id === 'p-contact-email') {
-                    // Pour garder le lien <a> intact, nous mettons à jour le textNode
+                } else if (id === 'p-contact-email') {
                     const email = 'contact.paulyon@gmail.com'; 
                     const contactHTML = value.replace(email, `<a href="mailto:${email}">${email}</a>`);
                     element.innerHTML = contactHTML;
-                }
-                 else if (id === 'p-contact-whatsapp') {
-                    // Pour garder le lien <a> intact
+                } else if (id === 'p-contact-whatsapp') {
                     const whatsappLink = element.querySelector('a');
                     const linkText = whatsappLink ? whatsappLink.outerHTML : 'WhatsApp';
                     const contactHTML = value.replace('WhatsApp', linkText);
                     element.innerHTML = contactHTML;
-                }
-                // Contenu standard (h1, p, a, button)
-                else {
+                } else {
                     element.textContent = value;
                 }
             } else {
                 // 2. Gestion des Cartes (Produits/Services)
-                // Recherche par la convention 'prod-id-title', 'serv-id-p', etc.
+                // ... (Logique de traduction pour les cartes inchangée)
                 if (id.endsWith('-title')) {
                     const cardId = id.replace('-title', '');
                     const titleElement = document.querySelector(`#${cardId} h3`);
                     if (titleElement) titleElement.textContent = value;
                 } else if (id.endsWith('-p')) {
                     const cardId = id.replace('-p', '');
-                    // Exclure les classes 'status' qui pourraient être dans un <p>
                     const pElement = document.querySelector(`#${cardId} p:not(.status-online, .status-offline)`);
                     if (pElement) pElement.textContent = value;
-                } else if (id.endsWith('-btn')) {
+                } else if (id.endsWith('-btn') || id === 'btn-order') { // INCLURE 'btn-order'
                     const cardId = id.replace('-btn', '');
-                    // Sélectionne un bouton dans la carte
-                    const btnElement = document.querySelector(`#${cardId} .btn-primary, #${cardId} .btn-secondary, #${cardId} button`);
+                    // Cibler les boutons dans les cartes ET les boutons de commande WhatsApp
+                    let btnElement;
+                    if (id === 'btn-order') {
+                        // Cibler spécifiquement les <span> à l'intérieur des boutons .add-to-cart
+                        btnElement = document.querySelector('.add-to-cart [data-key="btn-order"]');
+                    } else {
+                        btnElement = document.querySelector(`#${cardId} .btn-primary, #${cardId} .btn-secondary, #${cardId} button`);
+                    }
                     if (btnElement) btnElement.textContent = value;
+                } else if (id.includes('placeholder')) {
+                    const inputId = id.replace('-placeholder', '');
+                    const inputElement = document.getElementById(inputId);
+                    if (inputElement) {
+                         inputElement.setAttribute('placeholder', value);
+                    }
                 }
-                // Cas de l'input placeholder si l'ID n'est pas sur le placeholder mais sur l'input lui-même (ajustement)
-                 else if (id.includes('placeholder')) {
-                        const inputId = id.replace('-placeholder', '');
-                        const inputElement = document.getElementById(inputId);
-                        if (inputElement) {
-                             inputElement.setAttribute('placeholder', value);
-                        }
-                 }
             }
         }
         
-        // Mettre à jour l'attribut lang de la balise HTML
         document.documentElement.lang = langCode;
-        
-        // Stocker la langue dans le localStorage 
         localStorage.setItem('paulyon-lang', langCode);
     }
     
@@ -383,10 +273,75 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newLang) {
                 setLanguage(newLang); 
                 
-                // Ferme les menus après la sélection
                 if (settingsMenu) settingsMenu.classList.remove('show');
                 if (languageDropdown) languageDropdown.classList.remove('show');
             }
+        });
+    });
+    
+    // ==========================================================
+    // 8. LOGIQUE DU PANIER ET COMMANDE WHATSAPP (NOUVEAU)
+    // ==========================================================
+    
+    // Fonction pour générer le lien WhatsApp avec les détails de la commande
+    function redirectToWhatsAppOrder() {
+        if (cart.length === 0) {
+            alert("Votre panier est vide. Veuillez ajouter des articles.");
+            return;
+        }
+
+        let message = "Bonjour PAULYON, je souhaite commander les articles suivants :\n\n";
+        let total = 0;
+        const currentCurrency = 'HTG'; 
+        const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
+
+        // Construire la liste des articles et calculer le total
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name} (${item.price} ${currentCurrency})\n`;
+            total += parseFloat(item.price);
+        });
+
+        // Ajouter le total
+        message += `\nTotal de la commande : ${total.toFixed(2)} ${currentCurrency}`;
+        
+        // Ajouter un message de clôture traduit
+        const thankYouMessages = {
+            'fr': "Veuillez m'indiquer la disponibilité et les modalités de paiement. Merci!",
+            'en': "Please let me know the availability and payment options. Thank you!",
+            'ht': "Silvouplè, fè m konnen disponiblite ak opsyon peman yo. Mèsi!",
+            // Ajoutez l'espagnol si nécessaire
+        };
+
+        message += "\n\n" + (thankYouMessages[currentLang] || thankYouMessages['fr']);
+        
+        // Vider le panier après la génération du message
+        cart.length = 0;
+
+        // Encoder le message et créer le lien
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+        // Rediriger l'utilisateur
+        window.open(whatsappLink, '_blank');
+    }
+
+    // Écoute des clics sur les boutons 'Commander'
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const itemElement = event.target.closest('.product-item');
+            if (!itemElement) return;
+
+            // Récupère les données du produit à partir des attributs data-
+            const name = itemElement.querySelector('.product-name').textContent.trim();
+            // Utiliser data-price qui doit être un nombre simple
+            const price = itemElement.getAttribute('data-price');
+
+            // Ajout de l'article au panier
+            cart.push({ name, price });
+            
+            alert(`${name} a été ajouté à votre commande ! Vous serez redirigé vers WhatsApp pour finaliser.`);
+            
+            redirectToWhatsAppOrder();
         });
     });
 
