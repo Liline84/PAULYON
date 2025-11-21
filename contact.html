@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contactez-nous</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome via CDN -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <section id="contact">
+      <h2 id="h2-contact">Contactez-nous</h2>
+      <p id="p-contact-email">
+        Envoyez-nous un message à
+        <a href="mailto:contact.paulyon@gmail.com">contact.paulyon@gmail.com</a> !
+      </p>
+      <p id="p-contact-whatsapp">
+        Vous pouvez également nous contacter directement via
+        <a href="https://wa.me/+50941172815">WhatsApp</a>.
+      </p>
+
+      <form action="https://formspree.io/f/contact.paulyon@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Nom" required id="input-name" />
+        <input type="email" name="_replyto" placeholder="Email" required id="input-email" />
+        <textarea name="message" placeholder="Message" required id="input-message"></textarea>
+        <button type="submit" id="btn-submit">Envoyer</button>
+      </form>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Charger header et footer via fetch
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+  </script>
+</body>
+</html>

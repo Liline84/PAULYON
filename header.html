@@ -1,0 +1,41 @@
+<header>
+    <div class="header-controls">
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">
+            ☰
+        </button>
+
+        <div class="search-container" id="search-container">
+            <input type="search" name="q" placeholder="Rechercher..." aria-label="Rechercher sur le site" id="search-input">
+        </div>
+
+        <button class="search-toggle" aria-controls="search-container" aria-expanded="false" id="search-toggle-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#accueil" id="nav-accueil">Accueil</a></li>
+            <li><a href="produits.html" id="nav-produits">Produits</a></li>
+            <li><a href="services.html" id="nav-services">Services</a> </li>
+            <li><a href="contact.html" id="nav-contact">Contact</a></li>
+
+            <li class="dropdown" id="settings-menu">
+                <a href="#" class="dropdown-toggle" id="nav-settings"><i class="fa-solid fa-gear"></i> Paramètres</a>
+                <ul class="dropdown-content settings-dropdown">
+                  <li class="dropdown-language">
+                        <a href="#" class="language-toggle" id="nav-language-toggle">
+                            <i class="fa-solid fa-language"></i> Langue
+                        </a>
+                        <ul class="language-content">
+                            <li><a href="#" data-lang="fr" class="lang-option">Français (FR)</a></li>
+                            <li><a href="#" data-lang="en" class="lang-option">English (EN)</a></li>
+                            <li><a href="#" data-lang="es" class="lang-option">Español (ES)</a></li>
+                            <li><a href="#" data-lang="ht" class="lang-option">Kreyòl (HT)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
