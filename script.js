@@ -1,8 +1,14 @@
+// script.js (Réécrit pour le chargement dynamique)
+
 // AJOUT : Classe pour gérer les transitions CSS après le chargement
-// Ceci évite les animations indésirables au chargement initial de la page.
 document.body.classList.add('preload');
 
-document.addEventListener('DOMContentLoaded', () => {
+
+// ==========================================================
+// [FONCTION GLOBALE] Gère l'initialisation de tout le HEADER
+// Cette fonction doit être appelée depuis index.html APRES le fetch('header.html')
+// ==========================================================
+function initMenuHandlers() {
 
     // Retirer la classe de préchargement pour activer les transitions CSS
     setTimeout(() => {
@@ -12,8 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     // 1. SÉLECTION DES ÉLÉMENTS (CONSOLIDÉ)
     // ==========================================================
+    // Ces sélections ne devraient plus être NULL à ce stade.
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.getElementById('main-nav');
+    // Vérification de l'existence avant d'appeler querySelectorAll
     const navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
 
     // Menus Déroulants
@@ -23,19 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingsMenu = settingsToggle ? settingsToggle.closest('.dropdown') : null; 
     const languageDropdown = languageToggle ? languageToggle.closest('.dropdown-language') : null; 
 
-    const langOptions = document.querySelectorAll('.lang-option');
-    
     // Éléments pour la Recherche
     const searchToggleBtn = document.getElementById('search-toggle-btn');
     const searchContainer = document.getElementById('search-container');
     const searchInput = document.getElementById('search-input');
     
-    // Éléments pour les produits/WhatsApp (NOUVEAU)
-    const whatsappNumber = '50941172815'; 
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    const cart = []; // Panier vide
-
-
     // ==========================================================
     // [FONCTION COMMUNE] Gestion Générale de la Fermeture
     // ==========================================================
@@ -55,8 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // 2. GESTION DU MENU HAMBURGER (MOBILE)
-    // *C'est la section qui ouvre/ferme votre menu principal*
+    // 2. GESTION DU MENU HAMBURGER (MOBILE) - DOIT MAINTENANT FONCTIONNER
     // ==========================================================
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', () => {
@@ -80,16 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // ==========================================================
     // 3. FERMER LE MENU APRÈS AVOIR CLIQUÉ SUR UN LIEN PRINCIPAL
-    // (Conserve la logique pour les ancres si vous êtes sur index.html)
     // ==========================================================
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            // Si le lien mène à une autre page, le navigateur gère la fermeture.
-            // Si le lien est une ancre ou un lien dans un menu déroulant, on ferme.
             if (!link.closest('.dropdown') && link.getAttribute('href').startsWith('#')) {
                 closeAllMenus();
             }
-            // Mettre à jour l'état actif (utile pour l'accessibilité)
             navLinks.forEach(l => l.removeAttribute('aria-current'));
             link.setAttribute('aria-current', 'page');
         });
@@ -119,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    // 5. GESTION DU BOUTON DE RECHERCHE (NOUVEAU)
+    // 5. GESTION DU BOUTON DE RECHERCHE
     // ==========================================================
     if (searchToggleBtn && searchContainer && searchInput) {
         searchToggleBtn.addEventListener('click', function() {
@@ -130,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (isExpanded) {
                 searchInput.focus();
-                // Ferme le menu principal si la recherche s'ouvre
                 if (mainNav && mainNav.classList.contains('active')) {
                     mainNav.classList.remove('active');
                     menuToggle.setAttribute('aria-expanded', 'false');
@@ -153,42 +147,48 @@ document.addEventListener('DOMContentLoaded', () => {
             closeAllMenus();
         }
     });
+}
+// FIN de initMenuHandlers()
 
 
-    // ==========================================================
-    // 7. LOGIQUE DE TRADUCTION (Dictionnaire mis à jour)
-    // ==========================================================
+// ==========================================================
+// LOGIQUE QUI N'EST PAS DANS initMenuHandlers (Traduction/WhatsApp)
+// Elle sera exécutée au chargement normal de la page.
+// ==========================================================
+document.addEventListener('DOMContentLoaded', () => {
     
+    // Variables nécessaires
+    const langOptions = document.querySelectorAll('.lang-option');
+    const whatsappNumber = '50941172815'; 
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cart = []; 
+
     // A. Le Dictionnaire de Traduction (AJOUT de 'btn-order')
     const translations = {
         'fr': {
             // ... (translations existantes)
             'nav-accueil': 'Accueil',
             'nav-produits': 'Produits',
-            // ...
             'prod-electronique-btn': 'Voir la sélection',
-            'btn-order': 'Commander', // NOUVEAU pour le bouton WhatsApp
+            'btn-order': 'Commander', 
             // ... (autres services et contacts)
         },
         'en': {
              // ... (translations existantes)
              'nav-accueil': 'Home',
              'nav-produits': 'Products',
-             // ...
              'prod-electronique-btn': 'View Selection',
-             'btn-order': 'Order', // NOUVEAU
+             'btn-order': 'Order', 
              // ...
         },
         'ht': {
             // ... (translations existantes)
             'nav-accueil': 'Lakay',
             'nav-produits': 'Pwodwi',
-            // ...
             'prod-electronique-btn': 'Gade seleksyon an',
-            'btn-order': 'Kòmande', // NOUVEAU
+            'btn-order': 'Kòmande', 
             // ...
         }
-        // NOTE: Ajoutez 'es' ici si l'Espagnol est nécessaire
     };
 
 
@@ -196,14 +196,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function setLanguage(langCode) {
         const currentTranslation = translations[langCode];
         if (!currentTranslation) return;
-
+        
+        // Cible la racine des lang options pour mise à jour visuelle si nécessaire
+        const languageDropdown = document.querySelector('.dropdown-language');
+        
         // 1. Traduction des éléments par ID et cas spéciaux
         for (const id in currentTranslation) {
             const element = document.getElementById(id);
             const value = currentTranslation[id];
             
+            // ... (Logique de traduction complète ici, telle que vous l'aviez fournie)
             if (element) {
-                // ... (Logique de traduction standard inchangée)
                 if (id === 'title-tag') {
                     document.title = value;
                 } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
@@ -224,7 +227,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 // 2. Gestion des Cartes (Produits/Services)
-                // ... (Logique de traduction pour les cartes inchangée)
                 if (id.endsWith('-title')) {
                     const cardId = id.replace('-title', '');
                     const titleElement = document.querySelector(`#${cardId} h3`);
@@ -233,12 +235,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const cardId = id.replace('-p', '');
                     const pElement = document.querySelector(`#${cardId} p:not(.status-online, .status-offline)`);
                     if (pElement) pElement.textContent = value;
-                } else if (id.endsWith('-btn') || id === 'btn-order') { // INCLURE 'btn-order'
+                } else if (id.endsWith('-btn') || id === 'btn-order') { 
                     const cardId = id.replace('-btn', '');
-                    // Cibler les boutons dans les cartes ET les boutons de commande WhatsApp
                     let btnElement;
                     if (id === 'btn-order') {
-                        // Cibler spécifiquement les <span> à l'intérieur des boutons .add-to-cart
                         btnElement = document.querySelector('.add-to-cart [data-key="btn-order"]');
                     } else {
                         btnElement = document.querySelector(`#${cardId} .btn-primary, #${cardId} .btn-secondary, #${cardId} button`);
@@ -272,18 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (newLang) {
                 setLanguage(newLang); 
-                
-                if (settingsMenu) settingsMenu.classList.remove('show');
-                if (languageDropdown) languageDropdown.classList.remove('show');
             }
         });
     });
     
     // ==========================================================
-    // 8. LOGIQUE DU PANIER ET COMMANDE WHATSAPP (NOUVEAU)
+    // 8. LOGIQUE DU PANIER ET COMMANDE WHATSAPP 
     // ==========================================================
     
-    // Fonction pour générer le lien WhatsApp avec les détails de la commande
     function redirectToWhatsAppOrder() {
         if (cart.length === 0) {
             alert("Votre panier est vide. Veuillez ajouter des articles.");
@@ -295,48 +291,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentCurrency = 'HTG'; 
         const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
 
-        // Construire la liste des articles et calculer le total
         cart.forEach((item, index) => {
             message += `${index + 1}. ${item.name} (${item.price} ${currentCurrency})\n`;
             total += parseFloat(item.price);
         });
 
-        // Ajouter le total
         message += `\nTotal de la commande : ${total.toFixed(2)} ${currentCurrency}`;
         
-        // Ajouter un message de clôture traduit
         const thankYouMessages = {
             'fr': "Veuillez m'indiquer la disponibilité et les modalités de paiement. Merci!",
             'en': "Please let me know the availability and payment options. Thank you!",
             'ht': "Silvouplè, fè m konnen disponiblite ak opsyon peman yo. Mèsi!",
-            // Ajoutez l'espagnol si nécessaire
         };
 
         message += "\n\n" + (thankYouMessages[currentLang] || thankYouMessages['fr']);
         
-        // Vider le panier après la génération du message
         cart.length = 0;
 
-        // Encoder le message et créer le lien
         const encodedMessage = encodeURIComponent(message);
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-        // Rediriger l'utilisateur
         window.open(whatsappLink, '_blank');
     }
 
-    // Écoute des clics sur les boutons 'Commander'
     addToCartButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const itemElement = event.target.closest('.product-item');
             if (!itemElement) return;
 
-            // Récupère les données du produit à partir des attributs data-
             const name = itemElement.querySelector('.product-name').textContent.trim();
-            // Utiliser data-price qui doit être un nombre simple
             const price = itemElement.getAttribute('data-price');
 
-            // Ajout de l'article au panier
             cart.push({ name, price });
             
             alert(`${name} a été ajouté à votre commande ! Vous serez redirigé vers WhatsApp pour finaliser.`);
@@ -345,4 +330,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-});
+}); // FIN de DOMContentLoaded
+
