@@ -1,0 +1,99 @@
+{
+  "generalSettings": {
+    "siteName": "PAULYON's Lab Hub",
+    "copyrightYear": 2025,
+    "currentCurrency": "HTG",
+    "whatsappNumber": "+50941172815",
+    "emailContact": "contact.paulyon@gmail.com",
+    "address": "Ruelle Flora, Madeline, Cap-Haïtien, Nord, Haïti, W.I"
+  },
+
+  "socialLinks": [
+    {
+      "platform": "Facebook",
+      "url": "#",
+      "iconClass": "fa-brands fa-facebook"
+    },
+    {
+      "platform": "Instagram",
+      "url": "#",
+      "iconClass": "fa-brands fa-instagram"
+    }
+  ],
+
+  "languages": [
+    {"code": "fr", "name": "Français (FR)"},
+    {"code": "en", "name": "English (EN)"},
+    {"code": "es", "name": "Español (ES)"},
+    {"code": "ht", "name": "Kreyòl (HT)"}
+  ],
+
+  "products": [
+    {
+      "id": 1,
+      "name": "Vêtements (Homme & Femme)",
+      "price": 35.00,
+      "description": "T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.",
+      "imagePath": "assets/img/vetements.jpg",
+      "iconClass": "fa-solid fa-shirt",
+      "colorClass": "icon-blue"
+    },
+    {
+      "id": 2,
+      "name": "Bijoux Personnalisés",
+      "price": 80.00,
+      "description": "Création de bijoux uniques (colliers, bracelets, bagues).",
+      "imagePath": "assets/img/bijoux.jpg",
+      "iconClass": "fa-solid fa-ring",
+      "colorClass": "icon-purple"
+    },
+    {
+      "id": 3,
+      "name": "Produits Cosmétiques",
+      "price": 45.00,
+      "description": "Maquillage, soins de la peau et parfums de qualité supérieure.",
+      "imagePath": "assets/img/cosmetiques.jpg",
+      "iconClass": "fa-solid fa-bottle-droplet",
+      "colorClass": "icon-green"
+    },
+    {
+      "id": 4,
+      "name": "Appareils Électroniques",
+      "price": 599.99,
+      "description": "Gadgets et équipements électroniques modernes et fiables.",
+      "imagePath": "assets/img/electronique.jpg",
+      "iconClass": "fa-solid fa-laptop",
+      "colorClass": "icon-yellow"
+    }
+  ],
+
+  "services": [
+    {
+      "id": 101,
+      "title": "Conception Graphique",
+      "price": 750.00,
+      "details": "Design créatif pour tous vos supports marketing : logos, flyers, tasses, bidons, calendriers, et plus.",
+      "status": "online", 
+      "iconClass": "fa-solid fa-paintbrush",
+      "colorClass": "icon-blue-light"
+    },
+    {
+      "id": 102,
+      "title": "Développement Web",
+      "price": 1200.00,
+      "details": "Création de sites internet professionnels, modernes et optimisés pour mobile (Front-end & Back-end).",
+      "status": "online",
+      "iconClass": "fa-solid fa-desktop",
+      "colorClass": "icon-orange"
+    },
+    {
+      "id": 103,
+      "title": "Codage & Programmation",
+      "price": 900.00,
+      "details": "Développement de scripts, logiciels et solutions spécifiques sur mesure.",
+      "status": "online",
+      "iconClass": "fa-solid fa-code",
+      "colorClass": "icon-red"
+    }
+  ]
+}
