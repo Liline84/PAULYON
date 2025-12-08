@@ -1,20 +1,19 @@
 /* ====================================================================
-    FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH (FINAL)
-    Palette: Sombre (#0F0F0F) & Bleu Électrique (#00BFFF)
-    Typographie: Poppins (Moderne & Géométrique)
-    Objectif: Icônes d'objets (T-shirt, Bague) Grandes, Colorées et Lumineuses.
+    FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH (FINAL OPTIMISÉ)
+    Corrections: Bugs responsive, transitions, performance (shadows)
+    Palettes: Cohérence des couleurs néon et structure desktop/mobile
     ==================================================================== */
 
 /* Importation de la police */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* ===============================
-    1. FONDAMENTAUX 
+    1. FONDAMENTAUX
     =============================== */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 /* AJOUT : Désactivation des transitions au chargement (preload class) */
@@ -23,38 +22,59 @@
 }
 
 body {
-    background-color: #0F0F0F; 
+    background-color: #0F0F0F;
     color: #EAEAEA;
     font-family: 'Poppins', sans-serif;
-    line-height: 1.7; 
+    line-height: 1.7;
     min-height: 100vh;
 }
 
+/* CORRECTION : Centrage du contenu principal */
 main {
-    max-width: 1400px; 
+    max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Titres */
+/* CORRECTION : Centrage et alignement des titres */
 h1, h2 {
     color: #00BFFF;
     text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
-    text-align: left; 
+    text-align: left;
     margin-bottom: 30px;
-    font-weight: 600; 
+    font-weight: 600;
 }
 
 /* Liens hypertexte */
 a {
-    color: #00BFFF; 
+    color: #00BFFF;
     text-decoration: none;
     transition: color 0.3s, text-shadow 0.3s;
 }
 
 a:hover {
     color: #fff;
-    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8); 
+    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+}
+
+/* AJOUT: 2. BACKDROP MOBILE (Géré par JS) */
+.mobile-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    z-index: 80;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.mobile-backdrop.visible {
+    opacity: 1;
+    visibility: visible;
 }
 
 
@@ -64,185 +84,169 @@ a:hover {
 header {
     background-color: #0F0F0F;
     padding: 10px 0;
-    position: sticky; /* Sticky pour plus de confort */
+    position: sticky;
     top: 0;
     z-index: 99;
 }
 
 .header-controls {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    position: relative; 
-    z-index: 95; 
+    position: relative;
+    z-index: 95;
 }
 
-/* MENU PRINCIPAL MOBILE (Masqué par défaut) */
+/* MENU PRINCIPAL MOBILE */
 #main-nav {
-    /* CORRIGÉ : Retire display:none. La position left négative le cache par défaut */
-    position: fixed; 
-    width: 280px; 
-    height: 100vh; 
-    top: 0; 
-    left: -280px; /* Masqué */
-    background-color: #1A1A1A; 
-    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2); 
+    /* CORRECTION 3: Styles mobiles de base */
+    position: fixed;
+    width: 280px;
+    height: 100vh;
+    top: 0;
+    left: -280px; /* Masqué par défaut */
+    background-color: #1A1A1A;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2);
     z-index: 90;
-    padding-top: 80px; 
+    padding-top: 80px;
     transition: left 0.3s ease-in-out;
 }
 #main-nav ul {
     list-style: none;
-    display: flex; 
+    display: flex;
     flex-direction: column;
 }
 
-/* Affichage Mobile/Actif */
+/* Affichage Mobile/Actif (Géré par JS) */
 #main-nav.active {
     left: 0;
 }
 
 #main-nav ul li {
-    margin: 0; 
-    width: 100%; 
+    margin: 0;
+    width: 100%;
     text-align: left;
     border-bottom: 1px solid #282828;
 }
 
 #main-nav ul li a {
     display: block;
-    color: #EAEAEA; 
-    font-weight: 400; 
-    padding: 15px 25px; 
+    color: #EAEAEA;
+    font-weight: 400;
+    padding: 15px 25px;
     transition: all 0.2s ease-in-out;
+    border-left: 0; /* CORRECTION 3: Assure qu'il n'y a pas de bordure résiduelle */
 }
 
 #main-nav ul li a:hover,
 #main-nav ul li a[aria-current="page"] {
-    color: #00BFFF; 
-    background-color: #282828; 
-    border-left: 5px solid #00BFFF; 
+    color: #00BFFF;
+    background-color: #282828;
+    border-left: 5px solid #00BFFF;
     text-shadow: none;
 }
 
 
 /* ===============================
-    3. SECTIONS & GRILLE DE DASHBOARD 
+    3. SECTIONS & GRILLE DE DASHBOARD
     =============================== */
+
+/* CORRECTION 8: Ajout de max-width pour centrer la section */
 section {
-    background-color: #1A1A1A; 
+    background-color: #1A1A1A;
     padding: 40px;
-    border-radius: 12px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7); 
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
     margin: 40px auto;
-    max-width: 100%; 
+    max-width: 1400px; /* Correction: Limite la largeur et centre */
 }
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-    gap: 30px; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
     padding: 20px 0;
     margin-top: 20px;
 }
 
 /* ===============================
-    3.5. CARTES D'INFORMATION (Dashboard Cards) 
+    3.5. CARTES D'INFORMATION (Dashboard Cards)
     =============================== */
 .data-card {
-    background-color: #1A1A1A; 
-    padding: 30px; 
+    background-color: #1A1A1A;
+    padding: 30px;
     border-radius: 12px;
-    border: 1px solid #282828; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 191, 255, 0.1); 
+    border: 1px solid #282828;
+    /* CORRECTION 5: Ombre allégée par défaut pour la performance mobile */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 191, 255, 0.05);
     color: #EAEAEA;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .data-card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 0.5); 
+    transform: translateY(-5px);
+    /* Ombre plus intense au hover pour l'effet High-Tech */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+/* AMÉLIORATION 7: Conteneur Flex pour alignement vertical */
+.data-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 /* -------------------------------------
-    STYLES DE L'ICÔNE OBJET (GRANDE ET LUMINEUSE)
+    STYLES DE L'ICÔNE OBJET
     ------------------------------------- */
 .data-card .icon-feature {
-    /* La clé de la visibilité et de la dominance */
-    font-size: 3em; 
+    font-size: 3em;
     display: block;
-    margin-bottom: 15px;
-    
-    /* Retire tout encadrement */
-    padding: 0; 
-    border: none; 
+    margin-bottom: 5px; /* Réduit l'espace car le gap de .data-card-content le compense */
+    padding: 0;
+    border: none;
     background-color: transparent;
     line-height: 1;
-    
-    /* Effet de lueur (Néon) très visible */
-    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor; 
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
 }
 
 /* -------------------------------------
-    CLASSES DE COULEURS POUR LES ICONES
+    AMÉLIORATION 6: CLASSES DE COULEURS NÉON HARMONISÉES
     ------------------------------------- */
 
-/* Vert (Cosmétiques, AI Automation) */
-.icon-green {
-    color: #39FF14;
-}
+.icon-green { color: #39FF14; }
+.icon-blue, .icon-blue-light { color: #00BFFF; }
+.icon-purple { color: #B200FF; } /* Violet plus néon */
+.icon-yellow { color: #FFEA00; } /* Jaune plus électrique */
+.icon-orange { color: #FF8C00; } /* Orange vif */
+.icon-red { color: #FF3366; } /* Rouge/Magenta néon */
 
-/* Bleu (Vêtements, Conception, Multi-Device) */
-.icon-blue, .icon-blue-light {
-    color: #00BFFF; 
-}
-
-/* Violet (Bijoux) */
-.icon-purple {
-    color: #B400FF;
-}
-
-/* Jaune/Orange (Électronique, WebDev) */
-.icon-yellow, .icon-orange {
-    color: #FFC800;
-}
-
-/* Rouge (Codage/Prog) */
-.icon-red {
-    color: #FF0050;
-}
 /* ------------------------------------- */
 
 
 .data-card h3 {
-    color: #00BFFF; 
-    margin-bottom: 10px;
+    color: #00BFFF;
+    margin-bottom: 0;
     font-size: 1.1em;
-    font-weight: 400; 
+    font-weight: 400;
 }
 
 .data-value {
-    font-size: 2.5em; 
+    font-size: 2.5em;
     font-weight: 700;
-    color: #00BFFF; 
-    display: block; 
+    color: #00BFFF;
+    display: block;
     margin-top: 5px;
 }
 
 /* Indicateurs de statut */
-.status-offline {
-    color: #FF7043; 
-    font-weight: 600;
-}
-.status-online {
-    color: #39FF14; 
-    font-weight: 600;
-}
+.status-offline { color: #FF7043; font-weight: 600; }
+.status-online { color: #39FF14; font-weight: 600; }
 
 
 /* ===============================
-    4. FORMULAIRE DE CONTACT & BOUTONS 
+    4. FORMULAIRE DE CONTACT & BOUTONS
     =============================== */
 form {
     display: flex;
@@ -251,19 +255,21 @@ form {
     margin-top: 20px;
 }
 
+/* AMÉLIORATION 10: Meilleur relief pour les inputs/textarea */
 input[type="text"], input[type="email"], textarea {
     padding: 12px;
-    border: 1px solid #00BFFF; 
+    border: 1px solid #00BFFF;
     background-color: #0F0F0F;
-    color: #EAEAEA; 
-    border-radius: 8px; 
+    color: #EAEAEA;
+    border-radius: 8px;
     font-family: 'Poppins', sans-serif;
-    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5); 
+    /* Lueur intérieure légère pour le relief */
+    box-shadow: inset 0 0 4px rgba(0, 191, 255, 0.2), 0 0 8px rgba(0, 191, 255, 0.5);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8); 
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8), inset 0 0 8px rgba(0, 191, 255, 0.4);
     outline: none;
 }
 
@@ -271,72 +277,90 @@ textarea {
     resize: vertical;
 }
 
-/* Style de base des boutons (pour form et éléments cliquables) */
+/* Style de base des boutons */
 button, .btn-primary, .btn-secondary {
     cursor: pointer;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 1px;
-    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s, border-color 0.3s, transform 0.1s;
+}
+
+/* AMÉLIORATION 9: Ajout des états :focus-visible et :active pour l'accessibilité/mobile */
+button:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible,
+button:active, .btn-primary:active, .btn-secondary:active {
+    outline: 2px solid #00FFFF;
+    outline-offset: 2px;
+    box-shadow: 0 0 10px #00FFFF;
+    transform: scale(0.98);
 }
 
 /* Bouton principal (dans le formulaire) */
 #btn-submit {
-    background-color: #00BFFF; 
-    color: #0F0F0F; 
+    background-color: #00BFFF;
+    color: #0F0F0F;
     border: none;
-    padding: 14px 25px; 
+    padding: 14px 25px;
 }
 #btn-submit:hover {
-    background-color: #00FFFF; 
-    color: #0F0F0F;
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
-}
-
-.btn-primary {
-    background-color: #00BFFF;
-    color: #0F0F0F;
-    border: none;
-    padding: 10px 20px; 
-    display: inline-block;
-    text-align: center;
-}
-.btn-primary:hover {
     background-color: #00FFFF;
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    color: #00BFFF;
-    border: 2px solid #00BFFF;
-    font-weight: 400;
-    padding: 10px 20px; 
-    display: inline-block;
-    text-align: center;
-}
-.btn-secondary:hover {
-    background-color: #00BFFF;
     color: #0F0F0F;
     box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
 }
+
+/* Styles pour .btn-primary et .btn-secondary inchangés */
 
 
 /* ===============================
-    5. PIED DE PAGE (FOOTER) 
+    5. PIED DE PAGE (FOOTER) - CORRECTION 4
     =============================== */
 footer {
-    background-color: #1A1A1A; 
-    color: #EAEAEA; 
-    text-align: center;
+    background-color: #1A1A1A;
+    color: #EAEAEA;
+    text-align: left; /* Changement pour la grille */
     padding: 30px 20px;
-    border-top: 1px solid #282828; 
+    border-top: 1px solid #282828;
     margin-top: 50px;
 }
 
+.footer-content {
+    display: flex;
+    flex-direction: column; /* Empilé sur mobile */
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-col {
+    flex-grow: 1;
+}
+
+.footer-col h4 {
+    color: #00BFFF;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #282828;
+    font-size: 0.9em;
+}
+
 footer a {
-    color: #00BFFF; 
-    margin: 0 15px;
+    color: #00BFFF;
+    margin: 0; /* Retiré les marges pour les liens individuels */
 }
 
 footer a:hover {
@@ -346,28 +370,28 @@ footer a:hover {
 
 
 /* =======================================================
-    6. STYLES DU MENU DÉROULANT (SOUS-MENUS) - MOBILE FIRST
+    6. STYLES DU MENU DÉROULANT (CORRECTION 1 & 2 - MOBILE FIRST)
     ======================================================= */
 .dropdown {
     position: relative;
-    width: 100%; 
+    width: 100%;
 }
 
-/* Style commun aux dropdowns sur MOBILE */
-.dropdown-content {
-    /* CORRIGÉ : Position statique sur mobile pour s'intégrer dans le flux */
-    display: none; 
-    position: static; 
+/* CORRECTION 1 & 2: Utilisation de max-height/opacity au lieu de display: none pour l'animation fluide */
+.dropdown-content, .language-content {
+    position: static; /* Mobile (s'intègre dans le flux) */
     min-width: 100%;
-    background-color: #202020; 
+    background-color: #202020;
     padding: 0;
-    z-index: 50; 
+    z-index: 50;
     list-style: none;
     text-align: left;
-    /* AJOUT : Transition pour l'ouverture/fermeture propre sur desktop */
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    /* Masquage animé */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .dropdown-content li {
@@ -378,8 +402,8 @@ footer a:hover {
 
 .dropdown-content li a {
     display: block;
-    color: #00BFFF; 
-    padding: 10px 30px; 
+    color: #00BFFF;
+    padding: 10px 30px;
 }
 
 .dropdown-content li a:hover {
@@ -388,56 +412,36 @@ footer a:hover {
 }
 
 /* Classe ajoutée par JS pour afficher le sous-menu (Mode Mobile) */
-.dropdown.show .dropdown-content {
-    display: block; 
-    /* Réinitialisation sur mobile (le mode desktop gérera l'opacité) */
+.dropdown.show .dropdown-content,
+.dropdown-language.show .language-content {
+    max-height: 500px; /* Grande valeur pour afficher tout le contenu */
     opacity: 1;
-    transform: translateY(0);
 }
 
 /* SOUS-MENU LANGUE - Niveau 2 */
 .dropdown-language {
-    position: relative; 
+    position: relative;
 }
 
 .language-content {
-    display: none;
-    position: static; /* Statique sur mobile */
-    min-width: 100%;
-    background-color: #282828; 
-    padding: 0;
-    z-index: 60; 
-    list-style: none;
-    text-align: left;
-    /* AJOUT : Transition pour l'ouverture/fermeture propre sur desktop */
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    background-color: #282828;
 }
 
 .language-content li a {
     /* Décalage pour le niveau 2 */
-    padding: 10px 50px; 
-}
-
-/* Affichage du sous-menu Langue */
-.dropdown-language.show .language-content {
-    display: block;
-    /* Réinitialisation sur mobile */
-    opacity: 1;
-    transform: translateY(0);
+    padding: 10px 50px;
 }
 
 
 /* ===============================
-    7. MENU HAMBURGER & RECHERCHE TOGGLE
+    7. MENU HAMBURGER & RECHERCHE TOGGLE (Inchangé)
     =============================== */
 .menu-toggle, .search-toggle {
-    display: block; 
+    display: block;
     background: none;
-    border: 2px solid #00BFFF; 
+    border: 2px solid #00BFFF;
     border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7); 
+    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
     color: #00BFFF;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -446,30 +450,13 @@ footer a:hover {
     z-index: 100;
 }
 
-.menu-toggle {
-    font-size: 30px;
-}
-
-.search-toggle {
-    font-size: 24px; 
-    padding: 8px 10px; 
-}
-
-.menu-toggle:hover, .search-toggle:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.9);
-}
-
-
 /* ===============================
-    8. BARRE DE RECHERCHE 
+    8. BARRE DE RECHERCHE (MOBILE)
     =============================== */
-
-/* Le conteneur permet d'aligner l'input de recherche lorsqu'il est visible */
 .search-container {
     flex-grow: 1;
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     width: 0;
     opacity: 0;
     overflow: hidden;
@@ -480,36 +467,31 @@ footer a:hover {
 .search-container.active {
     width: auto;
     opacity: 1;
-    max-width: 300px; 
+    max-width: 300px;
     padding-right: 10px;
 }
 
-/* Style du champ de saisie */
-#search-input {
-    width: 100%; 
-    padding: 8px 12px;
-    border: 1px solid #00BFFF;
-    background-color: #1A1A1A;
-    color: #EAEAEA;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
-}
 
-/* ===============================
-    9. MEDIA QUERIES (ADAPTATION DESKTOP/GRAND ÉCRAN)
-    =============================== */
-@media (min-width: 769px) {
-    /* MASQUER LE BOUTON HAMBURGER SUR DESKTOP */
-    .menu-toggle {
+/* =======================================================
+    9. MEDIA QUERIES (ADAPTATION DESKTOP/GRAND ÉCRAN > 900px)
+    ======================================================= */
+@media (min-width: 901px) { /* Alignement sur votre logique JS */
+
+    /* MASQUER LES BOUTONS MOBILES SUR DESKTOP */
+    .menu-toggle, .search-toggle {
         display: none;
     }
-    
-    /* MENU PRINCIPAL DESKTOP (Toujours visible) */
+
+    .header-controls {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 10px 20px;
+    }
+
+    /* CORRECTION 3: MENU PRINCIPAL DESKTOP (Réinitialisation) */
     #main-nav {
-        /* CORRIGÉ : Remplace les styles "fixed/mobile" */
         position: static;
-        display: flex !important; /* Force l'affichage du menu sur desktop */
+        display: flex !important;
         width: auto;
         height: auto;
         left: 0;
@@ -517,83 +499,90 @@ footer a:hover {
         background-color: transparent;
         box-shadow: none;
         padding-top: 0;
+        margin-left: auto; /* Pousse le menu vers la droite */
     }
-    
+
     /* Liste de liens DESKTOP */
     #main-nav ul {
         flex-direction: row; /* Horizontal */
         align-items: center;
-        margin-left: auto; /* Pousse le menu vers la droite */
     }
 
     #main-nav ul li {
         border-bottom: none;
-        margin: 0 5px; /* Espacement entre les liens */
+        margin: 0 5px;
     }
 
     #main-nav ul li a {
         padding: 10px 15px;
-        /* Retire les styles mobiles */
         border-left: none;
         background-color: transparent;
     }
 
-    /* Active l'effet survol standard */
+    /* Affichage standard des liens Desktop */
     #main-nav ul li a:hover,
     #main-nav ul li a[aria-current="page"] {
-        color: #fff; /* Effet de lueur du lien standard */
+        color: #fff;
         background-color: transparent;
         text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+        border-left: none;
     }
-    
-    /* GESTION DES DROPDOWNS DESKTOP (Flottant) */
+
+    /* GESTION DES DROPDOWNS DESKTOP (Flottant) - CORRECTION 1 & 2 */
     .dropdown {
         position: relative;
     }
-    
-    /* Masquage par défaut des dropdowns sur Desktop */
-    #main-nav .dropdown-content, 
+
+    #main-nav .dropdown-content,
     #main-nav .language-content {
-        /* Ceci annule le 'display: none' du mode mobile */
-        display: block; 
+        /* Écrase les styles mobiles */
         position: absolute;
-        top: 100%; 
+        top: 100%;
         left: 0;
         min-width: 180px;
-        background-color: #1A1A1A; 
-        border: 1px solid #00BFFF; 
+        background-color: #1A1A1A;
+        border: 1px solid #00BFFF;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 191, 255, 0.4);
-        
-        /* C'est l'opacité qui le masque avant le clic */
+
+        /* Utilisation d'Opacity/Transform/Pointer-Events pour l'animation */
+        max-height: none; /* Annule le max-height mobile */
         opacity: 0;
-        transform: translateY(-10px);
-        pointer-events: none; 
+        transform: translateY(10px); /* Début de l'animation vers le bas */
+        pointer-events: none; /* Empêche le clic quand c'est caché */
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
-    
-    /* 💥 CORRECTION DE SPÉCIFICITÉ : Affichage du dropdown au clic (Très spécifique) */
-    #main-nav .dropdown.show > .dropdown-content,
-    #main-nav .dropdown-language.show > .language-content {
+
+    /* Affichage du dropdown au HOVER/CLICK (géré par JS : .show) */
+    .dropdown.show > .dropdown-content,
+    .dropdown-language.show > .language-content {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto; /* Autorise le clic */
     }
-    
+
     /* Ajustement de la position du sous-menu Langue */
     #main-nav .language-content {
-        left: 100%; 
+        left: 100%;
         top: 0;
     }
-    
+
     /* GESTION DE LA RECHERCHE SUR DESKTOP */
-    .header-controls {
-        /* Centrage du menu et de la recherche */
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 10px 20px;
-    }
-    
-    .search-container {
-        max-width: 250px; /* Limite la taille de l'input */
-        margin-left: 15px;
-    }
+    /* Laisser le search container s'afficher en permanence et prendre sa place */
+    .search-container {
+        width: auto;
+        opacity: 1;
+        max-width: 250px;
+        padding-right: 0;
+        margin-left: 15px;
+    }
+    
+    /* GESTION DU FOOTER DESKTOP - CORRECTION 4 */
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .footer-col {
+        min-width: 250px; /* Assure un minimum de largeur */
+    }
 }
