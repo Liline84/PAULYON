@@ -2,23 +2,28 @@
 document.body.classList.add('preload');
 
 // ==========================================================
-// [FONCTION ASYNCHRONE] Charge et retourne le contenu de data.json
+// [FONCTION ASYNCHRONE] Charge et retourne le contenu des fichiers JSON
 // ==========================================================
 async function loadSiteData() {
     try {
-        const response = await fetch('data.json');
-        if (!response.ok) {
-            throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-        const data = await response.json();
-        return data;
+        const [dataResponse, translationResponse] = await Promise.all([
+            fetch('data.json'),
+            fetch('traduction.json')
+        ]);
+
+        if (!dataResponse.ok) throw new Error(`Erreur HTTP pour data.json: ${dataResponse.status}`);
+        if (!translationResponse.ok) throw new Error(`Erreur HTTP pour traduction.json: ${translationResponse.status}`);
+
+        const siteData = await dataResponse.json();
+        const translations = await translationResponse.json();
+
+        return { siteData, translations }; // Retourne les DEUX objets
     } catch (error) {
-        console.error("Erreur lors du chargement de data.json:", error);
+        console.error("Erreur lors du chargement des fichiers JSON:", error);
         // Retourne un objet par défaut pour éviter les erreurs
         return { 
-            generalSettings: {}, 
-            products: [], 
-            services: [] 
+            siteData: { generalSettings: {}, products: [], services: [], languages: [] },
+            translations: { 'fr': {} } // Fallback minimal
         };
     }
 }
