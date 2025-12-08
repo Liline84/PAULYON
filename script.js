@@ -17,13 +17,13 @@ async function loadSiteData() {
         const siteData = await dataResponse.json();
         const translations = await translationResponse.json();
 
-        return { siteData, translations }; // Retourne les DEUX objets
+        return { siteData, translations };
     } catch (error) {
         console.error("Erreur lors du chargement des fichiers JSON:", error);
         // Retourne un objet par défaut pour éviter les erreurs
         return { 
             siteData: { generalSettings: {}, products: [], services: [], languages: [] },
-            translations: { 'fr': {} } // Fallback minimal
+            translations: { 'fr': {} } 
         };
     }
 }
@@ -39,13 +39,19 @@ function initMenuHandlers() {
     }, 100); 
 
     // ==========================================================
-    // 1. SÉLECTION DES ÉLÉMENTS (CONSOLIDÉ)
+    // 1. SÉLECTION DES ÉLÉMENTS (CONSOLIDÉ ET ÉTENDU)
     // ==========================================================
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.getElementById('main-nav');
     const navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
 
-    // Menus Déroulants
+    // Nouveaux Menus Déroulants (Produits & Services)
+    const productsToggle = document.getElementById('nav-produits');
+    const productsDropdown = productsToggle ? productsToggle.closest('#products-dropdown') : null;
+    const servicesToggle = document.getElementById('nav-services');
+    const servicesDropdown = servicesToggle ? servicesToggle.closest('#services-dropdown') : null;
+
+    // Menus Déroulants existants (Paramètres & Langue)
     const settingsToggle = document.getElementById('nav-settings');
     const languageToggle = document.getElementById('nav-language-toggle');
     const settingsMenu = settingsToggle ? settingsToggle.closest('.dropdown') : null; 
@@ -65,8 +71,11 @@ function initMenuHandlers() {
             menuToggle.setAttribute('aria-expanded', 'false');
             menuToggle.textContent = '☰';
         }
+        // Fermeture de TOUS les sous-menus
         if (settingsMenu) settingsMenu.classList.remove('show');
         if (languageDropdown) languageDropdown.classList.remove('show');
+        if (productsDropdown) productsDropdown.classList.remove('show');
+        if (servicesDropdown) servicesDropdown.classList.remove('show');
         
         // Fermeture de la recherche
         if (searchContainer) searchContainer.classList.remove('active');
@@ -89,10 +98,7 @@ function initMenuHandlers() {
 
             // Ferme les sous-menus si le menu principal est fermé
             if (!isExpanded) {
-                 if (settingsMenu) settingsMenu.classList.remove('show');
-                 if (languageDropdown) languageDropdown.classList.remove('show');
-                 if (searchContainer) searchContainer.classList.remove('active');
-                 if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
+                 closeAllMenus(); // Utilise la fonction générale
             }
         });
     }
@@ -102,6 +108,7 @@ function initMenuHandlers() {
     // ==========================================================
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
+            // Ferme tout si on clique sur un lien qui ne fait pas partie d'un dropdown
             if (!link.closest('.dropdown') && link.getAttribute('href').startsWith('#')) {
                 closeAllMenus();
             }
@@ -111,28 +118,35 @@ function initMenuHandlers() {
     });
 
     // ==========================================================
-    // 4. GESTION DES SOUS-MENUS PARAMÈTRES ET LANGUE
+    // 4. GESTION DES SOUS-MENUS PRODUITS, SERVICES, PARAMÈTRES ET LANGUE
     // ==========================================================
-    if (settingsToggle && settingsMenu) {
-        settingsToggle.addEventListener('click', (event) => {
+    
+    // Fonction utilitaire pour gérer l'ouverture/fermeture d'un menu déroulant
+    function handleDropdownToggle(toggleElement, dropdownElement) {
+        if (!toggleElement || !dropdownElement) return;
+
+        toggleElement.addEventListener('click', (event) => {
             event.preventDefault(); 
             event.stopPropagation();
-            settingsMenu.classList.toggle('show'); 
             
-            if (settingsMenu.classList.contains('show') && languageDropdown) {
-                languageDropdown.classList.remove('show');
-            }
+            // Ferme tous les AUTRES menus déroulants
+            [productsDropdown, servicesDropdown, settingsMenu, languageDropdown].forEach(d => {
+                if (d && d !== dropdownElement) {
+                    d.classList.remove('show');
+                }
+            });
+            
+            // Ouvre ou ferme le menu actuel
+            dropdownElement.classList.toggle('show');
         });
     }
 
-    if (languageToggle && languageDropdown) {
-        languageToggle.addEventListener('click', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            languageDropdown.classList.toggle('show');
-        });
-    }
-
+    // Application aux 4 menus déroulants
+    handleDropdownToggle(productsToggle, productsDropdown);
+    handleDropdownToggle(servicesToggle, servicesDropdown);
+    handleDropdownToggle(settingsToggle, settingsMenu);
+    handleDropdownToggle(languageToggle, languageDropdown);
+    
     // ==========================================================
     // 5. GESTION DU BOUTON DE RECHERCHE
     // ==========================================================
@@ -145,11 +159,17 @@ function initMenuHandlers() {
 
             if (isExpanded) {
                 searchInput.focus();
+                // Ferme le menu principal s'il est ouvert
                 if (mainNav && mainNav.classList.contains('active')) {
                     mainNav.classList.remove('active');
                     menuToggle.setAttribute('aria-expanded', 'false');
                     menuToggle.textContent = '☰';
                 }
+                // Ferme tous les dropdowns
+                if (productsDropdown) productsDropdown.classList.remove('show');
+                if (servicesDropdown) servicesDropdown.classList.remove('show');
+                if (settingsMenu) settingsMenu.classList.remove('show');
+                if (languageDropdown) languageDropdown.classList.remove('show');
             } else {
                 searchInput.value = ''; 
             }
@@ -160,10 +180,10 @@ function initMenuHandlers() {
     // 6. FERMER LES MENUS SI L'UTILISATEUR CLIQUE EN DEHORS
     // ==========================================================
     document.addEventListener('click', (event) => {
-        const isOutsideMenu = mainNav && !mainNav.contains(event.target) && menuToggle && !menuToggle.contains(event.target);
+        const isOutsideNav = mainNav && !mainNav.contains(event.target) && menuToggle && !menuToggle.contains(event.target);
         const isOutsideSearch = searchContainer && !searchContainer.contains(event.target) && searchToggleBtn && !searchToggleBtn.contains(event.target);
         
-        if (isOutsideMenu && isOutsideSearch) {
+        if (isOutsideNav && isOutsideSearch) {
             closeAllMenus();
         }
     });
@@ -171,17 +191,15 @@ function initMenuHandlers() {
 // FIN de initMenuHandlers()
 
 
-// ... (code précédent de initMenuHandlers())
-
 // ==========================================================
 // [LOGIQUE PRINCIPALE] Exécutée au chargement du DOM
 // ==========================================================
 document.addEventListener('DOMContentLoaded', async () => { 
 
     // ==========================================================
-    // 0. CHARGEMENT DES DONNÉES JSON (MIS À JOUR)
+    // 0. CHARGEMENT DES DONNÉES JSON
     // ==========================================================
-    const { siteData, translations } = await loadSiteData(); // Récupère les deux JSON
+    const { siteData, translations } = await loadSiteData();
     
     // Récupération des paramètres généraux
     const generalSettings = siteData.generalSettings || {};
@@ -194,8 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Variables nécessaires
     const cart = []; 
-    // AJOUT : Récupération de la langue sauvegardée
-    const savedLang = localStorage.getItem('paulyon-lang') || 'fr'; 
+    const savedLang = localStorage.getItem('paulyon-lang') || 'fr';
 
     // ==========================================================
     // A. Fonction de Traduction Principale (Adaptée pour le JSON)
@@ -211,14 +228,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             if (element) {
                 if (id === 'title-tag') {
-                    document.title = siteName + ' | ' + value; // Ajout du nom du site
+                    document.title = siteName + ' | ' + value; 
                 } else if (id.endsWith('-placeholder')) {
-                    // Cible les placeholders via l'ID de l'input sans le suffixe -placeholder
                     const inputElement = document.getElementById(id.replace('-placeholder', ''));
                     if (inputElement) inputElement.setAttribute('placeholder', value);
-                
+
                 } else if (id === 'p-contact-email') {
-                    // Utiliser des tokens de remplacement
                     const html = value.replace('[EMAIL]', `<a href="mailto:${emailContact}">${emailContact}</a>`);
                     element.innerHTML = html;
                 } else if (id === 'p-contact-whatsapp') {
@@ -252,6 +267,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelectorAll('[data-translate-key="status-unavailable"]').forEach(p => {
              p.textContent = currentTranslation['status-offline'] || 'Indisponible';
         });
+
 
         document.documentElement.lang = langCode;
         localStorage.setItem('paulyon-lang', langCode);
@@ -288,16 +304,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================================
-    // 7. FONCTIONS DE GESTION DU PANIER (CORRIGÉES POUR LE JSON)
+    // 7. FONCTIONS DE GESTION DU PANIER (FINALISÉ)
     // ==========================================================
     
     // Fonction utilitaire pour la redirection WhatsApp
     function redirectToWhatsAppOrder() {
         const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
-        const t = translations[currentLang]; // Récupère les traductions du JSON
+        const t = translations[currentLang];
         
         if (cart.length === 0) {
-            alert(t['alert-cart-empty'] || "Votre panier est vide. Veuillez ajouter des articles."); // Utilise la clé du JSON
+            alert(t['alert-cart-empty'] || "Votre panier est vide. Veuillez ajouter des articles.");
             return;
         }
 
@@ -334,7 +350,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         cart.push({ name, price });
         
-        // Utilise la clé du JSON pour l'alerte
         alert(`${name}${t['alert-cart-add'] || " a été ajouté à votre commande ! Vous serez redirigé vers WhatsApp pour finaliser."}`);
         
         redirectToWhatsAppOrder();
@@ -388,7 +403,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <h3>${service.title}</h3>
                     <p>${service.details}</p>
                     <p class="${statusClass}" data-translate-key="${statusKey}">Disponible</p> 
-                    <div class="data-value">${service.price} ${currentCurrency}</div>  
+                    <div class="data-value">${service.price} ${currentCurrency}</div>
                     <a href="contact.html" class="btn-secondary" data-key="btn-quote">Demander un devis</a>
                 </div>
             `;
@@ -399,8 +414,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ==========================================================
     // DÉCLENCHEMENT DE L'AFFICHAGE DYNAMIQUE ET DE LA TRADUCTION
     // ==========================================================
+    
+    // 1. Déclenche l'initialisation des gestionnaires de menus (y compris Produits/Services)
+    initMenuHandlers();
 
-    // 1. Génère le menu de langue
+    // 2. Génère le menu de langue
     if (siteData.languages) {
         generateLanguageMenu(siteData.languages);
     } else if (translations) {
@@ -409,17 +427,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         generateLanguageMenu(languages);
     }
     
-    // 2. Affiche les produits si nous sommes sur la bonne page
+    // 3. Affiche les produits si nous sommes sur la bonne page
     if (siteData.products.length > 0 && document.body.id === 'products-page') { 
         displayProducts(siteData.products);
     }
 
-    // 3. Affiche les services si nous sommes sur la bonne page
+    // 4. Affiche les services si nous sommes sur la bonne page
     if (siteData.services.length > 0 && document.body.id === 'services-page') { 
         displayServices(siteData.services);
     }
     
-    // 4. Applique la langue sauvegardée à tous les éléments
+    // 5. Applique la langue sauvegardée à tous les éléments
     setLanguage(savedLang);
 
 }); // FIN de DOMContentLoaded
