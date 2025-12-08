@@ -66,16 +66,49 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.error("Erreur critique lors du chargement des fichiers JSON:", err));
 
 
-    // ==============================
-    // 4. FONCTIONS DE TRADUCTION ET DE GÉNÉRATION DYNAMIQUE
-    // ==============================
+    // ...
+// ==============================
+// 4. FONCTIONS DE TRADUCTION ET DE GÉNÉRATION DYNAMIQUE
+// ==============================
     
-    function initializeDynamicContent() {
-        // Gérer les menus déroulants et les liens du footer
-        generateProductMenu();
-        generateLanguageMenu();
-        generateSocialLinks();
-        // Ici, vous pouvez ajouter la fonction de rendu des cartes Produits/Services si nécessaire
+function initializeDynamicContent() {
+    // Gérer les menus déroulants et les liens du footer
+    generateProductMenu();
+    generateServiceMenu(); // L'appel est ici
+    generateLanguageMenu();
+    generateSocialLinks();
+}
+    
+// Gère l'injection des chaînes de traduction et le remplacement des placeholders
+function setLanguage(lang) { /* ... */ }
+
+// Génère la liste des produits dans le menu
+function generateProductMenu() { 
+    const productDropdownContent = document.getElementById('products-menu-content');
+    if (!productDropdownContent) return;
+
+    productDropdownContent.innerHTML = dataConfig.products.map(product => `
+        <li><a href="/products/${product.id}">${product.name}</a></li>
+    `).join('');
+}
+
+// Fonction de génération des services (À placer ici)
+function generateServiceMenu() {
+    const serviceDropdownContent = document.getElementById('services-menu-content');
+    if (!serviceDropdownContent) return;
+
+    serviceDropdownContent.innerHTML = dataConfig.services.map(service => `
+        <li><a href="/services/${service.id}">${service.title}</a></li>
+    `).join('');
+}
+
+// Génère la liste des langues dans le menu
+function generateLanguageMenu() { /* ... */ }
+
+// Génère les liens sociaux dans le footer
+function generateSocialLinks() { /* ... */ }
+
+// ... (Reste du script)    // Ici, vous pouvez ajouter la fonction de rendu des cartes Produits/Services si nécessaire
     }
     
     // Gère l'injection des chaînes de traduction et le remplacement des placeholders
