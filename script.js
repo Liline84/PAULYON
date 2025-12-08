@@ -66,120 +66,74 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.error("Erreur critique lors du chargement des fichiers JSON:", err));
 
 
-    // ...
-// ==============================
+    // ==============================
 // 4. FONCTIONS DE TRADUCTION ET DE GÉNÉRATION DYNAMIQUE
 // ==============================
-    
-function initializeDynamicContent() {
-    // Gérer les menus déroulants et les liens du footer
-    generateProductMenu();
-    generateServiceMenu(); // L'appel est ici
-    generateLanguageMenu();
-    generateSocialLinks();
-}
-    
-// Gère l'injection des chaînes de traduction et le remplacement des placeholders
-function setLanguage(lang) { /* ... */ }
 
-// Génère la liste des produits dans le menu
-function generateProductMenu() { 
-    const productDropdownContent = document.getElementById('products-menu-content');
-    if (!productDropdownContent) return;
+// ... (vos fonctions generateProductMenu, generateServiceMenu, etc. sont ici) ...
 
-    productDropdownContent.innerHTML = dataConfig.products.map(product => `
-        <li><a href="/products/${product.id}">${product.name}</a></li>
-    `).join('');
-}
+/**
+ * Génère les cartes de Produits et les insère dans la page.
+ * Utilise les données de data.json et la fonction addToCart.
+ */
+function renderProductCards() {
+    const container = document.querySelector('#products-section .cards-container');
+    if (!container || !dataConfig.products) return;
 
-// Fonction de génération des services (À placer ici)
-function generateServiceMenu() {
-    const serviceDropdownContent = document.getElementById('services-menu-content');
-    if (!serviceDropdownContent) return;
-
-    serviceDropdownContent.innerHTML = dataConfig.services.map(service => `
-        <li><a href="/services/${service.id}">${service.title}</a></li>
-    `).join('');
-}
-
-// Génère la liste des langues dans le menu
-function generateLanguageMenu() { /* ... */ }
-
-// Génère les liens sociaux dans le footer
-function generateSocialLinks() { /* ... */ }
-
-// ... (Reste du script)    // Ici, vous pouvez ajouter la fonction de rendu des cartes Produits/Services si nécessaire
-    }
-    
-    // Gère l'injection des chaînes de traduction et le remplacement des placeholders
-    function setLanguage(lang) {
-        currentLanguage = lang;
-        const general = dataConfig.generalSettings;
-        const currentTranslation = translations[lang] || translations["fr"];
-
-        document.querySelectorAll("[data-i18n]").forEach(el => {
-            const key = el.getAttribute("data-i18n");
-            let text = currentTranslation[key] || "";
+    container.innerHTML = dataConfig.products.map(product => `
+        <div class="card product-card">
+            <div class="card-icon ${product.colorClass}">
+                <i class="${product.iconClass}"></i>
+            </div>
             
-            // Remplacement des placeholders globaux dans la chaîne
-            if (text) {
-                text = text
-                    .replace(/\[EMAIL\]/g, `<a href="mailto:${general.emailContact}">${general.emailContact}</a>`)
-                    .replace(/\[WHATSAPP\]/g, `<a href="https://wa.me/${general.whatsappNumber}" target="_blank">+${general.whatsappNumber}</a>`)
-                    .replace(/\[YEAR\]/g, general.copyrightYear)
-                    .replace(/\[SITE_NAME\]/g, general.siteName)
-                    .replace(/\[ADDRESS\]/g, general.address);
-                el.innerHTML = text;
-            }
-        });
+            <img src="${product.imagePath}" alt="${product.name}" class="card-img" loading="lazy">
+            
+            <div class="card-body">
+                <h3>${product.name}</h3>
+                <p class="card-description">${product.description}</p>
+                
+                <div class="card-footer">
+                    <span class="card-price">${product.price} ${dataConfig.generalSettings.currentCurrency}</span>
+                    
+                    <button class="btn btn-primary btn-add-cart" 
+                            data-i18n="btn-commander"
+                            onclick="window.addToCart('${product.name}', ${product.price})">
+                        Commander
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
-        document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
-            const key = el.getAttribute("data-i18n-placeholder");
-            if(currentTranslation[key]) el.placeholder = currentTranslation[key];
-        });
+/**
+ * Génère les cartes de Services et les insère dans la page.
+ * Utilise les données de data.json.
+ */
+function renderServiceCards() {
+    const container = document.querySelector('#services-section .cards-container');
+    if (!container || !dataConfig.services) return;
 
-        renderCart(); 
-    }
-    
-    // Génère la liste des produits dans le menu
-    function generateProductMenu() {
-        if (!productDropdownContent) return;
-
-        productDropdownContent.innerHTML = dataConfig.products.map(product => `
-            <li><a href="/products/${product.id}">${product.name}</a></li>
-        `).join('');
-    }
-    
-    // Génère la liste des langues dans le menu
-    function generateLanguageMenu() {
-        if (!languageDropdownContent) return;
-
-        languageDropdownContent.innerHTML = dataConfig.languages.map(lang => `
-            <li><a href="#" data-lang="${lang.code}">${lang.name}</a></li>
-        `).join('');
-
-        // Attache l'écouteur d'événements à la liste générée
-        languageDropdownContent.addEventListener("click", e => {
-            if (e.target.tagName.toLowerCase() === "a" && e.target.hasAttribute("data-lang")) {
-                e.preventDefault();
-                const langCode = e.target.getAttribute("data-lang");
-                setLanguage(langCode);
-                closeAllMenus();
-            }
-        });
-    }
-
-    // Génère les liens sociaux dans le footer (nécessite que le conteneur soit dans le HTML)
-    function generateSocialLinks() {
-        const socialContainer = document.querySelector('.footer-social .social-icons');
-        if (!socialContainer) return;
-
-        socialContainer.innerHTML = dataConfig.socialLinks.map(link => `
-            <a href="${link.url}" target="_blank" title="${link.platform}">
-                <i class="${link.iconClass}"></i>
-            </a>
-        `).join('');
-    }
+    container.innerHTML = dataConfig.services.map(service => `
+        <div class="card service-card ${service.status === 'online' ? 'status-online' : 'status-offline'}">
+            <div class="card-icon ${service.colorClass}">
+                <i class="${service.iconClass}"></i>
+            </div>
+            
+            <div class="card-body">
+                <h3>${service.title}</h3>
+                <p class="card-description">${service.details}</p>
+                
+                <div class="card-footer">
+                    <span class="card-price">${service.price} ${dataConfig.generalSettings.currentCurrency}</span>
+                    <span class="card-status status-dot" data-i18n="status-${service.status}">
+                        ${service.status === 'online' ? 'En Ligne' : 'Hors Ligne'}
+                    </span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
 
     // ==============================
