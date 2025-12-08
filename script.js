@@ -20,7 +20,6 @@ async function loadSiteData() {
         return { siteData, translations };
     } catch (error) {
         console.error("Erreur lors du chargement des fichiers JSON:", error);
-        // Retourne un objet par défaut pour éviter les erreurs
         return { 
             siteData: { generalSettings: {}, products: [], services: [], languages: [] },
             translations: { 'fr': {} } 
@@ -29,7 +28,7 @@ async function loadSiteData() {
 }
 
 // ==========================================================
-// [FONCTION GLOBALE] Gère l'initialisation de tout le HEADER
+// [FONCTION DU HEADER] Gère l'initialisation de tout le HEADER (Appelée par index.html)
 // ==========================================================
 function initMenuHandlers() {
 
@@ -39,29 +38,24 @@ function initMenuHandlers() {
     }, 100); 
 
     // ==========================================================
-    // 1. SÉLECTION DES ÉLÉMENTS (CORRIGÉ ET CONSOLIDÉ)
+    // 1. SÉLECTION DES ÉLÉMENTS 
     // ==========================================================
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.getElementById('main-nav');
     const navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
 
-    // Menus Déroulants (Produits & Services)
     const productsToggle = document.getElementById('nav-produits');
     const productsDropdown = productsToggle ? productsToggle.closest('#products-dropdown') : null;
     
     const servicesToggle = document.getElementById('nav-services');
     const servicesDropdown = servicesToggle ? servicesToggle.closest('#services-dropdown') : null;
 
-    // Menus Déroulants (Paramètres & Langue)
     const settingsToggle = document.getElementById('nav-settings');
-    // CORRECTION APPLIQUÉE : Ciblage de l'ID spécifique #settings-dropdown
     const settingsMenu = settingsToggle ? settingsToggle.closest('#settings-dropdown') : null; 
     
     const languageToggle = document.getElementById('nav-language-toggle');
-    // Le HTML utilise .dropdown-language et l'ID #language-dropdown, nous ciblerons l'ID pour plus de précision.
     const languageDropdown = languageToggle ? languageToggle.closest('#language-dropdown') : null; 
     
-    // Éléments pour la Recherche
     const searchToggleBtn = document.getElementById('search-toggle-btn');
     const searchContainer = document.getElementById('search-container');
     const searchInput = document.getElementById('search-input');
@@ -75,13 +69,11 @@ function initMenuHandlers() {
             menuToggle.setAttribute('aria-expanded', 'false');
             menuToggle.textContent = '☰';
         }
-        // Fermeture de TOUS les sous-menus
         if (settingsMenu) settingsMenu.classList.remove('show');
         if (languageDropdown) languageDropdown.classList.remove('show');
         if (productsDropdown) productsDropdown.classList.remove('show');
         if (servicesDropdown) servicesDropdown.classList.remove('show');
         
-        // Fermeture de la recherche
         if (searchContainer) searchContainer.classList.remove('active');
         if (searchToggleBtn) searchToggleBtn.setAttribute('aria-expanded', 'false');
         if (searchInput) searchInput.value = '';
@@ -97,12 +89,10 @@ function initMenuHandlers() {
             const isExpanded = mainNav.classList.contains('active');
             menuToggle.setAttribute('aria-expanded', isExpanded);
             
-            // Mise à jour de l'icône
             menuToggle.textContent = isExpanded ? '✖' : '☰';
 
-            // Ferme les sous-menus si le menu principal est fermé
             if (!isExpanded) {
-                 closeAllMenus(); // Utilise la fonction générale
+                 closeAllMenus(); 
             }
         });
     }
@@ -112,7 +102,6 @@ function initMenuHandlers() {
     // ==========================================================
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
-            // Ferme tout si on clique sur un lien qui ne fait pas partie d'un dropdown
             if (!link.closest('.dropdown') && link.getAttribute('href').startsWith('#')) {
                 closeAllMenus();
             }
@@ -122,10 +111,8 @@ function initMenuHandlers() {
     });
 
     // ==========================================================
-    // 4. GESTION DES SOUS-MENUS PRODUITS, SERVICES, PARAMÈTRES ET LANGUE
+    // 4. GESTION DES SOUS-MENUS
     // ==========================================================
-    
-    // Fonction utilitaire pour gérer l'ouverture/fermeture d'un menu déroulant
     function handleDropdownToggle(toggleElement, dropdownElement) {
         if (!toggleElement || !dropdownElement) return;
 
@@ -140,12 +127,10 @@ function initMenuHandlers() {
                 }
             });
             
-            // Ouvre ou ferme le menu actuel
             dropdownElement.classList.toggle('show');
         });
     }
 
-    // Application aux 4 menus déroulants
     handleDropdownToggle(productsToggle, productsDropdown);
     handleDropdownToggle(servicesToggle, servicesDropdown);
     handleDropdownToggle(settingsToggle, settingsMenu);
@@ -163,13 +148,11 @@ function initMenuHandlers() {
 
             if (isExpanded) {
                 searchInput.focus();
-                // Ferme le menu principal s'il est ouvert
                 if (mainNav && mainNav.classList.contains('active')) {
                     mainNav.classList.remove('active');
                     menuToggle.setAttribute('aria-expanded', 'false');
                     menuToggle.textContent = '☰';
                 }
-                // Ferme tous les dropdowns
                 if (productsDropdown) productsDropdown.classList.remove('show');
                 if (servicesDropdown) servicesDropdown.classList.remove('show');
                 if (settingsMenu) settingsMenu.classList.remove('show');
@@ -196,16 +179,15 @@ function initMenuHandlers() {
 
 
 // ==========================================================
-// [LOGIQUE PRINCIPALE] Exécutée au chargement du DOM
+// [LOGIQUE PRINCIPALE DE L'APPLICATION] (Appelée par index.html)
 // ==========================================================
-document.addEventListener('DOMContentLoaded', async () => { 
+async function runMainAppLogic() { 
 
     // ==========================================================
     // 0. CHARGEMENT DES DONNÉES JSON
     // ==========================================================
     const { siteData, translations } = await loadSiteData();
     
-    // Récupération des paramètres généraux
     const generalSettings = siteData.generalSettings || {};
     const whatsappNumber = (generalSettings.whatsappNumber || '').replace('+', '');
     const currentCurrency = generalSettings.currentCurrency || 'HTG';
@@ -214,7 +196,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const copyrightYear = generalSettings.copyrightYear || 2025;
     const siteName = generalSettings.siteName || 'PAULYON';
 
-    // Variables nécessaires
     const cart = []; 
     const savedLang = localStorage.getItem('paulyon-lang') || 'fr';
 
@@ -225,7 +206,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const currentTranslation = translations[langCode];
         if (!currentTranslation) return;
         
-        // 1. Traduction des éléments statiques par ID et cas spéciaux
         for (const id in currentTranslation) {
             const element = document.getElementById(id);
             const value = currentTranslation[id];
@@ -256,15 +236,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             } 
         }
 
-        // 2. Traduction des boutons générés dynamiquement
         document.querySelectorAll('[data-key="btn-order"]').forEach(btn => {
             btn.textContent = currentTranslation['btn-order'] || 'Commander';
         });
         document.querySelectorAll('[data-key="btn-quote"]').forEach(btn => {
             btn.textContent = currentTranslation['btn-quote'] || 'Demander un devis';
         });
-        
-        // 3. Traduction des statuts (Disponible/Indisponible)
         document.querySelectorAll('[data-translate-key="status-available"]').forEach(p => {
              p.textContent = currentTranslation['status-online'] || 'Disponible';
         });
@@ -295,7 +272,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             langContent.appendChild(li);
         });
 
-        // Réattacher les écouteurs aux nouvelles options
         document.querySelectorAll('.lang-option').forEach(option => {
             option.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -310,8 +286,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ==========================================================
     // 7. FONCTIONS DE GESTION DU PANIER (FINALISÉ)
     // ==========================================================
-    
-    // Fonction utilitaire pour la redirection WhatsApp
     function redirectToWhatsAppOrder() {
         const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
         const t = translations[currentLang];
@@ -332,7 +306,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         message += `${t['whatsapp-msg-total'] || '\nTotal de la commande : '}${total.toFixed(2)} ${currentCurrency}`;
         message += "\n\n" + (t['whatsapp-msg-thanks'] || "Veuillez m'indiquer la disponibilité et les modalités de paiement. Merci!");
         
-        // Vider le panier après la commande
         cart.length = 0; 
 
         const encodedMessage = encodeURIComponent(message);
@@ -341,7 +314,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.open(whatsappLink, '_blank');
     }
     
-    // Fonction de gestion de l'ajout au panier (attachée aux boutons)
     function handleAddToCart(event) {
         const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
         const t = translations[currentLang];
@@ -359,7 +331,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         redirectToWhatsAppOrder();
     }
     
-    // Fonction utilitaire pour attacher les écouteurs sur les boutons 'Commander'
     function attachCartListeners() {
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.removeEventListener('click', handleAddToCart); 
@@ -370,8 +341,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ==========================================================
     // 8. AFFICHAGE DYNAMIQUE DU CONTENU (Produits/Services)
     // ==========================================================
-    
-    // Fonction d'affichage des produits (pour produits.html)
     function displayProducts(products) {
         const productsContainer = document.getElementById('products-list-container');
         if (!productsContainer) return;
@@ -392,7 +361,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         attachCartListeners();
     }
 
-    // Fonction d'affichage des services (pour services.html)
     function displayServices(services) {
         const servicesContainer = document.getElementById('services-list-container');
         if (!servicesContainer) return;
@@ -419,29 +387,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     // DÉCLENCHEMENT DE L'AFFICHAGE DYNAMIQUE ET DE LA TRADUCTION
     // ==========================================================
     
-    // 1. Déclenche l'initialisation des gestionnaires de menus (y compris Produits/Services)
-    initMenuHandlers();
-
-    // 2. Génère le menu de langue
+    // 1. Génère le menu de langue
     if (siteData.languages) {
         generateLanguageMenu(siteData.languages);
     } else if (translations) {
-        // Fallback: générer la liste des langues à partir des clés du fichier de traduction
         const languages = Object.keys(translations).map(code => ({ code, name: translations[code]['nav-language-toggle'] || code.toUpperCase() }));
         generateLanguageMenu(languages);
     }
     
-    // 3. Affiche les produits si nous sommes sur la bonne page
+    // 2. Affiche les produits si nous sommes sur la bonne page
     if (siteData.products.length > 0 && document.body.id === 'products-page') { 
         displayProducts(siteData.products);
     }
 
-    // 4. Affiche les services si nous sommes sur la bonne page
+    // 3. Affiche les services si nous sommes sur la bonne page
     if (siteData.services.length > 0 && document.body.id === 'services-page') { 
         displayServices(siteData.services);
     }
     
-    // 5. Applique la langue sauvegardée à tous les éléments
+    // 4. Applique la langue sauvegardée à tous les éléments
     setLanguage(savedLang);
 
-}); // FIN de DOMContentLoaded
+} // FIN de runMainAppLogic()
