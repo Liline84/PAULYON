@@ -25,7 +25,10 @@
     {"code": "fr", "name": "Français (FR)"},
     {"code": "en", "name": "English (EN)"},
     {"code": "es", "name": "Español (ES)"},
-    {"code": "ht", "name": "Kreyòl (HT)"}
+    {"code": "ht", "name": "Kreyòl (HT)"},
+    {"code": "zh", "name": "中文 (ZH)"},
+    {"code": "ar", "name": "العربية (AR)"},
+    {"code": "ru", "name": "Русский (RU)"}
   ],
 
   "products": [
@@ -96,4 +99,5 @@
       "colorClass": "icon-red"
     }
   ]
+
 }
