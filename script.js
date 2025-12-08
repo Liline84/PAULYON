@@ -66,16 +66,27 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.error("Erreur critique lors du chargement des fichiers JSON:", err));
 
 
-    // ==============================
+   // ==============================
 // 4. FONCTIONS DE TRADUCTION ET DE GÉNÉRATION DYNAMIQUE
 // ==============================
 
-// ... (vos fonctions generateProductMenu, generateServiceMenu, etc. sont ici) ...
+// Définition de la fonction initializeDynamicContent
+function initializeDynamicContent() {
+    // Gérer les menus déroulants et les liens du footer
+    generateProductMenu();
+    generateServiceMenu();
+    generateLanguageMenu();
+    generateSocialLinks();
+    
+    // NOUVEAU : Rendu des cartes sur la page principale
+    renderProductCards();
+    renderServiceCards(); 
+    
+    // Après le rendu initial, réappliquer la traduction pour les nouveaux éléments
+    setLanguage(currentLanguage);
+}
 
-/**
- * Génère les cartes de Produits et les insère dans la page.
- * Utilise les données de data.json et la fonction addToCart.
- */
+// ... (Suivi par la définition de setLanguage, generateProductMenu, generateServiceMenu, renderProductCards, etc.)
 function renderProductCards() {
     const container = document.querySelector('#products-section .cards-container');
     if (!container || !dataConfig.products) return;
