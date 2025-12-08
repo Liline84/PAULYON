@@ -21,28 +21,28 @@
     <div id="footer"></div>
 
     <script src="script.js"></script>
-    <script>
-      // Charger header et footer dynamiquement
-      fetch('header.html')
-        .then(res => res.text())
-        .then(data => {
-          document.getElementById('header').innerHTML = data;
-          
-          // **CORRECTION : Initialiser le menu seulement APRÈS l'insertion du HTML**
-          if (typeof initMenuHandlers === 'function') {
-               initMenuHandlers(); 
-          }
-          
-          // Note : La logique de traduction/WhatsApp qui n'utilise pas 
-          // le menu peut être appelée ici si elle ne fait pas partie du footer.
-          // Mais il est plus propre de tout initialiser dans le script.js.
-        });
+<script>
+    // Charger header et footer dynamiquement
+    fetch('header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('header').innerHTML = data;
         
-      fetch('footer.html')
-        .then(res => res.text())
-        .then(data => {
-          document.getElementById('footer').innerHTML = data;
-        });
-    </script>
+        // CORRECTION MAJEURE : On utilise la fonction d'initialisation spécifique au Header
+        // qui ne dépend pas de DOMContentLoaded.
+        if (typeof initMenuHandlers === 'function') {
+            initMenuHandlers(); 
+        }
+        
+        // Ensuite, on exécute la fonction qui gère les données (traduction, etc.)
+        if (typeof runMainAppLogic === 'function') {
+             runMainAppLogic(); 
+        }
+      });
+      
+    fetch('footer.html')
+      // ... (le reste du fetch footer)
+      // ...
+</script>
 </body>
 </html>
