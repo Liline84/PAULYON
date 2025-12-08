@@ -38,20 +38,30 @@
 
   <div id="footer"></div>
 
-  <script src="script.js"></script>
-  <script>
+ <script src="script.js"></script>
+<script>
     // Charger header et footer via fetch
     fetch('header.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('header').innerHTML = data;
+        
+        // 1. Initialiser le menu seulement APRÈS l'insertion du HTML
+        if (typeof initMenuHandlers === 'function') {
+            initMenuHandlers(); 
+        }
+        
+        // 2. Exécuter la logique principale de l'application (traduction, etc.)
+        if (typeof runMainAppLogic === 'function') {
+             runMainAppLogic(); 
+        }
       });
-
+      
     fetch('footer.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('footer').innerHTML = data;
       });
-  </script>
+</script>
 </body>
 </html>
