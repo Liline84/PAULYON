@@ -444,24 +444,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         attachCartListeners();
     }
 
+    // ... (dans displayServices)
+
     // Fonction d'affichage des services (pour services.html)
     function displayServices(services) {
         const servicesContainer = document.getElementById('services-list-container');
         if (!servicesContainer) return;
 
         services.forEach(service => {
-            // Détermine la classe de statut (online/offline)
+            const statusKey = service.status === 'online' ? 'status-available' : 'status-unavailable';
             const statusClass = service.status === 'online' ? 'status-online' : 'status-offline';
-            const statusTextKey = service.status === 'online' ? 'status-available' : 'status-unavailable';
             
             const serviceHTML = `
                 <div class="data-card service-card" data-price="${service.price}" data-id="${service.id}">
                     <i class="${service.iconClass} icon-feature ${service.colorClass}"></i>
                     <h3>${service.title}</h3>
                     <p>${service.details}</p>
-                    <p class="${statusClass}" data-translate-key="${statusTextKey}">${service.status === 'online' ? 'Disponible' : 'Indisponible'}</p> 
-                    <div class="data-value">${service.price}</div>
-                    <a href="contact.html" class="btn-secondary" data-key="btn-quote">Demander un devis</a>
+                    <p class="${statusClass}" data-translate-key="${statusKey}">Disponible</p> 
+                    <div class="data-value">${service.price} ${currentCurrency}</div>  <a href="contact.html" class="btn-secondary" data-key="btn-quote">Demander un devis</a>
                 </div>
             `;
             servicesContainer.insertAdjacentHTML('beforeend', serviceHTML);
