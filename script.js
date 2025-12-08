@@ -39,24 +39,28 @@ function initMenuHandlers() {
     }, 100); 
 
     // ==========================================================
-    // 1. SÉLECTION DES ÉLÉMENTS (CONSOLIDÉ ET ÉTENDU)
+    // 1. SÉLECTION DES ÉLÉMENTS (CORRIGÉ ET CONSOLIDÉ)
     // ==========================================================
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.getElementById('main-nav');
     const navLinks = mainNav ? mainNav.querySelectorAll('a') : [];
 
-    // Nouveaux Menus Déroulants (Produits & Services)
+    // Menus Déroulants (Produits & Services)
     const productsToggle = document.getElementById('nav-produits');
     const productsDropdown = productsToggle ? productsToggle.closest('#products-dropdown') : null;
+    
     const servicesToggle = document.getElementById('nav-services');
     const servicesDropdown = servicesToggle ? servicesToggle.closest('#services-dropdown') : null;
 
-    // Menus Déroulants existants (Paramètres & Langue)
+    // Menus Déroulants (Paramètres & Langue)
     const settingsToggle = document.getElementById('nav-settings');
+    // CORRECTION APPLIQUÉE : Ciblage de l'ID spécifique #settings-dropdown
+    const settingsMenu = settingsToggle ? settingsToggle.closest('#settings-dropdown') : null; 
+    
     const languageToggle = document.getElementById('nav-language-toggle');
-    const settingsMenu = settingsToggle ? settingsToggle.closest('.dropdown') : null; 
-    const languageDropdown = languageToggle ? languageToggle.closest('.dropdown-language') : null; 
-
+    // Le HTML utilise .dropdown-language et l'ID #language-dropdown, nous ciblerons l'ID pour plus de précision.
+    const languageDropdown = languageToggle ? languageToggle.closest('#language-dropdown') : null; 
+    
     // Éléments pour la Recherche
     const searchToggleBtn = document.getElementById('search-toggle-btn');
     const searchContainer = document.getElementById('search-container');
