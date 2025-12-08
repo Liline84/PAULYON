@@ -548,26 +548,29 @@ footer a:hover {
     
     /* GESTION DES DROPDOWNS DESKTOP (Flottant) */
     .dropdown {
-        /* Permet aux sous-menus d'être positionnés par rapport à cet élément */
         position: relative;
     }
-
-    .dropdown-content, .language-content {
-        /* CORRIGÉ : Position ABSOLUE pour flotter */
+    
+    /* CORRECTION DE SPÉCIFICITÉ: Assure que le contenu du sous-menu est visible sur desktop */
+    #main-nav .dropdown-content, 
+    #main-nav .language-content {
+        /* Ceci annule définitivement le 'display: none' du mode mobile */
+        display: block; 
         position: absolute;
-        top: 100%; /* Juste en dessous du lien parent */
+        top: 100%; 
         left: 0;
         min-width: 180px;
-        background-color: #1A1A1A; /* Fond de menu */
-        border: 1px solid #00BFFF; /* Bordure High-Tech */
+        background-color: #1A1A1A; 
+        border: 1px solid #00BFFF; 
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 191, 255, 0.4);
         
-        /* AJOUT : Masque par défaut pour l'animation */
-        display: block; 
-        pointer-events: none; /* Empêche le clic tant qu'il n'est pas "show" */
+        /* C'est l'opacité qui le masque avant le clic */
+        opacity: 0;
+        transform: translateY(-10px);
+        pointer-events: none; 
     }
     
-    /* Affichage du dropdown avec animation */
+    /* Affichage du dropdown au clic */
     .dropdown.show .dropdown-content,
     .dropdown-language.show .language-content {
         opacity: 1;
@@ -577,12 +580,10 @@ footer a:hover {
     
     /* Ajustement de la position du sous-menu Langue */
     .language-content {
-        left: 100%; /* Niveau 2 : à droite du menu parent */
+        left: 100%; 
         top: 0;
     }
-    .dropdown-language.show .language-content {
-        transform: translateX(0);
-    }
+    /* ... le reste de la media query... */
     
     /* GESTION DE LA RECHERCHE SUR DESKTOP */
     .header-controls {
@@ -597,3 +598,5 @@ footer a:hover {
         margin-left: 15px;
     }
 }
+
+/* Le reste du CSS (sections 1 à 8) reste inchangé */
