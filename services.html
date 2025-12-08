@@ -1,54 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nos Services</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-RXf+QSDCUQs7aeMY5a8u8H6fS6Z1FfZL1L9ZdzgGu/N1SXTdt3xUHP5Xr6b+DV8B+m1z+RmcrHY9E4RFiWvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nos Services</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-RXf+QSDCUQs7aeMY5a8u8H6fS6Z1FfZL1L9ZdzgGu/N1SXTdt3xUHP5Xr6b+DV8B+m1z+RmcrHY9E4RFiWvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body id="services-page">
 
-  <div id="header"></div>
+    <div id="header"></div>
 
-  <main>
-    <section id="services">
-      <h2 id="h2-services">Nos Services</h2>
+    <main>
+        <section id="services">
+            <h2 id="h2-services">Nos Services</h2>
 
-      <div class="dashboard-grid">
-        <div class="data-card service-card" id="serv-conception">
-          <i class="fa-solid fa-paintbrush icon-feature icon-blue-light"></i>
-          <h3>Conception Graphique (Logos, Flyers, Tasses, etc.)</h3>
-          <p>Design créatif pour tous vos supports marketing : bidons, calendriers, et plus.</p>
-          <p class="status-online">Disponible</p>
-          <div class="data-value">750.00</div>
-          <a href="#" class="btn-secondary" id="serv-conception-btn">Demander un devis</a>
-        </div>
-        <div class="data-card service-card" id="serv-webdev">
-          <i class="fa-solid fa-desktop icon-feature icon-orange"></i>
-          <h3>Développement Web (Front-end & Back-end)</h3>
-          <p>Création de sites internet professionnels, modernes et optimisés pour mobile.</p>
-          <p class="status-online">Disponible</p>
-          <div class="data-value">XX.XX</div>
-          <a href="#" class="btn-secondary" id="serv-webdev-btn">Démarrer un projet</a>
-        </div>
+            <div class="dashboard-grid" id="services-list-container">
+                </div>
+        </section>
+    </main>
 
-        <div class="data-card service-card" id="serv-codage-prog">
-          <i class="fa-solid fa-code icon-feature icon-red"></i>
-          <h3>Codage & Programmation</h3>
-          <p>Développement de scripts, logiciels et solutions spécifiques.</p>
-          <p class="status-online">Disponible</p>
-          <div class="data-value">XX.XX</div>
-          <a href="#" class="btn-secondary" id="serv-codage-prog-btn">Détails</a>
-        </div>
+    <div id="footer"></div>
 
-      </div>
-    </section>
-  </main>
-
-  <div id="footer"></div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
