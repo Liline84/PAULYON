@@ -4,45 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="title-tag">𝐏𝐀𝐔𝐋𝐘𝐎𝐍'𝐬 𝐋𝐚𝐛 𝐇𝐮𝐛</title>
+
+    <!-- Fonts et icônes -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJc5f49yU/X1/L6Nbd/t2xK11p0n1fX/n7g+l4WjF5s+vH1R0H+f4TfV4Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <!-- Conteneurs pour header et footer -->
     <div id="header"></div>
 
     <main>
-      <section id="accueil" class="hero-section">
-          <h1 id="h1-accueil">Bienvenue chez PAULYON</h1>
-          <p id="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
-      </section>
+        <section id="accueil" class="hero-section">
+            <h1 id="h1-accueil" data-i18n="h1-accueil">Bienvenue chez PAULYON</h1>
+            <p id="p-slogan" data-i18n="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
+        </section>
     </main>
 
     <div id="footer"></div>
 
+    <!-- Script principal -->
     <script src="script.js"></script>
-<script>
+    <script>
+    // ================================
     // Charger header et footer dynamiquement
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('header').innerHTML = data;
-        
-        // CORRECTION MAJEURE : On utilise la fonction d'initialisation spécifique au Header
-        // qui ne dépend pas de DOMContentLoaded.
-        if (typeof initMenuHandlers === 'function') {
-            initMenuHandlers(); 
-        }
-        
-        // Ensuite, on exécute la fonction qui gère les données (traduction, etc.)
-        if (typeof runMainAppLogic === 'function') {
-             runMainAppLogic(); 
-        }
-      });
-      
-    fetch('footer.html')
-      // ... (le reste du fetch footer)
-      // ...
-</script>
+    // ================================
+
+    function loadHeaderFooter() {
+        // --- HEADER ---
+        fetch('header.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+
+                // Initialiser le menu, dropdowns, recherche et backdrop
+                if (typeof initMenuHandlers === 'function') initMenuHandlers();
+
+                // Traductions, langues et logique principale
+                if (typeof runMainAppLogic === 'function') runMainAppLogic();
+            })
+            .catch(err => console.error("Erreur chargement header :", err));
+
+        // --- FOOTER ---
+        fetch('footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(err => console.error("Erreur chargement footer :", err));
+    }
+
+    // Exécuter le chargement
+    loadHeaderFooter();
+    </script>
 </body>
 </html>
