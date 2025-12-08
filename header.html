@@ -16,25 +16,36 @@
     <nav id="main-nav">
         <ul>
             <li><a href="#accueil" id="nav-accueil">Accueil</a></li>
-            <li><a href="produits.html" id="nav-produits">Produits</a></li>
-            <li><a href="services.html" id="nav-services">Services</a> </li>
+            
+            <li class="dropdown" id="products-dropdown">
+                <a href="#" class="dropdown-toggle" id="nav-produits">Produits</a>
+                <ul class="dropdown-content" id="products-menu-content">
+                    <li><a href="produits.html">Voir Tous les Produits</a></li>
+                </ul>
+            </li>
+            
+            <li class="dropdown" id="services-dropdown">
+                <a href="#" class="dropdown-toggle" id="nav-services">Services</a> 
+                <ul class="dropdown-content" id="services-menu-content">
+                    <li><a href="services.html">Voir Tous les Services</a></li>
+                </ul>
+            </li>
+            
             <li><a href="contact.html" id="nav-contact">Contact</a></li>
 
-            <li class="dropdown" id="settings-menu">
+            <li class="dropdown" id="settings-dropdown">
                 <a href="#" class="dropdown-toggle" id="nav-settings"><i class="fa-solid fa-gear"></i> Paramètres</a>
-                <ul class="dropdown-content settings-dropdown">
-                  <li class="dropdown-language">
-                        <a href="#" class="language-toggle" id="nav-language-toggle">
-                            <i class="fa-solid fa-language"></i> Langue
-                        </a>
-                        <ul class="language-content">
-                            <li><a href="#" data-lang="fr" class="lang-option">Français (FR)</a></li>
-                            <li><a href="#" data-lang="en" class="lang-option">English (EN)</a></li>
-                            <li><a href="#" data-lang="es" class="lang-option">Español (ES)</a></li>
-                            <li><a href="#" data-lang="ht" class="lang-option">Kreyòl (HT)</a></li>
-                        </ul>
-                    </li>
+                <ul class="dropdown-content" id="settings-menu-content">
+                    <li><a href="#preferences">Préférences</a></li>
                 </ul>
+            </li>
+
+            <li class="dropdown dropdown-language" id="language-dropdown">
+                <a href="#" class="dropdown-toggle" id="nav-language-toggle">
+                    <i class="fa-solid fa-language"></i> Langue
+                </a>
+                <ul class="dropdown-content language-content">
+                    </ul>
             </li>
         </ul>
     </nav>
