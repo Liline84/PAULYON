@@ -1,16 +1,17 @@
 <header>
     <div class="header-controls">
-        <!-- Bouton menu mobile -->
-        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">
-            ☰
+        <h1 class="site-logo">
+            <a href="/" style="color: #00BFFF; font-size: 1.5em; font-weight: 700;">PAULYON</a>
+        </h1>
+
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" title="Ouvrir le menu">
+            <i class="fa-solid fa-bars"></i>
         </button>
 
-        <!-- Barre de recherche -->
         <div class="search-container" id="search-container">
             <input type="search" 
                    name="q" 
                    id="search-input" 
-                   placeholder="Rechercher..." 
                    data-i18n-placeholder="search-input-placeholder"
                    aria-label="Rechercher sur le site">
         </div>
@@ -18,52 +19,41 @@
         <button class="search-toggle" 
                 aria-controls="search-container" 
                 aria-expanded="false" 
-                id="search-toggle-btn">
+                id="search-toggle-btn"
+                title="Afficher la barre de recherche">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
     </div>
 
-    <!-- NAVIGATION -->
     <nav id="main-nav">
         <ul>
-            <li><a href="#accueil" id="nav-accueil" data-i18n="nav-accueil">Accueil</a></li>
+            <li><a href="#accueil" data-i18n="nav-accueil">Accueil</a></li>
 
-            <!-- Produits -->
-            <li class="dropdown" id="products-dropdown">
-                <a href="#" class="dropdown-toggle" id="nav-produits" data-i18n="nav-produits">Produits</a>
-                <ul class="dropdown-content" id="products-menu-content">
-                    <li><a href="produits.html">Voir Tous les Produits</a></li>
-                </ul>
+            <li class="dropdown dropdown-products">
+                <a href="#" class="dropdown-toggle" data-i18n="nav-produits">Produits</a>
+                <ul class="dropdown-content" id="products-menu-content"></ul>
             </li>
 
-            <!-- Services -->
-            <li class="dropdown" id="services-dropdown">
-                <a href="#" class="dropdown-toggle" id="nav-services" data-i18n="nav-services">Services</a>
-                <ul class="dropdown-content" id="services-menu-content">
-                    <li><a href="services.html">Voir Tous les Services</a></li>
-                </ul>
+            <li class="dropdown dropdown-services">
+                <a href="#" class="dropdown-toggle" data-i18n="nav-services">Services</a>
+                <ul class="dropdown-content" id="services-menu-content"></ul>
             </li>
 
-            <!-- Contact -->
-            <li><a href="contact.html" id="nav-contact" data-i18n="nav-contact">Contact</a></li>
+            <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
 
-            <!-- Paramètres -->
-            <li class="dropdown" id="settings-dropdown">
-                <a href="#" class="dropdown-toggle" id="nav-settings">
-                    <i class="fa-solid fa-gear"></i> <span data-i18n="nav-settings">Paramètres</span>
+            <li class="dropdown dropdown-language">
+                <a href="#" class="dropdown-toggle" data-i18n="nav-language-toggle">
+                     <i class="fa-solid fa-globe"></i> <span>Langue</span>
                 </a>
-                <ul class="dropdown-content" id="settings-menu-content">
-                    <li><a href="#preferences">Préférences</a></li>
-
-                    <!-- Langue -->
-                    <li class="dropdown dropdown-language" id="language-dropdown">
-                        <a href="#" class="dropdown-toggle" id="nav-language-toggle">
-                            <i class="fa-solid fa-language"></i> <span data-i18n="nav-language-toggle">Langue</span>
-                        </a>
-                        <ul class="dropdown-content language-content"></ul>
-                    </li>
-                </ul>
+                <ul class="dropdown-content language-content"></ul>
             </li>
+            
+            <li>
+                 <a href="#settings" data-i18n="nav-settings">
+                     <i class="fa-solid fa-gear"></i> Paramètres
+                 </a>
+            </li>
+
         </ul>
     </nav>
 </header>
