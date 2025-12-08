@@ -166,15 +166,17 @@ function initMenuHandlers() {
 // FIN de initMenuHandlers()
 
 
+// ... (code précédent de initMenuHandlers())
+
 // ==========================================================
 // [LOGIQUE PRINCIPALE] Exécutée au chargement du DOM
 // ==========================================================
 document.addEventListener('DOMContentLoaded', async () => { 
 
     // ==========================================================
-    // 0. CHARGEMENT DES DONNÉES JSON
+    // 0. CHARGEMENT DES DONNÉES JSON (MIS À JOUR)
     // ==========================================================
-    const siteData = await loadSiteData();
+    const { siteData, translations } = await loadSiteData(); // Récupère les deux JSON
     
     // Récupération des paramètres généraux
     const generalSettings = siteData.generalSettings || {};
@@ -187,94 +189,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Variables nécessaires
     const cart = []; 
+    // AJOUT : Récupération de la langue sauvegardée
+    const savedLang = localStorage.getItem('paulyon-lang') || 'fr'; 
 
     // ==========================================================
-    // A. Le Dictionnaire de Traduction (Étendu)
+    // A. Fonction de Traduction Principale (Adaptée pour le JSON)
     // ==========================================================
-    const translations = {
-        'fr': {
-            'nav-accueil': 'Accueil',
-            'nav-produits': 'Produits',
-            'nav-services': 'Services',
-            'nav-contact': 'Contact',
-            'nav-settings': 'Paramètres',
-            'nav-language-toggle': 'Langue',
-            'search-input-placeholder': 'Rechercher...',
-            'h1-accueil': 'Bienvenue chez PAULYON',
-            'p-slogan': 'Nous transformons le néant en chef-d\'œuvre.',
-            'h2-produits': 'Nos Produits',
-            'h2-services': 'Nos Services',
-            'h2-contact': 'Contactez-nous',
-            'p-contact-email': `Envoyez-nous un message à <a href="mailto:${emailContact}">${emailContact}</a> !`,
-            'p-contact-whatsapp': `Vous pouvez également nous contacter directement via <a href="https://wa.me/${whatsappNumber}">WhatsApp</a>.`,
-            'input-name-placeholder': 'Nom',
-            'input-email-placeholder': 'Email',
-            'input-message-placeholder': 'Message',
-            'btn-submit': 'Envoyer',
-            'footer-copyright': `&copy; ${copyrightYear} ${siteName}. Tous droits réservés.`,
-            'footer-address': `Adresse : ${address}`,
-            'status-online': 'Disponible',
-            'status-offline': 'Indisponible',
-            'btn-order': 'Commander', 
-            'btn-quote': 'Demander un devis',
-        },
-        'en': {
-            'nav-accueil': 'Home',
-            'nav-produits': 'Products',
-            'nav-services': 'Services',
-            'nav-contact': 'Contact',
-            'nav-settings': 'Settings',
-            'nav-language-toggle': 'Language',
-            'search-input-placeholder': 'Search...',
-            'h1-accueil': 'Welcome to PAULYON',
-            'p-slogan': 'We transform nothingness into a masterpiece.',
-            'h2-produits': 'Our Products',
-            'h2-services': 'Our Services',
-            'h2-contact': 'Contact Us',
-            'p-contact-email': `Send us a message at <a href="mailto:${emailContact}">${emailContact}</a>!`,
-            'p-contact-whatsapp': `You can also contact us directly via <a href="https://wa.me/${whatsappNumber}">WhatsApp</a>.`,
-            'input-name-placeholder': 'Name',
-            'input-email-placeholder': 'Email',
-            'input-message-placeholder': 'Message',
-            'btn-submit': 'Send',
-            'footer-copyright': `&copy; ${copyrightYear} ${siteName}. All rights reserved.`,
-            'footer-address': `Address: ${address}`,
-            'status-online': 'Available',
-            'status-offline': 'Unavailable',
-            'btn-order': 'Order',
-            'btn-quote': 'Request a quote',
-        },
-        'ht': {
-            'nav-accueil': 'Lakay',
-            'nav-produits': 'Pwodwi',
-            'nav-services': 'Sèvis',
-            'nav-contact': 'Kontakte',
-            'nav-settings': 'Paramèt',
-            'nav-language-toggle': 'Lang',
-            'search-input-placeholder': 'Chèche...',
-            'h1-accueil': 'Byenvini lakay PAULYON',
-            'p-slogan': 'Nou transfòme anyen an yon chèfdèv.',
-            'h2-produits': 'Pwodwi Nou Yo',
-            'h2-services': 'Sèvis Nou Yo',
-            'h2-contact': 'Kontakte Nou',
-            'p-contact-email': `Voye yon mesaj pou nou nan <a href="mailto:${emailContact}">${emailContact}</a>!`,
-            'p-contact-whatsapp': `Ou kapab kontakte nou dirèkteman sou <a href="https://wa.me/${whatsappNumber}">WhatsApp</a>.`,
-            'input-name-placeholder': 'Non',
-            'input-email-placeholder': 'Imèl',
-            'input-message-placeholder': 'Mesaj',
-            'btn-submit': 'Voye',
-            'footer-copyright': `&copy; ${copyrightYear} ${siteName}. Tout dwa rezève.`,
-            'footer-address': `Adrès: ${address}`,
-            'status-online': 'Disponib',
-            'status-offline': 'Pa disponib',
-            'btn-order': 'Kòmande',
-            'btn-quote': 'Mande yon deviz',
-        },
-        // Ajoutez 'es' ici si nécessaire
-    };
-
-
-    // B. Fonction de Traduction Principale (Adaptée pour le JSON)
     function setLanguage(langCode) {
         const currentTranslation = translations[langCode];
         if (!currentTranslation) return;
@@ -286,28 +206,38 @@ document.addEventListener('DOMContentLoaded', async () => {
             
             if (element) {
                 if (id === 'title-tag') {
-                    document.title = value;
-                } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    element.setAttribute('placeholder', value);
-                } else if (id.startsWith('p-contact') || id.startsWith('footer-')) {
-                    element.innerHTML = value; // Utiliser innerHTML pour conserver les balises <a>
+                    document.title = siteName + ' | ' + value; // Ajout du nom du site
+                } else if (id.endsWith('-placeholder')) {
+                    // Cible les placeholders via l'ID de l'input sans le suffixe -placeholder
+                    const inputElement = document.getElementById(id.replace('-placeholder', ''));
+                    if (inputElement) inputElement.setAttribute('placeholder', value);
+                
+                } else if (id === 'p-contact-email') {
+                    // Utiliser des tokens de remplacement
+                    const html = value.replace('[EMAIL]', `<a href="mailto:${emailContact}">${emailContact}</a>`);
+                    element.innerHTML = html;
+                } else if (id === 'p-contact-whatsapp') {
+                    const whatsappLink = `<a href="https://wa.me/${whatsappNumber}">${currentTranslation['nav-contact']}</a>`;
+                    const html = value.replace('[WHATSAPP]', whatsappLink);
+                    element.innerHTML = html;
+                } else if (id === 'footer-copyright') {
+                    const html = value.replace('[YEAR]', copyrightYear).replace('[SITE_NAME]', siteName);
+                    element.innerHTML = html;
+                } else if (id === 'footer-address') {
+                    const html = value.replace('[ADDRESS]', address);
+                    element.innerHTML = html;
                 } else {
                     element.textContent = value;
                 }
             } 
         }
 
-        // 2. Traduction des boutons générés dynamiquement (Products & Services)
-        // Ceci cible les éléments créés par displayProducts/displayServices
+        // 2. Traduction des boutons générés dynamiquement
         document.querySelectorAll('[data-key="btn-order"]').forEach(btn => {
-            if (currentTranslation['btn-order']) {
-                btn.textContent = currentTranslation['btn-order'];
-            }
+            btn.textContent = currentTranslation['btn-order'] || 'Commander';
         });
         document.querySelectorAll('[data-key="btn-quote"]').forEach(btn => {
-            if (currentTranslation['btn-quote']) {
-                btn.textContent = currentTranslation['btn-quote'];
-            }
+            btn.textContent = currentTranslation['btn-quote'] || 'Demander un devis';
         });
         
         // 3. Traduction des statuts (Disponible/Indisponible)
@@ -317,7 +247,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelectorAll('[data-translate-key="status-unavailable"]').forEach(p => {
              p.textContent = currentTranslation['status-offline'] || 'Indisponible';
         });
-
 
         document.documentElement.lang = langCode;
         localStorage.setItem('paulyon-lang', langCode);
@@ -354,34 +283,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ==========================================================
-    // 7. FONCTIONS DE GESTION DU PANIER (FINALISÉ)
+    // 7. FONCTIONS DE GESTION DU PANIER (CORRIGÉES POUR LE JSON)
     // ==========================================================
     
     // Fonction utilitaire pour la redirection WhatsApp
     function redirectToWhatsAppOrder() {
+        const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
+        const t = translations[currentLang]; // Récupère les traductions du JSON
+        
         if (cart.length === 0) {
-            alert(translations[localStorage.getItem('paulyon-lang') || 'fr']['cart-empty'] || "Votre panier est vide. Veuillez ajouter des articles.");
+            alert(t['alert-cart-empty'] || "Votre panier est vide. Veuillez ajouter des articles."); // Utilise la clé du JSON
             return;
         }
 
-        let message = "Bonjour PAULYON, je souhaite commander les articles suivants :\n\n";
+        let message = t['whatsapp-msg-intro'] || "Bonjour PAULYON, je souhaite commander les articles suivants :\n\n";
         let total = 0;
-        const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
 
         cart.forEach((item, index) => {
             message += `${index + 1}. ${item.name} (${item.price} ${currentCurrency})\n`;
             total += parseFloat(item.price);
         });
 
-        message += `\nTotal de la commande : ${total.toFixed(2)} ${currentCurrency}`;
-        
-        const thankYouMessages = {
-            'fr': "Veuillez m'indiquer la disponibilité et les modalités de paiement. Merci!",
-            'en': "Please let me know the availability and payment options. Thank you!",
-            'ht': "Silvouplè, fè m konnen disponiblite ak opsyon peman yo. Mèsi!",
-        };
-
-        message += "\n\n" + (thankYouMessages[currentLang] || thankYouMessages['fr']);
+        message += `${t['whatsapp-msg-total'] || '\nTotal de la commande : '}${total.toFixed(2)} ${currentCurrency}`;
+        message += "\n\n" + (t['whatsapp-msg-thanks'] || "Veuillez m'indiquer la disponibilité et les modalités de paiement. Merci!");
         
         // Vider le panier après la commande
         cart.length = 0; 
@@ -394,7 +318,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Fonction de gestion de l'ajout au panier (attachée aux boutons)
     function handleAddToCart(event) {
-        // Cible le parent commun (.product-item)
+        const currentLang = localStorage.getItem('paulyon-lang') || 'fr';
+        const t = translations[currentLang];
+        
         const itemElement = event.target.closest('.product-item');
         if (!itemElement) return;
 
@@ -403,17 +329,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         cart.push({ name, price });
         
-        // Alerte simple (vous pouvez remplacer par un toast ou une modale)
-        alert(`${name} a été ajouté à votre commande ! Vous serez redirigé vers WhatsApp pour finaliser.`);
+        // Utilise la clé du JSON pour l'alerte
+        alert(`${name}${t['alert-cart-add'] || " a été ajouté à votre commande ! Vous serez redirigé vers WhatsApp pour finaliser."}`);
         
         redirectToWhatsAppOrder();
     }
     
     // Fonction utilitaire pour attacher les écouteurs sur les boutons 'Commander'
     function attachCartListeners() {
-        // Cible tous les boutons qui ont la classe pour ajouter au panier
         document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.removeEventListener('click', handleAddToCart); // Empêche l'attachement multiple
+            button.removeEventListener('click', handleAddToCart); 
             button.addEventListener('click', handleAddToCart);
         });
     }
@@ -440,11 +365,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             productsContainer.insertAdjacentHTML('beforeend', productHTML);
         });
 
-        // TRES IMPORTANT: Attacher les écouteurs aux nouveaux boutons créés
         attachCartListeners();
     }
-
-    // ... (dans displayServices)
 
     // Fonction d'affichage des services (pour services.html)
     function displayServices(services) {
@@ -461,7 +383,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <h3>${service.title}</h3>
                     <p>${service.details}</p>
                     <p class="${statusClass}" data-translate-key="${statusKey}">Disponible</p> 
-                    <div class="data-value">${service.price} ${currentCurrency}</div>  <a href="contact.html" class="btn-secondary" data-key="btn-quote">Demander un devis</a>
+                    <div class="data-value">${service.price} ${currentCurrency}</div>  
+                    <a href="contact.html" class="btn-secondary" data-key="btn-quote">Demander un devis</a>
                 </div>
             `;
             servicesContainer.insertAdjacentHTML('beforeend', serviceHTML);
@@ -469,12 +392,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     // ==========================================================
-    // DÉCLENCHEMENT DE L'AFFICHAGE DYNAMIQUE
+    // DÉCLENCHEMENT DE L'AFFICHAGE DYNAMIQUE ET DE LA TRADUCTION
     // ==========================================================
 
     // 1. Génère le menu de langue
     if (siteData.languages) {
         generateLanguageMenu(siteData.languages);
+    } else if (translations) {
+        // Fallback: générer la liste des langues à partir des clés du fichier de traduction
+        const languages = Object.keys(translations).map(code => ({ code, name: translations[code]['nav-language-toggle'] || code.toUpperCase() }));
+        generateLanguageMenu(languages);
     }
     
     // 2. Affiche les produits si nous sommes sur la bonne page
@@ -487,7 +414,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         displayServices(siteData.services);
     }
     
-    // 4. Applique la langue sauvegardée à tous les éléments nouvellement créés
+    // 4. Applique la langue sauvegardée à tous les éléments
     setLanguage(savedLang);
 
 }); // FIN de DOMContentLoaded
