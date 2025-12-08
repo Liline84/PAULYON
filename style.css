@@ -1,20 +1,25 @@
 /* ====================================================================
-   FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH (FINAL)
-   Palette: Sombre (#0F0F0F) & Bleu Électrique (#00BFFF)
-   Typographie: Poppins (Moderne & Géométrique)
-   Objectif: Icônes d'objets (T-shirt, Bague) Grandes, Colorées et Lumineuses.
-   ==================================================================== */
+    FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH (FINAL)
+    Palette: Sombre (#0F0F0F) & Bleu Électrique (#00BFFF)
+    Typographie: Poppins (Moderne & Géométrique)
+    Objectif: Icônes d'objets (T-shirt, Bague) Grandes, Colorées et Lumineuses.
+    ==================================================================== */
 
 /* Importation de la police */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* ===============================
-   1. FONDAMENTAUX 
-   =============================== */
+    1. FONDAMENTAUX 
+    =============================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box; 
+}
+
+/* AJOUT : Désactivation des transitions au chargement (preload class) */
+.preload * {
+    transition: none !important;
 }
 
 body {
@@ -54,12 +59,14 @@ a:hover {
 
 
 /* ===============================
-   2. HEADER ET NAVIGATION 
-   =============================== */
+    2. HEADER ET NAVIGATION (MOBILE FIRST)
+    =============================== */
 header {
     background-color: #0F0F0F;
     padding: 10px 0;
-    position: relative; 
+    position: sticky; /* Sticky pour plus de confort */
+    top: 0;
+    z-index: 99;
 }
 
 .header-controls {
@@ -71,13 +78,14 @@ header {
     z-index: 95; 
 }
 
+/* MENU PRINCIPAL MOBILE (Masqué par défaut) */
 #main-nav {
-    display: none;
+    /* CORRIGÉ : Retire display:none. La position left négative le cache par défaut */
     position: fixed; 
     width: 280px; 
     height: 100vh; 
     top: 0; 
-    left: -280px;
+    left: -280px; /* Masqué */
     background-color: #1A1A1A; 
     box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2); 
     z-index: 90;
@@ -90,9 +98,9 @@ header {
     flex-direction: column;
 }
 
+/* Affichage Mobile/Actif */
 #main-nav.active {
     left: 0;
-    display: block; 
 }
 
 #main-nav ul li {
@@ -120,8 +128,8 @@ header {
 
 
 /* ===============================
-   3. SECTIONS & GRILLE DE DASHBOARD 
-   =============================== */
+    3. SECTIONS & GRILLE DE DASHBOARD 
+    =============================== */
 section {
     background-color: #1A1A1A; 
     padding: 40px;
@@ -140,8 +148,8 @@ section {
 }
 
 /* ===============================
-   3.5. CARTES D'INFORMATION (Dashboard Cards) 
-   =============================== */
+    3.5. CARTES D'INFORMATION (Dashboard Cards) 
+    =============================== */
 .data-card {
     background-color: #1A1A1A; 
     padding: 30px; 
@@ -158,8 +166,8 @@ section {
 }
 
 /* -------------------------------------
-   STYLES DE L'ICÔNE OBJET (GRANDE ET LUMINEUSE)
-   ------------------------------------- */
+    STYLES DE L'ICÔNE OBJET (GRANDE ET LUMINEUSE)
+    ------------------------------------- */
 .data-card .icon-feature {
     /* La clé de la visibilité et de la dominance */
     font-size: 3em; 
@@ -177,8 +185,8 @@ section {
 }
 
 /* -------------------------------------
-   CLASSES DE COULEURS POUR LES ICONES
-   ------------------------------------- */
+    CLASSES DE COULEURS POUR LES ICONES
+    ------------------------------------- */
 
 /* Vert (Cosmétiques, AI Automation) */
 .icon-green {
@@ -234,8 +242,8 @@ section {
 
 
 /* ===============================
-   4. FORMULAIRE DE CONTACT & BOUTONS 
-   =============================== */
+    4. FORMULAIRE DE CONTACT & BOUTONS 
+    =============================== */
 form {
     display: flex;
     flex-direction: column;
@@ -315,8 +323,8 @@ button, .btn-primary, .btn-secondary {
 
 
 /* ===============================
-   5. PIED DE PAGE (FOOTER) 
-   =============================== */
+    5. PIED DE PAGE (FOOTER) 
+    =============================== */
 footer {
     background-color: #1A1A1A; 
     color: #EAEAEA; 
@@ -337,15 +345,17 @@ footer a:hover {
 }
 
 
-/* ===============================
-   6. STYLES DU MENU DÉROULANT (SOUS-MENUS)
-   =============================== */
+/* =======================================================
+    6. STYLES DU MENU DÉROULANT (SOUS-MENUS) - MOBILE FIRST
+    ======================================================= */
 .dropdown {
     position: relative;
     width: 100%; 
 }
 
+/* Style commun aux dropdowns sur MOBILE */
 .dropdown-content {
+    /* CORRIGÉ : Position statique sur mobile pour s'intégrer dans le flux */
     display: none; 
     position: static; 
     min-width: 100%;
@@ -354,6 +364,10 @@ footer a:hover {
     z-index: 50; 
     list-style: none;
     text-align: left;
+    /* AJOUT : Transition pour l'ouverture/fermeture propre sur desktop */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .dropdown-content li {
@@ -373,9 +387,12 @@ footer a:hover {
     color: #fff;
 }
 
-/* Classe ajoutée par JS pour afficher le sous-menu */
+/* Classe ajoutée par JS pour afficher le sous-menu (Mode Mobile) */
 .dropdown.show .dropdown-content {
     display: block; 
+    /* Réinitialisation sur mobile (le mode desktop gérera l'opacité) */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* SOUS-MENU LANGUE - Niveau 2 */
@@ -385,27 +402,36 @@ footer a:hover {
 
 .language-content {
     display: none;
-    position: static;
+    position: static; /* Statique sur mobile */
     min-width: 100%;
     background-color: #282828; 
     padding: 0;
     z-index: 60; 
     list-style: none;
     text-align: left;
+    /* AJOUT : Transition pour l'ouverture/fermeture propre sur desktop */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .language-content li a {
+    /* Décalage pour le niveau 2 */
     padding: 10px 50px; 
 }
 
+/* Affichage du sous-menu Langue */
 .dropdown-language.show .language-content {
-    display: block; 
+    display: block;
+    /* Réinitialisation sur mobile */
+    opacity: 1;
+    transform: translateY(0);
 }
 
 
 /* ===============================
-   7. MENU HAMBURGER & RECHERCHE TOGGLE
-   =============================== */
+    7. MENU HAMBURGER & RECHERCHE TOGGLE
+    =============================== */
 .menu-toggle, .search-toggle {
     display: block; 
     background: none;
@@ -436,8 +462,8 @@ footer a:hover {
 
 
 /* ===============================
-   8. BARRE DE RECHERCHE 
-   =============================== */
+    8. BARRE DE RECHERCHE 
+    =============================== */
 
 /* Le conteneur permet d'aligner l'input de recherche lorsqu'il est visible */
 .search-container {
@@ -471,29 +497,103 @@ footer a:hover {
 }
 
 /* ===============================
-   9. MEDIA QUERIES 
-   =============================== */
-@media (max-width: 768px) {
-    /* Ajustement de la section pour ne pas coller les bords */
-    section {
-        padding: 20px;
+    9. MEDIA QUERIES (ADAPTATION DESKTOP/GRAND ÉCRAN)
+    =============================== */
+@media (min-width: 769px) {
+    /* MASQUER LE BOUTON HAMBURGER SUR DESKTOP */
+    .menu-toggle {
+        display: none;
     }
     
-    /* Le conteneur de recherche prend plus de place sur mobile */
-    .search-container.active {
-        max-width: calc(100% - 120px); 
-    }
-
-    /* Le bouton de menu et le bouton de recherche sont maintenant côte à côte */
-    .header-controls {
-        gap: 15px;
-        justify-content: flex-start; /* Aligne les deux boutons à gauche sur mobile */
-    }
-
-    /* Réalignement du panneau de navigation pour le mobile */
+    /* MENU PRINCIPAL DESKTOP (Toujours visible) */
     #main-nav {
-        width: 100%;
-        max-width: 280px;
-        left: -280px; 
+        /* CORRIGÉ : Remplace les styles "fixed/mobile" */
+        position: static;
+        display: flex !important; /* Force l'affichage du menu sur desktop */
+        width: auto;
+        height: auto;
+        left: 0;
+        top: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding-top: 0;
+    }
+    
+    /* Liste de liens DESKTOP */
+    #main-nav ul {
+        flex-direction: row; /* Horizontal */
+        align-items: center;
+        margin-left: auto; /* Pousse le menu vers la droite */
+    }
+
+    #main-nav ul li {
+        border-bottom: none;
+        margin: 0 5px; /* Espacement entre les liens */
+    }
+
+    #main-nav ul li a {
+        padding: 10px 15px;
+        /* Retire les styles mobiles */
+        border-left: none;
+        background-color: transparent;
+    }
+
+    /* Active l'effet survol standard */
+    #main-nav ul li a:hover,
+    #main-nav ul li a[aria-current="page"] {
+        color: #fff; /* Effet de lueur du lien standard */
+        background-color: transparent;
+        text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+    }
+    
+    /* GESTION DES DROPDOWNS DESKTOP (Flottant) */
+    .dropdown {
+        /* Permet aux sous-menus d'être positionnés par rapport à cet élément */
+        position: relative;
+    }
+
+    .dropdown-content, .language-content {
+        /* CORRIGÉ : Position ABSOLUE pour flotter */
+        position: absolute;
+        top: 100%; /* Juste en dessous du lien parent */
+        left: 0;
+        min-width: 180px;
+        background-color: #1A1A1A; /* Fond de menu */
+        border: 1px solid #00BFFF; /* Bordure High-Tech */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 191, 255, 0.4);
+        
+        /* AJOUT : Masque par défaut pour l'animation */
+        display: block; 
+        pointer-events: none; /* Empêche le clic tant qu'il n'est pas "show" */
+    }
+    
+    /* Affichage du dropdown avec animation */
+    .dropdown.show .dropdown-content,
+    .dropdown-language.show .language-content {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto; /* Autorise le clic */
+    }
+    
+    /* Ajustement de la position du sous-menu Langue */
+    .language-content {
+        left: 100%; /* Niveau 2 : à droite du menu parent */
+        top: 0;
+    }
+    .dropdown-language.show .language-content {
+        transform: translateX(0);
+    }
+    
+    /* GESTION DE LA RECHERCHE SUR DESKTOP */
+    .header-controls {
+        /* Centrage du menu et de la recherche */
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 10px 20px;
+    }
+    
+    .search-container {
+        max-width: 250px; /* Limite la taille de l'input */
+        margin-left: 15px;
     }
 }
