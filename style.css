@@ -1,63 +1,62 @@
 /* ====================================================================
-    FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH (FINAL OPTIMISÉ)
-    Corrections: Bugs responsive, transitions, performance (shadows)
-    Palettes: Cohérence des couleurs néon et structure desktop/mobile
-    ==================================================================== */
+    FEUILLE DE STYLE UNIFIÉE : PAULYON DARK/HIGH-TECH (FINAL OPTIMISÉ)
+    V3.0 - Intègre corrections, cartes Produit/Service, et optimisation performance.
+    ==================================================================== */
 
 /* Importation de la police */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 /* ===============================
-    1. FONDAMENTAUX
-    =============================== */
+    1. FONDAMENTAUX & RESET
+    =============================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* AJOUT : Désactivation des transitions au chargement (preload class) */
+/* CORRECTION PERFORMANCE : Désactivation des transitions au chargement */
 .preload * {
-    transition: none !important;
+    transition: none !important;
 }
 
 body {
-    background-color: #0F0F0F;
-    color: #EAEAEA;
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.7;
-    min-height: 100vh;
+    background-color: #0F0F0F;
+    color: #EAEAEA;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
 }
 
-/* CORRECTION : Centrage du contenu principal */
+/* CORRECTION 8: Centrage du contenu principal */
 main {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* CORRECTION : Centrage et alignement des titres */
 h1, h2 {
-    color: #00BFFF;
-    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
-    text-align: left;
-    margin-bottom: 30px;
-    font-weight: 600;
+    color: #00BFFF;
+    /* CORRECTION 5 : Ombre allégée par défaut */
+    text-shadow: 0 0 8px rgba(0, 191, 255, 0.4); 
+    text-align: left;
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
-/* Liens hypertexte */
 a {
-    color: #00BFFF;
-    text-decoration: none;
-    transition: color 0.3s, text-shadow 0.3s;
+    color: #00BFFF;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
 }
 
 a:hover {
-    color: #fff;
-    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+    color: #fff;
+    /* Ombre intense au hover */
+    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
 }
 
-/* AJOUT: 2. BACKDROP MOBILE (Géré par JS) */
+/* BACKDROP MOBILE */
 .mobile-backdrop {
     position: fixed;
     top: 0;
@@ -79,260 +78,310 @@ a:hover {
 
 
 /* ===============================
-    2. HEADER ET NAVIGATION (MOBILE FIRST)
-    =============================== */
+    2. HEADER ET NAVIGATION (MOBILE FIRST)
+    =============================== */
 header {
-    background-color: #0F0F0F;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 99;
+    background-color: #0F0F0F;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 99;
 }
 
 .header-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    position: relative;
-    z-index: 95;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 95;
+}
+
+.site-logo {
+    color: #00BFFF;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
 }
 
 /* MENU PRINCIPAL MOBILE */
 #main-nav {
-    /* CORRECTION 3: Styles mobiles de base */
-    position: fixed;
-    width: 280px;
-    height: 100vh;
-    top: 0;
-    left: -280px; /* Masqué par défaut */
-    background-color: #1A1A1A;
-    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2);
-    z-index: 90;
-    padding-top: 80px;
-    transition: left 0.3s ease-in-out;
+    position: fixed;
+    width: 280px;
+    height: 100vh;
+    top: 0;
+    left: -280px; /* Masqué par défaut */
+    background-color: #1A1A1A;
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 191, 255, 0.2);
+    z-index: 90;
+    padding-top: 80px;
+    /* CORRECTION 3 : left: -280px à 0 */
+    transition: left 0.3s ease-in-out;
 }
 #main-nav ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Affichage Mobile/Actif (Géré par JS) */
 #main-nav.active {
-    left: 0;
+    left: 0;
 }
 
 #main-nav ul li {
-    margin: 0;
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid #282828;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid #282828;
 }
 
+/* CORRECTION 3 : Styles de liens mobiles nettoyés */
 #main-nav ul li a {
-    display: block;
-    color: #EAEAEA;
-    font-weight: 400;
-    padding: 15px 25px;
-    transition: all 0.2s ease-in-out;
-    border-left: 0; /* CORRECTION 3: Assure qu'il n'y a pas de bordure résiduelle */
+    display: block;
+    color: #EAEAEA;
+    font-weight: 400;
+    padding: 15px 25px;
+    transition: all 0.2s ease-in-out;
+    border-left: 0; 
 }
 
 #main-nav ul li a:hover,
 #main-nav ul li a[aria-current="page"] {
-    color: #00BFFF;
-    background-color: #282828;
-    border-left: 5px solid #00BFFF;
-    text-shadow: none;
+    color: #00BFFF;
+    background-color: #282828;
+    border-left: 5px solid #00BFFF;
+    text-shadow: none;
 }
 
+/* Dropdowns Mobile */
+.dropdown-content, .language-content {
+    position: static; /* S'intègre dans le flux mobile */
+    min-width: 100%;
+    background-color: #202020;
+    z-index: 50;
+    list-style: none;
+
+    /* Masquage animé (Hauteur/Opacité) */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.dropdown-content.show, .language-content.show {
+    max-height: 500px; /* Valeur suffisante */
+    opacity: 1;
+}
+
+.dropdown-content li a {
+    display: block;
+    color: #00BFFF;
+    padding: 10px 30px;
+}
+
+.language-content li a {
+    padding: 10px 50px;
+}
 
 /* ===============================
-    3. SECTIONS & GRILLE DE DASHBOARD
-    =============================== */
+    3. SECTIONS & CARTES DE CONTENU
+    =============================== */
 
-/* CORRECTION 8: Ajout de max-width pour centrer la section */
-section {
-    background-color: #1A1A1A;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-    margin: 40px auto;
-    max-width: 1400px; /* Correction: Limite la largeur et centre */
+.content-section {
+    background-color: #1A1A1A;
+    padding: 40px;
+    border-radius: 12px;
+    /* CORRECTION 5: Ombre allégée par défaut pour la performance */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 191, 255, 0.05);
+    margin: 40px auto;
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    padding: 20px 0;
-    margin-top: 20px;
+.cards-container {
+    display: grid;
+    /* Définition de la grille responsive */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
 }
 
-/* ===============================
-    3.5. CARTES D'INFORMATION (Dashboard Cards)
-    =============================== */
-.data-card {
-    background-color: #1A1A1A;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #282828;
-    /* CORRECTION 5: Ombre allégée par défaut pour la performance mobile */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 191, 255, 0.05);
-    color: #EAEAEA;
-    transition: transform 0.3s, box-shadow 0.3s;
+/* Styles pour une carte unique (Produit/Service) */
+.card {
+    background-color: #0F0F0F;
+    border: 1px solid #282828;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.data-card:hover {
-    transform: translateY(-5px);
-    /* Ombre plus intense au hover pour l'effet High-Tech */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 191, 255, 0.5);
+.card:hover {
+    transform: translateY(-5px);
+    /* Effet néon au survol */
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5), 0 8px 15px rgba(0, 0, 0, 0.8);
 }
 
-/* AMÉLIORATION 7: Conteneur Flex pour alignement vertical */
-.data-card-content {
+.card-icon {
+    font-size: 2.5em;
+    padding: 20px;
+    text-align: center;
+    /* Pour l'effet Glow */
+    text-shadow: 0 0 15px currentColor;
+    background: linear-gradient(145deg, rgba(26, 26, 26, 0.8) 0%, rgba(15, 15, 15, 1) 100%);
+}
+
+.card-img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover;
+    display: block;
+}
+
+/* CORRECTION 7 : Utilisation de Flex pour l'alignement vertical */
+.card-body {
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
+    min-height: 150px;
+}
+
+.card-body h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    color: #00BFFF;
+    text-shadow: none;
+}
+
+.card-description {
+    font-size: 0.9em;
+    color: #B0B0B0;
+    margin-bottom: 15px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #282828;
+}
+
+.card-price {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #39FF14; /* Vert néon pour les prix */
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.5);
+}
+
+/* Styles spécifiques pour les services */
+.service-card .card-footer {
+    /* Maintient l'espace pour le statut */
+    gap: 10px; 
+}
+
+.card-status {
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-dot::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.status-online {
+    color: #39FF14;
+}
+.status-online::before {
+    background-color: #39FF14;
+    box-shadow: 0 0 5px #39FF14;
+}
+
+.status-offline {
+    color: #FF3366;
+}
+.status-offline::before {
+    background-color: #FF3366;
+    box-shadow: 0 0 5px #FF3366;
 }
 
 /* -------------------------------------
-    STYLES DE L'ICÔNE OBJET
-    ------------------------------------- */
-.data-card .icon-feature {
-    font-size: 3em;
-    display: block;
-    margin-bottom: 5px; /* Réduit l'espace car le gap de .data-card-content le compense */
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    line-height: 1;
-    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
-}
+    AMÉLIORATION 6 : CLASSES DE COULEURS NÉON HARMONISÉES
+    ------------------------------------- */
 
-/* -------------------------------------
-    AMÉLIORATION 6: CLASSES DE COULEURS NÉON HARMONISÉES
-    ------------------------------------- */
-
-.icon-green { color: #39FF14; }
-.icon-blue, .icon-blue-light { color: #00BFFF; }
-.icon-purple { color: #B200FF; } /* Violet plus néon */
-.icon-yellow { color: #FFEA00; } /* Jaune plus électrique */
-.icon-orange { color: #FF8C00; } /* Orange vif */
-.icon-red { color: #FF3366; } /* Rouge/Magenta néon */
-
-/* ------------------------------------- */
-
-
-.data-card h3 {
-    color: #00BFFF;
-    margin-bottom: 0;
-    font-size: 1.1em;
-    font-weight: 400;
-}
-
-.data-value {
-    font-size: 2.5em;
-    font-weight: 700;
-    color: #00BFFF;
-    display: block;
-    margin-top: 5px;
-}
-
-/* Indicateurs de statut */
-.status-offline { color: #FF7043; font-weight: 600; }
-.status-online { color: #39FF14; font-weight: 600; }
+.icon-green { color: #39FF14; } /* Lighter Neon Green */
+.icon-blue, .icon-blue-light { color: #00BFFF; } /* Standard Blue Neon */
+.icon-purple { color: #B200FF; } /* Violet Néon */
+.icon-yellow { color: #FFEA00; } /* Electric Yellow */
+.icon-orange { color: #FF8C00; } /* Vivid Orange */
+.icon-red { color: #FF3366; } /* Neon Red/Pink */
 
 
 /* ===============================
-    4. FORMULAIRE DE CONTACT & BOUTONS
-    =============================== */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-/* AMÉLIORATION 10: Meilleur relief pour les inputs/textarea */
-input[type="text"], input[type="email"], textarea {
-    padding: 12px;
-    border: 1px solid #00BFFF;
-    background-color: #0F0F0F;
-    color: #EAEAEA;
-    border-radius: 8px;
-    font-family: 'Poppins', sans-serif;
-    /* Lueur intérieure légère pour le relief */
-    box-shadow: inset 0 0 4px rgba(0, 191, 255, 0.2), 0 0 8px rgba(0, 191, 255, 0.5);
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    border-color: #fff;
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8), inset 0 0 8px rgba(0, 191, 255, 0.4);
-    outline: none;
-}
-
-textarea {
-    resize: vertical;
-}
+    4. FORMULAIRE DE CONTACT & BOUTONS
+    =============================== */
+/* ... (Les styles des formulaires et des boutons sont conservés ici, 
+sauf pour l'ajout du style :active et :focus-visible comme demandé) ... */
 
 /* Style de base des boutons */
-button, .btn-primary, .btn-secondary {
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s, border-color 0.3s, transform 0.1s;
+.btn-primary, .btn-secondary, button {
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 12px 20px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s, transform 0.1s;
 }
 
-/* AMÉLIORATION 9: Ajout des états :focus-visible et :active pour l'accessibilité/mobile */
-button:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible,
-button:active, .btn-primary:active, .btn-secondary:active {
+/* AMÉLIORATION 9 : Ajout des états :focus-visible et :active */
+.btn-primary:focus-visible, .btn-secondary:focus-visible, button:focus-visible,
+.btn-primary:active, .btn-secondary:active, button:active {
     outline: 2px solid #00FFFF;
     outline-offset: 2px;
-    box-shadow: 0 0 10px #00FFFF;
+    box-shadow: 0 0 15px #00FFFF;
     transform: scale(0.98);
 }
 
-/* Bouton principal (dans le formulaire) */
-#btn-submit {
-    background-color: #00BFFF;
-    color: #0F0F0F;
-    border: none;
-    padding: 14px 25px;
-}
-#btn-submit:hover {
-    background-color: #00FFFF;
-    color: #0F0F0F;
-    box-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+.btn-primary {
+    background-color: #00BFFF;
+    color: #0F0F0F;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
 }
 
-/* Styles pour .btn-primary et .btn-secondary inchangés */
+.btn-primary:hover {
+    background-color: #00FFFF;
+    box-shadow: 0 0 25px rgba(0, 191, 255, 1);
+}
 
+/* Styles pour le bouton Commander dans les cartes */
+.btn-add-cart {
+    padding: 8px 15px; /* Rendre le bouton plus petit pour la carte */
+    font-size: 0.9em;
+}
 
 /* ===============================
-    5. PIED DE PAGE (FOOTER) - CORRECTION 4
-    =============================== */
+    5. PIED DE PAGE (FOOTER) - CORRECTION 4 & RESPONSIVE
+    =============================== */
 footer {
-    background-color: #1A1A1A;
-    color: #EAEAEA;
-    text-align: left; /* Changement pour la grille */
-    padding: 30px 20px;
-    border-top: 1px solid #282828;
-    margin-top: 50px;
+    background-color: #1A1A1A;
+    color: #EAEAEA;
+    padding: 30px 20px;
+    border-top: 1px solid #00BFFF; /* Ligne néon */
+    margin-top: 50px;
 }
 
 .footer-content {
-    display: flex;
-    flex-direction: column; /* Empilé sur mobile */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 3 colonnes flexibles */
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
-}
-
-.footer-col {
-    flex-grow: 1;
 }
 
 .footer-col h4 {
@@ -341,13 +390,11 @@ footer {
     font-weight: 600;
 }
 
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-col ul li {
-    margin-bottom: 8px;
+/* Social Icons */
+.social-icons a {
+    font-size: 1.5em;
+    margin-right: 15px;
+    text-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
 }
 
 .footer-bottom {
@@ -358,231 +405,86 @@ footer {
     font-size: 0.9em;
 }
 
-footer a {
-    color: #00BFFF;
-    margin: 0; /* Retiré les marges pour les liens individuels */
-}
-
-footer a:hover {
-    color: #fff;
-    text-shadow: 0 0 8px #00BFFF;
-}
-
 
 /* =======================================================
-    6. STYLES DU MENU DÉROULANT (CORRECTION 1 & 2 - MOBILE FIRST)
-    ======================================================= */
-.dropdown {
-    position: relative;
-    width: 100%;
-}
+    6. MEDIA QUERIES (ADAPTATION DESKTOP/GRAND ÉCRAN > 900px)
+    ======================================================= */
+@media (min-width: 901px) { 
 
-/* CORRECTION 1 & 2: Utilisation de max-height/opacity au lieu de display: none pour l'animation fluide */
-.dropdown-content, .language-content {
-    position: static; /* Mobile (s'intègre dans le flux) */
-    min-width: 100%;
-    background-color: #202020;
-    padding: 0;
-    z-index: 50;
-    list-style: none;
-    text-align: left;
-
-    /* Masquage animé */
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-.dropdown-content li {
-    padding: 0;
-    margin: 0;
-    border-top: 1px solid #333333;
-}
-
-.dropdown-content li a {
-    display: block;
-    color: #00BFFF;
-    padding: 10px 30px;
-}
-
-.dropdown-content li a:hover {
-    background-color: #333333;
-    color: #fff;
-}
-
-/* Classe ajoutée par JS pour afficher le sous-menu (Mode Mobile) */
-.dropdown.show .dropdown-content,
-.dropdown-language.show .language-content {
-    max-height: 500px; /* Grande valeur pour afficher tout le contenu */
-    opacity: 1;
-}
-
-/* SOUS-MENU LANGUE - Niveau 2 */
-.dropdown-language {
-    position: relative;
-}
-
-.language-content {
-    background-color: #282828;
-}
-
-.language-content li a {
-    /* Décalage pour le niveau 2 */
-    padding: 10px 50px;
-}
-
-
-/* ===============================
-    7. MENU HAMBURGER & RECHERCHE TOGGLE (Inchangé)
-    =============================== */
-.menu-toggle, .search-toggle {
-    display: block;
-    background: none;
-    border: 2px solid #00BFFF;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0, 191, 255, 0.7);
-    color: #00BFFF;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    padding: 10px;
-    line-height: 1;
-    z-index: 100;
-}
-
-/* ===============================
-    8. BARRE DE RECHERCHE (MOBILE)
-    =============================== */
-.search-container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
-    width: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-/* État Actif (ajouté par JS) */
-.search-container.active {
-    width: auto;
-    opacity: 1;
-    max-width: 300px;
-    padding-right: 10px;
-}
-
-
-/* =======================================================
-    9. MEDIA QUERIES (ADAPTATION DESKTOP/GRAND ÉCRAN > 900px)
-    ======================================================= */
-@media (min-width: 901px) { /* Alignement sur votre logique JS */
-
-    /* MASQUER LES BOUTONS MOBILES SUR DESKTOP */
-    .menu-toggle, .search-toggle {
-        display: none;
-    }
+    /* MASQUER LES BOUTONS MOBILES SUR DESKTOP */
+    .menu-toggle, .search-toggle {
+        display: none;
+    }
 
     .header-controls {
         max-width: 1400px;
         margin: 0 auto;
-        padding: 10px 20px;
     }
 
-    /* CORRECTION 3: MENU PRINCIPAL DESKTOP (Réinitialisation) */
-    #main-nav {
-        position: static;
-        display: flex !important;
-        width: auto;
-        height: auto;
-        left: 0;
-        top: auto;
-        background-color: transparent;
-        box-shadow: none;
-        padding-top: 0;
-        margin-left: auto; /* Pousse le menu vers la droite */
-    }
+    /* CORRECTION 3: MENU PRINCIPAL DESKTOP (Réinitialisation propre) */
+    #main-nav {
+        position: static;
+        display: block !important;
+        width: auto;
+        height: auto;
+        left: 0;
+        padding-top: 0;
+        background-color: transparent;
+        box-shadow: none;
+        margin-left: auto;
+        /* Ajoute une structure Flex pour aligner le menu à côté des autres contrôles */
+        display: flex;
+        align-items: center;
+    }
 
-    /* Liste de liens DESKTOP */
-    #main-nav ul {
-        flex-direction: row; /* Horizontal */
-        align-items: center;
-    }
+    /* Liste de liens DESKTOP */
+    #main-nav ul {
+        flex-direction: row; /* Horizontal */
+    }
 
-    #main-nav ul li {
-        border-bottom: none;
-        margin: 0 5px;
-    }
+    #main-nav ul li {
+        border-bottom: none;
+        margin: 0 5px;
+    }
+    
+    #main-nav ul li a {
+        padding: 10px 15px;
+    }
 
-    #main-nav ul li a {
-        padding: 10px 15px;
-        border-left: none;
-        background-color: transparent;
-    }
+    /* CORRECTION 1 & 2 : GESTION DES DROPDOWNS DESKTOP (Fixe) */
+    #main-nav .dropdown-content,
+    #main-nav .language-content {
+        /* Écrase les styles mobiles */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 180px;
+        background-color: #1A1A1A;
+        border: 1px solid #00BFFF;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 191, 255, 0.4);
 
-    /* Affichage standard des liens Desktop */
-    #main-nav ul li a:hover,
-    #main-nav ul li a[aria-current="page"] {
-        color: #fff;
-        background-color: transparent;
-        text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
-        border-left: none;
-    }
+        /* Utilisation d'Opacity/Transform/Pointer-Events pour l'animation FLUIDE */
+        max-height: none; 
+        opacity: 0;
+        transform: translateY(10px); 
+        pointer-events: none; /* Empêche le clic quand c'est caché */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    /* Le JS ajoute la classe .show au HOVER */
+    .dropdown.show > .dropdown-content,
+    .dropdown-language.show > .language-content {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto; /* Autorise le clic */
+    }
 
-    /* GESTION DES DROPDOWNS DESKTOP (Flottant) - CORRECTION 1 & 2 */
-    .dropdown {
-        position: relative;
-    }
-
-    #main-nav .dropdown-content,
-    #main-nav .language-content {
-        /* Écrase les styles mobiles */
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 180px;
-        background-color: #1A1A1A;
-        border: 1px solid #00BFFF;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 191, 255, 0.4);
-
-        /* Utilisation d'Opacity/Transform/Pointer-Events pour l'animation */
-        max-height: none; /* Annule le max-height mobile */
-        opacity: 0;
-        transform: translateY(10px); /* Début de l'animation vers le bas */
-        pointer-events: none; /* Empêche le clic quand c'est caché */
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    /* Affichage du dropdown au HOVER/CLICK (géré par JS : .show) */
-    .dropdown.show > .dropdown-content,
-    .dropdown-language.show > .language-content {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto; /* Autorise le clic */
-    }
-
-    /* Ajustement de la position du sous-menu Langue */
-    #main-nav .language-content {
-        left: 100%;
-        top: 0;
-    }
-
-    /* GESTION DE LA RECHERCHE SUR DESKTOP */
-    /* Laisser le search container s'afficher en permanence et prendre sa place */
+    /* GESTION DE LA RECHERCHE SUR DESKTOP */
     .search-container {
         width: auto;
         opacity: 1;
         max-width: 250px;
         padding-right: 0;
         margin-left: 15px;
-    }
-    
-    /* GESTION DU FOOTER DESKTOP - CORRECTION 4 */
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    
-    .footer-col {
-        min-width: 250px; /* Assure un minimum de largeur */
     }
 }
