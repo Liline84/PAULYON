@@ -1,60 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nos Produits</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-RXf+QSDCUQs7aeMY5a8u8H6fS6Z1FfZL1L9ZdzgGu/N1SXTdt3xUHP5Xr6b+DV8B+m1z+RmcrHY9E4RFiWvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="title-tag">Nos Produits</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-RXf+QSDCUQs7aeMY5a8u8H6fS6Z1FfZL1L9ZdzgGu/N1SXTdt3xUHP5Xr6b+DV8B+m1z+RmcrHY9E4RFiWvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body id="products-page"> 
 
-  <div id="header"></div>
+    <div id="header"></div>
 
-  <main>
-    <section id="produits">
-      <h2 id="h2-produits">Nos Produits</h2>
+    <main>
+        <section id="produits">
+            <h2 id="h2-produits">Nos Produits</h2>
 
-      <div class="dashboard-grid">
+            <div class="dashboard-grid" id="products-list-container">
+                </div>
 
-        <div class="data-card product-card" id="prod-vetements">
-          <i class="fa-solid fa-shirt icon-feature icon-blue"></i>
-          <h3>Vêtements (Homme & Femme)</h3>
-          <p>T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.</p>
-          <div class="data-value">XX.XX</div>
-          <a href="#" class="btn-primary" id="prod-vetements-btn">Voir la collection</a>
-        </div>
-        <div class="data-card product-card" id="prod-bijoux">
-          <i class="fa-solid fa-ring icon-feature icon-purple"></i>
-          <h3>Bijoux Personnalisés</h3>
-          <p>Création de bijoux uniques (colliers, bracelets, bagues).</p>
-          <div class="data-value">XX.XX</div>
-          <a href="#" class="btn-primary" id="prod-bijoux-btn">Découvrir</a>
-        </div>
+        </section>
+    </main>
 
-        <div class="data-card product-card" id="prod-cosmetiques">
-          <i class="fa-solid fa-bottle-droplet icon-feature icon-green"></i>
-          <h3>Produits Cosmétiques</h3>
-          <p>Maquillage, soins de la peau et parfums de qualité supérieure.</p>
-          <div class="data-value">XX.XX</div>
-          <a href="#" class="btn-primary" id="prod-cosmetiques-btn">Acheter</a>
-        </div>
+    <div id="footer"></div>
 
-        <div class="data-card product-card" id="prod-electronique">
-          <i class="fa-solid fa-laptop icon-feature icon-yellow"></i>
-          <h3>Appareils Électroniques</h3>
-          <p>Gadgets et équipements électroniques modernes et fiables.</p>
-          <div class="data-value">XX.XX</div>
-          <a href="#" class="btn-primary" id="prod-electronique-btn">Voir la sélection</a>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <div id="footer"></div>
-
-  <script src="script.js"></script>
-  </body>
+    <script src="script.js"></script>
+</body>
 </html>
