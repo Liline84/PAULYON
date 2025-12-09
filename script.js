@@ -1,6 +1,5 @@
 // =======================================================
-// SCRIPT.JS OPTIMISÉ - GESTION COMPLÈTE DU FRONT-END
-// Intègre data.json et traduction.json
+// SCRIPT.JS OPTIMISÉ (V2.0) - FIX CRITIQUES & PERF
 // =======================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -8,39 +7,40 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==============================
     // 1. SÉLECTEURS ET VARIABLES GLOBALES
     // ==============================
-    const nav = document.getElementById("main-nav");
-    const menuToggle = document.querySelector(".menu-toggle");
-    const searchToggleBtn = document.getElementById("search-toggle-btn");
-    const searchContainer = document.getElementById("search-container");
-    const searchInput = document.getElementById("search-input");
-    const productDropdownContent = document.querySelector('.dropdown-products .dropdown-content');
-    const languageDropdownContent = document.querySelector('.dropdown-language .dropdown-content');
-    const dropdowns = document.querySelectorAll(".dropdown");
-    const body = document.body;
+    const DOMElements = {
+        nav: document.getElementById("main-nav"),
+        menuToggle: document.querySelector(".menu-toggle"),
+        searchToggleBtn: document.getElementById("search-toggle-btn"),
+        searchContainer: document.getElementById("search-container"),
+        searchInput: document.getElementById("search-input"),
+        productDropdownContent: document.querySelector('.dropdown-products .dropdown-content'),
+        languageDropdownContent: document.querySelector('.dropdown-language .dropdown-content'),
+        productCardsContainer: document.querySelector('#products-section .cards-container'),
+        serviceCardsContainer: document.querySelector('#services-section .cards-container'),
+        dropdowns: document.querySelectorAll(".dropdown"),
+        cartZone: document.getElementById("cart-zone"), // Supposant que vous avez une zone d'affichage du panier
+        htmlElement: document.documentElement // <html> tag for language setting
+    };
 
     let translations = {};
-    let dataConfig = {}; // Contient le contenu de data.json
-    let currentLanguage = "fr";
-    let cart = []; // Panier pour l'e-commerce
+    let dataConfig = {};
+    let currentLanguage = localStorage.getItem('lang') || "fr";
+    let cart = [];
 
     // ==============================
-    // 2. BACKDROP ET INITIALISATION DU CHARGEMENT
+    // 2. BACKDROP ET FOUC (Flash of Unstyled Content)
     // ==============================
+    // Ajout de la classe 'preload' pour désactiver les transitions au démarrage
+    document.body.classList.add('preload');
     
-    // Ajoutez la classe 'preload' pour désactiver les transitions au démarrage (voir CSS)
-    body.classList.add('preload');
+    // Crée et gère le fond gris transparent pour le menu mobile (Backdrop)
+    const backdrop = document.createElement("div");
+    backdrop.classList.add("mobile-backdrop");
+    document.body.appendChild(backdrop);
     
-    // Crée le fond gris transparent pour le menu mobile
-    function createBackdrop() {
-        const b = document.createElement("div");
-        b.classList.add("mobile-backdrop");
-        body.appendChild(b);
-        return b;
-    }
-    const backdrop = createBackdrop();
+    const showBackdrop = () => backdrop.classList.add("visible");
+    const hideBackdrop = () => backdrop.classList.remove("visible");
 
-    function showBackdrop() { backdrop.classList.add("visible"); }
-    function hideBackdrop() { backdrop.classList.remove("visible"); }
 
     // ==============================
     // 3. CHARGEMENT ASYNCHRONE DES DONNÉES
@@ -48,135 +48,261 @@ document.addEventListener("DOMContentLoaded", () => {
 
     Promise.all([
         fetch("traduction.json").then(res => res.json()),
-        fetch("data.json").then(res => res.json()) // Chargement du fichier data.json
+        fetch("data.json").then(res => res.json())
     ])
     .then(([translationData, configData]) => {
         translations = translationData;
         dataConfig = configData;
 
-        // 3A. Initialisation des composants après chargement
-        initializeDynamicContent(); 
-
-        // 3B. Démarrage de la traduction par défaut
-        setLanguage(currentLanguage);
+        // Initialisation complète après le chargement des données
+        initializeDynamicContent();
         
-        // Retirer la classe 'preload' pour activer les transitions après le chargement
-        body.classList.remove('preload');
+        // Démarrage de la traduction par défaut & mise à jour de la balise <html>
+        setLanguage(currentLanguage);
+
+        // Retirer la classe 'preload' pour activer les transitions
+        document.body.classList.remove('preload');
     })
     .catch(err => console.error("Erreur critique lors du chargement des fichiers JSON:", err));
 
 
-   // ==============================
-// 4. FONCTIONS DE TRADUCTION ET DE GÉNÉRATION DYNAMIQUE
-// ==============================
-
-// Définition de la fonction initializeDynamicContent
-function initializeDynamicContent() {
-    // Gérer les menus déroulants et les liens du footer
-    generateProductMenu();
-    generateServiceMenu();
-    generateLanguageMenu();
-    generateSocialLinks();
+    // ==============================
+    // 4. FONCTIONS DE TRADUCTION ET DE GÉNÉRATION DYNAMIQUE
+    // ==============================
     
-    // NOUVEAU : Rendu des cartes sur la page principale
-    renderProductCards();
-    renderServiceCards(); 
-    
-    // Après le rendu initial, réappliquer la traduction pour les nouveaux éléments
-    setLanguage(currentLanguage);
-}
+    /**
+     * Applique les traductions et initialise le contenu dynamique.
+     */
+    function initializeDynamicContent() {
+        // Gérer les menus déroulants
+        generateProductMenu();
+        generateServiceMenu();
+        generateLanguageMenu();
+        // generateSocialLinks(); // Si nécessaire
 
-// ... (Suivi par la définition de setLanguage, generateProductMenu, generateServiceMenu, renderProductCards, etc.)
-function renderProductCards() {
-    const container = document.querySelector('#products-section .cards-container');
-    if (!container || !dataConfig.products) return;
+        // Rendu des cartes (doit se faire avant la traduction)
+        renderProductCards();
+        renderServiceCards();
 
-    container.innerHTML = dataConfig.products.map(product => `
-        <div class="card product-card">
-            <div class="card-icon ${product.colorClass}">
-                <i class="${product.iconClass}"></i>
-            </div>
-            
-            <img src="${product.imagePath}" alt="${product.name}" class="card-img" loading="lazy">
-            
-            <div class="card-body">
-                <h3>${product.name}</h3>
-                <p class="card-description">${product.description}</p>
+        // Délégation des événements (pour le Panier - Correction 5)
+        attachProductCardListeners();
+    }
+
+    /**
+     * Applique les traductions à tous les éléments marqués par data-i18n.
+     */
+    function setLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('lang', lang);
+        
+        // Correction 6: Mise à jour de la balise <html>
+        DOMElements.htmlElement.setAttribute('lang', lang); 
+
+        const currentTrans = translations[lang] || translations["fr"];
+
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (currentTrans[key]) {
+                // Utilisation de innerHTML pour remplacer les placeholders
+                let translatedText = currentTrans[key];
                 
-                <div class="card-footer">
-                    <span class="card-price">${product.price} ${dataConfig.generalSettings.currentCurrency}</span>
+                // Remplacement des placeholders spécifiques
+                translatedText = translatedText.replace('[YEAR]', dataConfig.generalSettings.year || new Date().getFullYear());
+                translatedText = translatedText.replace('[SITE_NAME]', dataConfig.generalSettings.siteName || 'PAULYON');
+                translatedText = translatedText.replace('[EMAIL]', dataConfig.generalSettings.email || 'contact.paulyon@gmail.com');
+                translatedText = translatedText.replace('[WHATSAPP]', dataConfig.generalSettings.whatsappNumberFormatted || dataConfig.generalSettings.whatsappNumber);
+                
+                element.innerHTML = translatedText;
+            }
+        });
+        
+        // Mise à jour des placeholders
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-i18n-placeholder');
+            if (currentTrans[key]) {
+                element.placeholder = currentTrans[key];
+            }
+        });
+
+        renderCart(); // Assure la traduction du panier
+    }
+    
+    /**
+     * Génère la liste des produits dans le menu déroulant.
+     */
+    function generateProductMenu() {
+        if (!DOMElements.productDropdownContent || !dataConfig.products) return;
+
+        DOMElements.productDropdownContent.innerHTML = dataConfig.products.map(product => `
+            <li><a href="#product-${product.id}" class="nav-link">${product.name}</a></li>
+        `).join('');
+    }
+    
+    /**
+     * Génère la liste des services dans le menu déroulant.
+     */
+    function generateServiceMenu() {
+        if (!DOMElements.serviceDropdownContent || !dataConfig.services) return;
+        
+        // Correction : On assume qu'il existe un sélecteur pour le menu service
+        const serviceDropdownContent = document.querySelector('.dropdown-services .dropdown-content');
+        if (!serviceDropdownContent) return;
+
+        serviceDropdownContent.innerHTML = dataConfig.services.map(service => `
+            <li><a href="#service-${service.id}" class="nav-link">${service.title}</a></li>
+        `).join('');
+    }
+
+    /**
+     * Génère le menu de sélection de langue.
+     */
+    function generateLanguageMenu() {
+        if (!DOMElements.languageDropdownContent || !translations) return;
+
+        const availableLangs = Object.keys(translations);
+
+        DOMElements.languageDropdownContent.innerHTML = availableLangs.map(langCode => {
+            // Afficher le nom de la langue dans sa propre langue si possible
+            const langName = translations[langCode]['nav-language-toggle'] || langCode.toUpperCase();
+            const isActive = langCode === currentLanguage ? ' active-lang' : '';
+            return `<li><a href="#" data-lang="${langCode}" class="lang-switch${isActive}">${langName}</a></li>`;
+        }).join('');
+        
+        // Attachement de l'événement de changement de langue
+        DOMElements.languageDropdownContent.addEventListener('click', (e) => {
+            if (e.target.classList.contains('lang-switch')) {
+                e.preventDefault();
+                setLanguage(e.target.getAttribute('data-lang'));
+                closeAllMenus();
+            }
+        });
+    }
+
+    /**
+     * Génère les cartes de Produits.
+     */
+    function renderProductCards() {
+        const container = DOMElements.productCardsContainer;
+        if (!container || !dataConfig.products) return;
+
+        container.innerHTML = dataConfig.products.map(product => `
+            <div class="card product-card" id="product-${product.id}">
+                <div class="card-icon ${product.colorClass}">
+                    <i class="${product.iconClass}"></i>
+                </div>
+                
+                <img src="${product.imagePath}" alt="${product.name}" class="card-img" loading="lazy">
+                
+                <div class="card-body">
+                    <h3>${product.name}</h3>
+                    <p class="card-description">${product.description}</p>
                     
-                    <button class="btn btn-primary btn-add-cart" 
-                            data-i18n="btn-commander"
-                            onclick="window.addToCart('${product.name}', ${product.price})">
-                        Commander
-                    </button>
+                    <div class="card-footer">
+                        <span class="card-price">${product.price} ${dataConfig.generalSettings.currentCurrency}</span>
+                        
+                        <button class="btn btn-primary btn-add-cart"  
+                                data-i18n="btn-order"
+                                data-product-name="${product.name}"
+                                data-product-price="${product.price}">
+                            Commander
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
-}
+        `).join('');
+    }
 
-/**
- * Génère les cartes de Services et les insère dans la page.
- * Utilise les données de data.json.
- */
-function renderServiceCards() {
-    const container = document.querySelector('#services-section .cards-container');
-    if (!container || !dataConfig.services) return;
+    /**
+     * Génère les cartes de Services.
+     */
+    function renderServiceCards() {
+        const container = DOMElements.serviceCardsContainer;
+        if (!container || !dataConfig.services) return;
 
-    container.innerHTML = dataConfig.services.map(service => `
-        <div class="card service-card ${service.status === 'online' ? 'status-online' : 'status-offline'}">
-            <div class="card-icon ${service.colorClass}">
-                <i class="${service.iconClass}"></i>
-            </div>
-            
-            <div class="card-body">
-                <h3>${service.title}</h3>
-                <p class="card-description">${service.details}</p>
+        container.innerHTML = dataConfig.services.map(service => `
+            <div class="card service-card ${service.status === 'online' ? 'status-online' : 'status-offline'}" id="service-${service.id}">
+                <div class="card-icon ${service.colorClass}">
+                    <i class="${service.iconClass}"></i>
+                </div>
                 
-                <div class="card-footer">
-                    <span class="card-price">${service.price} ${dataConfig.generalSettings.currentCurrency}</span>
-                    <span class="card-status status-dot" data-i18n="status-${service.status}">
-                        ${service.status === 'online' ? 'En Ligne' : 'Hors Ligne'}
-                    </span>
+                <div class="card-body">
+                    <h3>${service.title}</h3>
+                    <p class="card-description">${service.details}</p>
+                    
+                    <div class="card-footer">
+                        <span class="card-price">${service.price} ${dataConfig.generalSettings.currentCurrency}</span>
+                        <span class="card-status status-dot" data-i18n="status-${service.status}">
+                            ${service.status === 'online' ? 'En Ligne' : 'Hors Ligne'}
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
-}
-
-
+        `).join('');
+    }
+    
     // ==============================
     // 5. GESTION DES INTERACTIONS UTILISATEUR
     // ==============================
 
+    /**
+     * Gère la fermeture globale de tous les éléments superposés.
+     * @param {HTMLElement} exception - Élément à ne pas fermer.
+     */
+    function closeAllMenus(exception = null) {
+        // Fermeture des Dropdowns (sauf l'exception)
+        DOMElements.dropdowns.forEach(d => {
+            // Le parent de l'exception est la liste d'items (d.closest('.dropdown'))
+            if (d !== exception) {
+                 d.querySelector(".dropdown-content")?.classList.remove("show");
+            }
+        });
+        
+        // Fermeture du menu mobile
+        DOMElements.nav?.classList.remove("active");
+        DOMElements.menuToggle?.setAttribute("aria-expanded", "false");
+        
+        // Fermeture de la recherche
+        DOMElements.searchContainer?.classList.remove("active");
+        DOMElements.searchToggleBtn?.setAttribute("aria-expanded", "false");
+        
+        // Fermeture du backdrop
+        hideBackdrop();
+    }
+    
     // 5A. MENU MOBILE
-    menuToggle?.addEventListener("click", () => {
-        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
-        menuToggle.setAttribute("aria-expanded", !expanded);
-        nav?.classList.toggle("active");
+    DOMElements.menuToggle?.addEventListener("click", () => {
+        const expanded = DOMElements.menuToggle.getAttribute("aria-expanded") === "true";
+        DOMElements.menuToggle.setAttribute("aria-expanded", !expanded);
+        DOMElements.nav?.classList.toggle("active");
         if (!expanded) showBackdrop(); else hideBackdrop();
     });
 
     backdrop.addEventListener("click", closeAllMenus);
 
-    // 5B. DROPDOWNS (MOBILE & DESKTOP)
-    dropdowns.forEach(drop => {
+    // 5B. DROPDOWNS (Logique simplifiée et stable - Fix 2 & 3)
+    DOMElements.dropdowns.forEach(drop => {
         const toggle = drop.querySelector(".dropdown-toggle");
         const content = drop.querySelector(".dropdown-content");
 
-        // Mobile click (au-dessous de 900px)
+        // GESTION DU CLIC (Mobile UNIQUEMENT)
         toggle?.addEventListener("click", e => {
-            if (window.innerWidth > 900) return;
+            if (window.innerWidth > 900) return; // Désactivé en Desktop
             e.preventDefault();
             e.stopPropagation();
-            // Ferme tous les autres menus sauf celui-ci
+            
+            const isVisible = content.classList.contains("show");
+            
+            // Ferme tous les autres menus (au niveau racine)
             closeAllMenus(drop); 
-            content?.classList.toggle("show");
+            
+            if (!isVisible) {
+                // Ouvre uniquement si c'était fermé
+                content?.classList.add("show");
+                toggle.setAttribute("aria-expanded", "true");
+            }
         });
 
-        // Desktop hover (au-dessus de 900px)
+        // GESTION DU HOVER (Desktop UNIQUEMENT)
         drop.addEventListener("mouseenter", () => {
             if (window.innerWidth <= 900) return;
             content?.classList.add("show");
@@ -187,65 +313,97 @@ function renderServiceCards() {
         });
     });
 
-    function closeAllMenus(exception = null) {
-        dropdowns.forEach(d => {
-            if (d !== exception) d.querySelector(".dropdown-content")?.classList.remove("show");
-        });
-        nav?.classList.remove("active");
-        menuToggle?.setAttribute("aria-expanded", "false");
-        hideBackdrop();
-        searchContainer?.classList.remove("active"); // Ferme la recherche aussi
-        searchToggleBtn?.setAttribute("aria-expanded", "false");
-    }
-
     document.addEventListener("click", e => {
-        // Ferme tous les menus si le clic est en dehors du header
-        if (!e.target.closest("header") && !e.target.closest(".mobile-backdrop")) closeAllMenus();
+        // Ferme tous les menus si le clic est en dehors du Header ou du Backdrop
+        const clickOutsideHeader = !e.target.closest("header");
+        const clickOutsideBackdrop = !e.target.closest(".mobile-backdrop");
+
+        if (clickOutsideHeader && clickOutsideBackdrop) {
+             closeAllMenus();
+        } 
+        
+        // Assure que le clic sur un lien du menu mobile ferme le menu
+        if (e.target.classList.contains('nav-link') && DOMElements.nav?.classList.contains('active')) {
+             closeAllMenus();
+        }
     });
 
     // 5C. BARRE DE RECHERCHE
-    searchToggleBtn?.addEventListener("click", () => {
-        const expanded = searchToggleBtn.getAttribute("aria-expanded") === "true";
-        searchToggleBtn.setAttribute("aria-expanded", !expanded);
-        searchContainer?.classList.toggle("active");
-        if (!expanded) searchInput?.focus();
+    DOMElements.searchToggleBtn?.addEventListener("click", () => {
+        const expanded = DOMElements.searchToggleBtn.getAttribute("aria-expanded") === "true";
+        DOMElements.searchToggleBtn.setAttribute("aria-expanded", !expanded);
+        DOMElements.searchContainer?.classList.toggle("active");
+        
+        if (!expanded) {
+            DOMElements.searchInput?.focus();
+        } else {
+            DOMElements.searchInput.value = ''; // Optionnel: effacer la recherche en fermant
+        }
     });
 
-    // 5D. RESPONSIVE (ferme tous les menus au redimensionnement si desktop)
+    // 5D. RESPONSIVE
     window.addEventListener("resize", () => {
-        if (window.innerWidth > 900) hideBackdrop();
-        closeAllMenus();
+        if (window.innerWidth > 900) {
+            closeAllMenus(); // S'assurer que le menu mobile et le backdrop sont désactivés
+        }
     });
 
 
     // ==============================
-    // 6. LOGIQUE E-COMMERCE (PANIER + WHATSAPP)
+    // 6. LOGIQUE E-COMMERCE (PANIER + WHATSAPP) - Fix Critique 1 & Optimisation 5
     // ==============================
     
+    /**
+     * Délégation des événements pour les boutons "Commander" après le rendu des cartes.
+     */
+    function attachProductCardListeners() {
+        DOMElements.productCardsContainer?.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-add-cart');
+            if (btn) {
+                const name = btn.getAttribute('data-product-name');
+                const price = parseFloat(btn.getAttribute('data-product-price'));
+                if (name && !isNaN(price)) {
+                    window.addToCart(name, price);
+                }
+            }
+        });
+    }
+
+    /**
+     * Affiche le contenu actuel du panier.
+     */
     function renderCart() {
-        const zone = document.getElementById("cart-zone");
-        if (!zone) return;
+        if (!DOMElements.cartZone) return;
         
         const currentTranslation = translations[currentLanguage] || translations["fr"];
-        const currency = dataConfig.generalSettings.currentCurrency;
+        const currency = dataConfig.generalSettings.currentCurrency || '';
 
         if (cart.length === 0) {
-            zone.innerHTML = currentTranslation["alert-cart-empty"] || "Votre panier est vide.";
+            DOMElements.cartZone.innerHTML = `<p>${currentTranslation["alert-cart-empty"] || "Votre panier est vide."}</p>`;
             return;
         }
 
-        zone.innerHTML = cart
+        // Affichage des articles groupés (ou listés, selon le besoin)
+        DOMElements.cartZone.innerHTML = cart
             .map(item => `<p>${item.name} — ${item.price} ${currency}</p>`)
             .join("");
     }
-
+    
+    // Fonction globale pour ajouter au panier
     window.addToCart = function(name, price) {
         cart.push({ name, price });
         const currentTranslation = translations[currentLanguage] || translations["fr"];
-        alert(`${name} ${currentTranslation["alert-cart-add"] || "a été ajouté au panier !"}`);
+        
+        // Affichage d'une alerte moins intrusive ou d'un toast pour une meilleure UX
+        console.log(`${name} ${currentTranslation["alert-cart-add"] || "a été ajouté au panier !"}`);
+        // Remplacez alert par un système de notification (ex: Toasts) pour une meilleure UX
+        
         renderCart();
+        // Optionnel : rediriger immédiatement vers la commande
+        // window.orderWhatsApp(); 
     }
 
+    // Fonction globale pour commander via WhatsApp
     window.orderWhatsApp = function() {
         const currentTranslation = translations[currentLanguage] || translations["fr"];
         const currency = dataConfig.generalSettings.currentCurrency;
@@ -257,15 +415,23 @@ function renderServiceCards() {
         const totalAmount = cart.reduce((sum, i) => sum + i.price, 0);
 
         const message = (currentTranslation["whatsapp-msg-intro"] || "Bonjour, je souhaite commander :\n") +
-                        items +
-                        "\n" +
-                        (currentTranslation["whatsapp-msg-total"] || "Total : ") +
-                        totalAmount + " " + currency +
-                        "\n" +
-                        (currentTranslation["whatsapp-msg-thanks"] || "Merci !");
+                            items +
+                            "\n" +
+                            (currentTranslation["whatsapp-msg-total"] || "Total : ") +
+                            totalAmount.toFixed(2) + " " + currency +
+                            "\n" +
+                            (currentTranslation["whatsapp-msg-thanks"] || "Merci !");
         
         const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        window.open(url, "_blank");
-    }
+        const windowRef = window.open(url, "_blank", "noopener,noreferrer");
 
+        // CORRECTION CRITIQUE 1: Vider le panier SEULEMENT si l'ouverture réussit
+        if (windowRef) {
+            cart.length = 0; 
+            renderCart(); // Mettre à jour l'affichage
+        } else {
+             // Fallback si la pop-up est bloquée
+             alert("Veuillez autoriser les pop-ups pour finaliser la commande via WhatsApp.");
+        }
+    }
 });
