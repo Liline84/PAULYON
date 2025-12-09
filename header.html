@@ -1,57 +1,81 @@
-<header>
+<header class="site-header">
     <div class="header-controls">
+        
+        <!-- Logo -->
         <h1 class="site-logo">
-            <a href="/" style="color: #00BFFF; font-size: 1.5em; font-weight: 700;">PAULYON</a>
+            <a href="/" class="logo-link" data-i18n="site-name">PAULYON</a>
         </h1>
 
-        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" title="Ouvrir le menu">
+        <!-- Bouton menu mobile -->
+        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" title="Menu">
             <i class="fa-solid fa-bars"></i>
         </button>
 
+        <!-- Barre de recherche -->
         <div class="search-container" id="search-container">
-            <input type="search" 
-                   name="q" 
-                   id="search-input" 
-                   data-i18n-placeholder="search-input-placeholder"
-                   aria-label="Rechercher sur le site">
+            <input type="search"
+                   id="search-input"
+                   name="q"
+                   aria-label="Rechercher"
+                   data-i18n-placeholder="search-input-placeholder">
         </div>
 
-        <button class="search-toggle" 
-                aria-controls="search-container" 
-                aria-expanded="false" 
+        <!-- Bouton ouverture recherche -->
+        <button class="search-toggle"
+                aria-controls="search-container"
+                aria-expanded="false"
                 id="search-toggle-btn"
-                title="Afficher la barre de recherche">
+                title="Recherche">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+
     </div>
 
-    <nav id="main-nav">
+    <!-- Menu principal -->
+    <nav id="main-nav" class="main-nav">
         <ul>
-            <li><a href="#accueil" data-i18n="nav-accueil">Accueil</a></li>
 
+            <li>
+                <a href="#accueil" data-i18n="nav-accueil">
+                    <i class="fa-solid fa-house"></i> Accueil
+                </a>
+            </li>
+
+            <!-- Produits -->
             <li class="dropdown dropdown-products">
-                <a href="#" class="dropdown-toggle" data-i18n="nav-produits">Produits</a>
+                <a href="#" class="dropdown-toggle" data-i18n="nav-produits">
+                    <i class="fa-solid fa-box-open"></i> Produits
+                </a>
                 <ul class="dropdown-content" id="products-menu-content"></ul>
             </li>
 
+            <!-- Services -->
             <li class="dropdown dropdown-services">
-                <a href="#" class="dropdown-toggle" data-i18n="nav-services">Services</a>
+                <a href="#" class="dropdown-toggle" data-i18n="nav-services">
+                    <i class="fa-solid fa-hand-holding-heart"></i> Services
+                </a>
                 <ul class="dropdown-content" id="services-menu-content"></ul>
             </li>
 
-            <li><a href="contact.html" data-i18n="nav-contact">Contact</a></li>
+            <li>
+                <a href="contact.html" data-i18n="nav-contact">
+                    <i class="fa-solid fa-envelope"></i> Contact
+                </a>
+            </li>
 
+            <!-- Langues -->
             <li class="dropdown dropdown-language">
                 <a href="#" class="dropdown-toggle" data-i18n="nav-language-toggle">
-                     <i class="fa-solid fa-globe"></i> <span>Langue</span>
+                    <i class="fa-solid fa-globe"></i> <span data-i18n="nav-language">Langue</span>
                 </a>
                 <ul class="dropdown-content language-content"></ul>
             </li>
-            
+
+            <!-- Paramètres -->
             <li>
-                 <a href="#settings" data-i18n="nav-settings">
-                     <i class="fa-solid fa-gear"></i> Paramètres
-                 </a>
+                <a href="#settings" data-i18n="nav-settings">
+                    <i class="fa-solid fa-gear"></i> Paramètres
+                </a>
             </li>
 
         </ul>
