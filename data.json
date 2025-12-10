@@ -35,7 +35,7 @@
     {
       "id": 1,
       "name": "Vêtements (Homme & Femme)",
-      "price": 35.00,
+      "price": ,
       "description": "T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.",
       "imagePath": "assets/img/vetements.jpg",
       "iconClass": "fa-solid fa-shirt",
@@ -44,7 +44,7 @@
     {
       "id": 2,
       "name": "Bijoux Personnalisés",
-      "price": 80.00,
+      "price": ,
       "description": "Création de bijoux uniques (colliers, bracelets, bagues).",
       "imagePath": "assets/img/bijoux.jpg",
       "iconClass": "fa-solid fa-ring",
@@ -53,7 +53,7 @@
     {
       "id": 3,
       "name": "Produits Cosmétiques",
-      "price": 45.00,
+      "price": ,
       "description": "Maquillage, soins de la peau et parfums de qualité supérieure.",
       "imagePath": "assets/img/cosmetiques.jpg",
       "iconClass": "fa-solid fa-bottle-droplet",
@@ -62,7 +62,7 @@
     {
       "id": 4,
       "name": "Appareils Électroniques",
-      "price": 599.99,
+      "price": ,
       "description": "Gadgets et équipements électroniques modernes et fiables.",
       "imagePath": "assets/img/electronique.jpg",
       "iconClass": "fa-solid fa-laptop",
@@ -101,3 +101,4 @@
   ]
 
 }
+
