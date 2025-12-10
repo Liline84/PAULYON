@@ -1,57 +1,37 @@
 <header class="site-header">
     <div class="header-controls">
         
-        <!-- Logo -->
         <h1 class="site-logo">
-            <a href="/" class="logo-link" data-i18n="site-name">PAULYON</a>
+            <a href="index.html" class="logo-link" data-i18n="site-name">PAULYON</a>
         </h1>
 
-        <!-- Bouton menu mobile -->
         <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" title="Menu">
             <i class="fa-solid fa-bars"></i>
         </button>
 
-        <!-- Barre de recherche -->
-        <div class="search-container" id="search-container">
-            <input type="search"
-                   id="search-input"
-                   name="q"
-                   aria-label="Rechercher"
-                   data-i18n-placeholder="search-input-placeholder">
-        </div>
-
-        <!-- Bouton ouverture recherche -->
-        <button class="search-toggle"
-                aria-controls="search-container"
-                aria-expanded="false"
-                id="search-toggle-btn"
-                title="Recherche">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
+        <a href="cart.html" class="cart-icon" title="Panier">
+            <i class="fa-solid fa-shopping-cart"></i>
+            <span class="cart-count">0</span> </a>
+        
     </div>
 
-    <!-- Menu principal -->
     <nav id="main-nav" class="main-nav">
         <ul>
 
             <li>
-                <a href="#accueil" data-i18n="nav-accueil">
-                    <i class="fa-solid fa-house"></i> Accueil
+                <a href="index.html" data-i18n="nav-accueil"> <i class="fa-solid fa-house"></i> Accueil
                 </a>
             </li>
 
-            <!-- Produits -->
             <li class="dropdown dropdown-products">
-                <a href="#" class="dropdown-toggle" data-i18n="nav-produits">
+                <a href="produits.html" class="dropdown-toggle" data-i18n="nav-produits"> 
                     <i class="fa-solid fa-box-open"></i> Produits
                 </a>
-                <ul class="dropdown-content" id="products-menu-content"></ul>
+                <ul class="dropdown-content" id="products-menu-content"></ul> 
             </li>
 
-            <!-- Services -->
             <li class="dropdown dropdown-services">
-                <a href="#" class="dropdown-toggle" data-i18n="nav-services">
+                <a href="services.html" class="dropdown-toggle" data-i18n="nav-services">
                     <i class="fa-solid fa-hand-holding-heart"></i> Services
                 </a>
                 <ul class="dropdown-content" id="services-menu-content"></ul>
@@ -63,7 +43,6 @@
                 </a>
             </li>
 
-            <!-- Langues -->
             <li class="dropdown dropdown-language">
                 <a href="#" class="dropdown-toggle" data-i18n="nav-language-toggle">
                     <i class="fa-solid fa-globe"></i> <span data-i18n="nav-language">Langue</span>
@@ -71,13 +50,12 @@
                 <ul class="dropdown-content language-content"></ul>
             </li>
 
-            <!-- Paramètres -->
             <li>
-                <a href="#settings" data-i18n="nav-settings">
-                    <i class="fa-solid fa-gear"></i> Paramètres
+                <a href="paramètres.html" data-i18n="nav-settings"> <i class="fa-solid fa-gear"></i> Paramètres
                 </a>
             </li>
 
         </ul>
     </nav>
-</header>
+                                                  </header>
+                                          
