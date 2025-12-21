@@ -1,1 +1,43 @@
+Parfait. On finalise alors avec :
 
+*`produits.css`*
+Contient le style pour la grille et les cartes produits.
+
+```css
+/* PRODUITS - Affichage des produits */
+.produits-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 20px 0;
+}
+
+.produit-card {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.produit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 191, 255, 0.4);
+}
+
+.produit-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.produit-card h3 {
+    margin-bottom: 10px;
+}
+
+.produit-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
