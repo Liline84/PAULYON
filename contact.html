@@ -4,24 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contactez-nous</title>
-   <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/forme.css">
-<link rel="stylesheet" href="css/produits.css">
-<link rel="stylesheet" href="css/services.css">
-<link rel="stylesheet" href="css/media.css">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/normalize.css">
-  <!-- Font Awesome via CDN -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/forme.css">
+  <link rel="stylesheet" href="css/produits.css">
+  <link rel="stylesheet" href="css/services.css">
+  <link rel="stylesheet" href="css/media.css">
+
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   />
 </head>
-<body id="contact-page">
 
+<body id="contact-page">
   <div id="header"></div>
 
   <main>
@@ -32,14 +35,19 @@
         <a href="mailto:contact.paulyon@gmail.com">contact.paulyon@gmail.com</a> !
       </p>
       <p id="p-contact-whatsapp">
-        Vous pouvez également nous contacter directement via
-        <a href="https://wa.me/+50941172815">WhatsApp</a>.
+        Vous pouvez également nous contacter directement via<a href="https://wa.me/50941172815">WhatsApp</a>.
       </p>
 
-      <form action="https://formspree.io/f/contact.paulyon@gmail.com" method="POST">
+      <form action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST">
+        <label for="input-name" class="visually-hidden">Nom</label>
         <input type="text" name="name" placeholder="Nom" required id="input-name" />
+
+        <label for="input-email" class="visually-hidden">Email</label>
         <input type="email" name="_replyto" placeholder="Email" required id="input-email" />
+
+        <label for="input-message" class="visually-hidden">Message</label>
         <textarea name="message" placeholder="Message" required id="input-message"></textarea>
+
         <button type="submit" id="btn-submit">Envoyer</button>
       </form>
     </section>
@@ -47,30 +55,21 @@
 
   <div id="footer"></div>
 
- <script src="script.js"></script>
-<script>
-    // Charger header et footer via fetch
+  <script src="script.js"></script>
+  <script>
     fetch('header.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('header').innerHTML = data;
-        
-        // 1. Initialiser le menu seulement APRÈS l'insertion du HTML
-        if (typeof initMenuHandlers === 'function') {
-            initMenuHandlers(); 
-        }
-        
-        // 2. Exécuter la logique principale de l'application (traduction, etc.)
-        if (typeof runMainAppLogic === 'function') {
-             runMainAppLogic(); 
-        }
+        if (typeof initMenuHandlers === 'function') initMenuHandlers();
+        if (typeof runMainAppLogic === 'function') runMainAppLogic();
       });
-      
+
     fetch('footer.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('footer').innerHTML = data;
       });
-</script>
+  </script>
 </body>
 </html>
