@@ -1,1 +1,50 @@
+/* ================================
+   FOOTER (CORRECTION D'ALIGNEMENT)
+================================ */
+footer {
+    background-color: var(--surface-color);
+    padding: 40px 20px;
+    border-top: 2px solid var(--secondary-color);
+}
 
+.footer-content {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr; /* Mobile */
+}
+
+.footer-col h4 {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-shadow: none;
+    text-align: left;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.social-icons a {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid var(--secondary-color);
+    padding-top: 15px;
+}
