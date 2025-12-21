@@ -1,9 +1,3 @@
-Parfait. On finalise alors avec :
-
-*`produits.css`*
-Contient le style pour la grille et les cartes produits.
-
-```css
 /* PRODUITS - Affichage des produits */
 .produits-grid {
     display: grid;
