@@ -1,1 +1,39 @@
+/* SERVICES - Grille de services */
+.services-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 20px 0;
+}
 
+.service-card {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 191, 255, 0.5);
+}
+
+.service-card i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.service-card h3 {
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+```
+
+Une fois ces deux fichiers ajoutés, tu auras une architecture CSS complète, claire et scalable. Tu veux une version condensée ou un fichier `main.css` plus tard si tu veux fusionner pour la prod ?
