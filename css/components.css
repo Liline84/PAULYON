@@ -1,1 +1,56 @@
+/* ================================
+   COMPOSANTS RÉUTILISABLES
+================================ */
 
+/* Cartes */
+.data-card {
+    background-color: var(--surface-color);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.data-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 191, 255, 0.4);
+}
+
+/* Boutons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+/* Icônes */
+.icon {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
