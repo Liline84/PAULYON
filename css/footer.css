@@ -32,6 +32,25 @@ footer {
     margin-bottom: 8px;
 }
 
+.footer-icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+/* Et si tu veux ajouter une couleur générale */
+.footer-icon.email {
+  color: #00bfff;
+}
+
+.footer-icon.whatsapp {
+  color: #25D366;
+}
+
+.footer-icon.location {
+  color: #e74c3c;
+}
+
 .social-icons a {
     color: var(--text-color);
     font-size: 1.5rem;
