@@ -1,7 +1,3 @@
-Voici un exemple complet pour *cart.js*, qui gère le panier, l’ajout, le rendu et la commande via WhatsApp :
-
-```js
-// cart.js
 export function initCart(DOMElements, translations, dataConfig, currentLanguage, renderCart) {
     let cart = [];
 
