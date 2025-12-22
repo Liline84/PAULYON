@@ -56,4 +56,5 @@ export function initCart(DOMElements, translations, dataConfig, currentLanguage,
 
     return {
         addToCart,
-        renderCart: renderCartUI,
+        renderCart: renderCartUI,getCart: () => cart
+    ;
