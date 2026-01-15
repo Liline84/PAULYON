@@ -85,3 +85,81 @@ padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 191, 255, 0.4);
 }
+
+/* =====================================
+   RESPONSIVE MENU (BURGER)
+===================================== */
+
+/* --- VERSION MOBILE (Écrans < 768px) --- */
+@media (max-width: 768px) {
+    /* Cache le menu par défaut */
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%; /* Juste en dessous du header */
+        left: 0;
+        width: 100%;
+        background-color: var(--surface-color); /* Même couleur que le header */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Affiche le menu quand la classe .active est ajoutée par JS */
+    .main-nav.active {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    /* Les liens s'empilent verticalement */
+    .main-nav ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-nav a {
+        padding: 15px 20px; /* Plus d'espace pour le doigt */
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    /* Animation d'ouverture douce */
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+/* --- VERSION ORDINATEUR (Écrans > 769px) --- */
+@media (min-width: 769px) {
+    /* On change la disposition du header pour mettre le menu à côté du logo */
+    .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 20px; /* Espace pour ne pas coller au bord droit */
+    }
+
+    /* Cache le bouton burger sur PC */
+    .menu-toggle {
+        display: none;
+    }
+
+    /* Force l'affichage du menu */
+    .main-nav {
+        display: block !important;
+        position: static; /* Annule la position absolute du mobile */
+        width: auto;
+        background: none;
+        box-shadow: none;
+    }
+
+    /* Aligne les liens horizontalement */
+    .main-nav ul {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+    
+    .main-nav a {
+        border-radius: 4px; /* Un peu plus joli sur PC au survol */
+    }
+}
