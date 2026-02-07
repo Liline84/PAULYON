@@ -1,62 +1,46 @@
-<header class="site-header">
+<aside class="sidebar" id="sidebar">
 
-    <div class="header-controls">
-        
-        <h1 class="site-logo">
-            <a href="index.html" class="logo-link" data-i18n="site-name">PAULYON</a>
-        </h1>
+  <div class="sidebar-header">
+    <h1 class="site-logo">
+      <a href="index.html">PAULYON</a>
+    </h1>
+  </div>
 
-        <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" title="Menu">
-            <i class="fa-solid fa-bars"></i>
-        </button>
+  <nav class="sidebar-nav">
 
-        <a href="cart.html" class="cart-icon" title="Panier">
-            <i class="fa-solid fa-shopping-cart"></i>
-            <span class="cart-count">0</span> </a>
-        
-    </div>
+    <a href="index.html" class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span data-i18n="nav-accueil">Accueil</span>
+    </a>
 
-    <nav id="main-nav" class="main-nav">
-        <ul>
+    <div class="nav-label">Boutique</div>
 
-            <li>
-                <a href="index.html" data-i18n="nav-accueil"> <i class="fa-solid fa-house"></i> Accueil
-                </a>
-            </li>
+    <a href="produits.html" class="nav-item">
+      <i class="fa-solid fa-box-open"></i>
+      <span data-i18n="nav-produits">Produits</span>
+    </a>
 
-            <li class="dropdown dropdown-products">
-                <a href="produits.html" class="dropdown-toggle" data-i18n="nav-produits"> 
-                    <i class="fa-solid fa-box-open"></i> Produits
-                </a>
-                <ul class="dropdown-content" id="products-menu-content"></ul> 
-            </li>
+    <a href="services.html" class="nav-item">
+      <i class="fa-solid fa-hand-holding-heart"></i>
+      <span data-i18n="nav-services">Services</span>
+    </a>
 
-            <li class="dropdown dropdown-services">
-                <a href="services.html" class="dropdown-toggle" data-i18n="nav-services">
-                    <i class="fa-solid fa-hand-holding-heart"></i> Services
-                </a>
-                <ul class="dropdown-content" id="services-menu-content"></ul>
-            </li>
+    <div class="nav-label">Contact</div>
 
-            <li>
-                <a href="contact.html" data-i18n="nav-contact">
-                    <i class="fa-solid fa-envelope"></i> Contact
-                </a>
-            </li>
+    <a href="contact.html" class="nav-item">
+      <i class="fa-solid fa-envelope"></i>
+      <span data-i18n="nav-contact">Contact</span>
+    </a>
 
-            <li class="dropdown dropdown-language">
-                <a href="#" class="dropdown-toggle" data-i18n="nav-language-toggle">
-                    <i class="fa-solid fa-globe"></i> <span data-i18n="nav-language">Langue</span>
-                </a>
-                <ul class="dropdown-content language-content"></ul>
-            </li>
+    <a href="paramètres.html" class="nav-item">
+      <i class="fa-solid fa-gear"></i>
+      <span data-i18n="nav-settings">Paramètres</span>
+    </a>
 
-            <li>
-                <a href="paramètres.html" data-i18n="nav-settings"> <i class="fa-solid fa-gear"></i> Paramètres
-                </a>
-            </li>
+  </nav>
 
-        </ul>
-    </nav>
-                                                  </header>
-                                          
+  <div class="sidebar-footer">
+    <span class="version-badge">v1.0.0</span>
+  </div>
+
+</aside>
