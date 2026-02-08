@@ -26,50 +26,55 @@
 <link rel="stylesheet" href="css/normalize.css">
 </head>
 <body>
-    
-    <div id="header-container"></div>
 
+  <!-- Overlay mobile -->
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-    <main class="main-content">
-        <header class="topbar">
-  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
-    <i class="fa-solid fa-bars"></i>
-  </button>
+  <!-- Sidebar injectée -->
+  <div id="header-container"></div>
 
-  <a href="cart.html" class="cart-icon">
-    <i class="fa-solid fa-shopping-cart"></i>
-    <span class="cart-count">0</span>
-  </a>
-</header>
-        <section id="accueil" class="hero-section">
-            <h1 data-i18n="h1-accueil">Bienvenue chez PAULYON</h1>
-            <p data-i18n="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
-        </section>
+  <main class="main-content">
 
-        <section id="products-section" class="content-section">
-            <h2 data-i18n="h2-produits">Nos Produits</h2>
-            <div class="cards-container products-grid">
-                </div>
-        </section>
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-        <section id="services-section" class="content-section">
-            <h2 data-i18n="h2-services">Nos Services</h2>
-            <div class="cards-container services-grid">
-                </div>
-        </section>
-        
-        <section id="contact-section" class="content-section">
-            <h2 data-i18n="h2-contact">Contactez-nous</h2>
-            <div class="contact-methods">
-                <p data-i18n="p-contact-email"></p>
-                <p data-i18n="p-contact-whatsapp"></p>
-                </div>
-        </section>
-    </main>
+      <a href="cart.html" class="cart-icon">
+        <i class="fa-solid fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+      </a>
+    </header>
 
-    <footer id="footer-container"></footer>
+    <!-- 🔥 ZONE SPA 🔥 -->
+    <div id="spa-content">
 
-    <script src="script.js"></script>
-    
-    </body>
-</html>
+      <!-- TOUT CE QUI CHANGE ENTRE LES PAGES -->
+      <section id="accueil" class="hero-section">
+        <h1 data-i18n="h1-accueil">Bienvenue chez PAULYON</h1>
+        <p data-i18n="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
+      </section>
+
+      <section id="products-section" class="content-section">
+        <h2 data-i18n="h2-produits">Nos Produits</h2>
+        <div class="cards-container products-grid"></div>
+      </section>
+
+      <section id="services-section" class="content-section">
+        <h2 data-i18n="h2-services">Nos Services</h2>
+        <div class="cards-container services-grid"></div>
+      </section>
+
+      <section id="contact-section" class="content-section">
+        <h2 data-i18n="h2-contact">Contactez-nous</h2>
+        <div class="contact-methods"></div>
+      </section>
+
+    </div>
+    <!-- 🔥 FIN SPA 🔥 -->
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
