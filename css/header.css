@@ -163,3 +163,78 @@ padding: 10px;
         border-radius: 4px; /* Un peu plus joli sur PC au survol */
     }
 }
+/* === SIDEBAR === */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #0f172a;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: #e5e7eb;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.nav-label {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.sidebar-footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+/* === MAIN === */
+.main-content {
+  margin-left: 260px;
+  min-height: 100vh;
+}
+
+/* === TOPBAR === */
+.topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.1);
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
