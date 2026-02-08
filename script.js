@@ -405,3 +405,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+document.querySelectorAll(".nav-item").forEach(link => {
+  link.addEventListener("click", e => {
+    const url = link.getAttribute("href");
+    if (!url || url === "#") return;
+
+    e.preventDefault();
+    loadPage(url);
+    setActive(link);
+    closeSidebar();
+  });
+});
+
+function loadPage(url) {
+  const container = document.getElementById("spa-content");
+
+  container.classList.add("fade-out");
+
+  fetch(url)
+    .then(res => res.text())
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const newContent = doc.querySelector("main").innerHTML;
+
+      setTimeout(() => {
+        container.innerHTML = newContent;
+        container.classList.remove("fade-out");
+        history.pushState({}, "", url);
+      }, 250);
+    });
+}
+
+function setActive(activeLink) {
+  document.querySelectorAll(".nav-item").forEach(l => l.classList.remove("active"));
+  activeLink.classList.add("active");
+}
