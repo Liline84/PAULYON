@@ -89,3 +89,20 @@ background-color: rgba(0, 0, 0, 0.7);
         padding-left: 15px;
     }
 }
+/* ===================================================
+   MOBILE OVERLAY
+=================================================== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
+}
+
