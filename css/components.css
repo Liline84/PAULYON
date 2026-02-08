@@ -54,3 +54,31 @@
     font-size: 1.2rem;
     margin-right: 8px;
 }
+/* ===================================================
+   CYBER / LUXE UI EFFECTS
+=================================================== */
+
+:root {
+  --neon: #6366f1;
+  --cyber: #22d3ee;
+  --lux-gold: #eab308;
+}
+
+.nav-item i {
+  color: var(--cyber);
+  filter: drop-shadow(0 0 6px rgba(34,211,238,.6));
+}
+
+.nav-item.active {
+  background: rgba(99,102,241,.25);
+  box-shadow: inset 0 0 12px rgba(99,102,241,.4);
+}
+
+.version-badge {
+  background: linear-gradient(135deg, var(--lux-gold), var(--neon));
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
