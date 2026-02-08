@@ -53,3 +53,28 @@ h1, h2, h3 {
     transform: translateY(-5px);
 box-shadow: 0 6px 15px rgba(0, 191, 255, 0.4);
 }
+
+/* ===================================================
+   MAIN LAYOUT
+=================================================== */
+
+.main-content {
+  margin-left: 260px;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+/* SPA content */
+#spa-content {
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(6px);
+}
