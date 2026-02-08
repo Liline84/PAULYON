@@ -30,7 +30,17 @@
     <div id="header-container"></div>
 
 
-    <main>
+    <main class="main-content">
+        <header class="topbar">
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <a href="cart.html" class="cart-icon">
+    <i class="fa-solid fa-shopping-cart"></i>
+    <span class="cart-count">0</span>
+  </a>
+</header>
         <section id="accueil" class="hero-section">
             <h1 data-i18n="h1-accueil">Bienvenue chez PAULYON</h1>
             <p data-i18n="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
