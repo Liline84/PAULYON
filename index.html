@@ -5,39 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title id="title-tag">𝐏𝐀𝐔𝐋𝐘𝐎𝐍'𝐬 𝐋𝐚𝐛 𝐇𝐮𝐛</title>
 
-    <meta name="description" content="PAULYON's Lab Hub: Transformation numérique et produits de qualité. Conception graphique, développement web, vêtements et bijoux personnalisés." />
-    <meta name="keywords" content="PAULYON, Haïti, Lab Hub, conception graphique, développement web, e-commerce, vêtements, bijoux, cosmétiques, électronique" />
+    <meta name="description" content="PAULYON's Lab Hub: Transformation numérique..." />
+    <meta name="keywords" content="PAULYON, Haïti, Lab Hub..." />
     <meta name="author" content="PAULYON" />
 
     <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-     <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/forme.css">
-<link rel="stylesheet" href="css/produits.css">
-<link rel="stylesheet" href="css/services.css">
-<link rel="stylesheet" href="css/media.css">
-<link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/forme.css">
+    <link rel="stylesheet" href="css/produits.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/normalize.css">
 </head>
 <body>
 
-  <!-- Overlay mobile -->
-  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+  <div class="overlay" id="overlay"></div>
 
-  <!-- Sidebar injectée -->
   <div id="header-container"></div>
 
   <main class="main-content">
-
-    <!-- Topbar -->
     <header class="topbar">
-      <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+      <button class="hamburger" id="hamburger-btn" aria-label="Menu">
         <i class="fa-solid fa-bars"></i>
       </button>
 
@@ -47,10 +42,7 @@
       </a>
     </header>
 
-    <!-- 🔥 ZONE SPA 🔥 -->
     <div id="spa-content">
-
-      <!-- TOUT CE QUI CHANGE ENTRE LES PAGES -->
       <section id="accueil" class="hero-section">
         <h1 data-i18n="h1-accueil">Bienvenue chez PAULYON</h1>
         <p data-i18n="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
@@ -70,11 +62,9 @@
         <h2 data-i18n="h2-contact">Contactez-nous</h2>
         <div class="contact-methods"></div>
       </section>
-
     </div>
-    <!-- 🔥 FIN SPA 🔥 -->
-
   </main>
 
   <script src="script.js"></script>
 </body>
+</html>
