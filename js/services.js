@@ -1,16 +1,17 @@
-// produits.js
 import { state } from './state.js';
 
-export function renderProductCards() {
-    const container = document.querySelector('#products-section .cards-container');
-    if (!container || !state.dataConfig.products) return;
+export function renderServiceCards() {
+    const container = document.querySelector('#services-section .cards-container');
+    if (!container || !state.dataConfig.services) return;
 
-    container.innerHTML = state.dataConfig.products.map(product => `
-        <div class="card product-card">
-            <img src="${product.imagePath}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <button class="btn-add-cart" data-name="${product.name}" data-price="${product.price}">
-                Commander
+    container.innerHTML = state.dataConfig.services.map(service => `
+        <div class="data-card service-card">
+            <i class="${service.iconClass} ${service.colorClass} icon" style="font-size: 2.5rem; margin-bottom:15px;"></i>
+            <h3>${service.title}</h3>
+            <p style="font-size: 0.9rem; margin-bottom:15px;">${service.details}</p>
+            <span class="badge version-badge">${service.price} ${state.dataConfig.generalSettings.currentCurrency}</span>
+            <button class="btn btn-primary btn-add-cart" data-name="${service.title}" data-price="${service.price}" style="margin-top:15px;">
+                Réserver via WhatsApp
             </button>
         </div>
     `).join('');
