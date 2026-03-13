@@ -44,3 +44,23 @@
   </div>
 
 </aside>
+<nav id="main-nav" class="nav-menu">
+  <ul class="nav-list">
+    <li><a href="#accueil" class="nav-link" data-i18n="menu-accueil"><i class="fa-solid fa-house"></i> Accueil</a></li>
+    <li><a href="#products-section" class="nav-link" data-i18n="menu-produits"><i class="fa-solid fa-box"></i> Produits</a></li>
+    <li><a href="#services-section" class="nav-link" data-i18n="menu-services"><i class="fa-solid fa-gears"></i> Services</a></li>
+    
+    <li class="dropdown">
+      <a href="#" class="nav-link dropdown-toggle" data-i18n="menu-parametres">
+        <i class="fa-solid fa-sliders"></i> Paramètres <i class="fa-solid fa-chevron-down"></i>
+      </a>
+      <ul class="dropdown-content">
+        <li><a href="#" onclick="changeLanguage('fr')">Français</a></li>
+        <li><a href="#" onclick="changeLanguage('ht')">Kreyòl</a></li>
+        <li><a href="#" onclick="changeLanguage('en')">English</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#contact-section" class="nav-link" data-i18n="menu-contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+  </ul>
+</nav>
