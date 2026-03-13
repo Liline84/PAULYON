@@ -23,6 +23,16 @@ document.addEventListener("DOMContentLoaded", () => {
             i18n.setLanguage(state.currentLanguage);
             prod.renderProductCards();
             serv.renderServiceCards();
+            // Dans script.js, après renderServiceCards()
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.btn-add-cart')) {
+        const btn = e.target.closest('.btn-add-cart');
+        const name = btn.dataset.name;
+        const price = btn.dataset.price;
+        // Ici tu appelles ton addToCart de cart.js
+        console.log(`Ajouté : ${name} à ${price} HTG`);
+    }
+});
             ui.attachNavigationListeners();
             
             document.body.classList.remove('preload');
