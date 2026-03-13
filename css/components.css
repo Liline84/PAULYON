@@ -73,12 +73,6 @@
    CYBER / LUXE UI EFFECTS
 =================================================== */
 
-:root {
-  --neon: #6366f1;
-  --cyber: #22d3ee;
-  --lux-gold: #eab308;
-}
-
 .nav-item i {
   color: var(--cyber);
   filter: drop-shadow(0 0 6px rgba(34,211,238,.6));
