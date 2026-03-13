@@ -17,3 +17,11 @@ export function attachNavigationListeners() {
     
     document.querySelector(".mobile-backdrop")?.addEventListener("click", closeAllMenus);
 }
+export function toggleSidebar() {
+    const nav = document.getElementById("main-nav");
+    // On peut ajouter une animation sur le bouton hamburger ici
+    nav.classList.toggle("active");
+    
+    // Si tu as un overlay pour flouter le reste du site
+    document.getElementById("overlay")?.classList.toggle("visible");
+}
