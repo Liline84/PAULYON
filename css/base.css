@@ -6,6 +6,9 @@
     --secondary-color: #2F8A99; /* Bleu foncé secondaire */
     --background-color: #1a1a1a; /* Fond Dark UI */
     --surface-color: #2a2a2a; /* Surfaces et cartes */
+    --neon: #6366f1;
+    --cyber: #22d3ee;
+    --lux-gold: #eab308;
     --text-color: #f0f0f0;
     --text-muted: #aaaaaa;
     --transition-speed: 0.25s;
