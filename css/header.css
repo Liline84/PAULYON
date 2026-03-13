@@ -372,3 +372,56 @@ padding: 10px;
     transform: translateX(0);
   }
 }
+/* Style du menu de navigation */
+.nav-menu {
+    position: fixed;
+    top: 70px; /* Juste en dessous de ta topbar */
+    right: -100%; /* Caché par défaut */
+    width: 250px;
+    height: auto;
+    background: rgba(18, 18, 18, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--cyber);
+    border-radius: 0 0 0 15px;
+    transition: right 0.4s ease-in-out;
+    z-index: 1000;
+}
+
+.nav-menu.active {
+    right: 0;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 20px;
+}
+
+.nav-link {
+    display: block;
+    padding: 12px 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    border-radius: 8px;
+}
+
+.nav-link:hover {
+    background: rgba(34, 211, 238, 0.1);
+    color: var(--cyber);
+    padding-left: 20px;
+}
+
+/* Gestion du sous-menu Paramètres */
+.dropdown-content {
+    display: none;
+    background: rgba(30, 30, 30, 0.8);
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 5px;
+    border-left: 2px solid var(--lux-gold);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
