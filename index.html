@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="title-tag">𝐏𝐀𝐔𝐋𝐘𝐎𝐍'𝐬 𝐋𝐚𝐛 𝐇𝐮𝐛</title>
-    <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#0f172a">
-<meta property="og:title" content="PAULYON Lab Hub">
-<meta property="og:description" content="Transformation numérique et produits personnalisés">
-<meta property="og:type" content="website">
-    <meta name="description" content="PAULYON's Lab Hub: Transformation numérique..." />
-    <meta name="keywords" content="PAULYON, Haïti, Lab Hub..." />
-    <meta name="author" content="PAULYON" />
 
-    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/normalize.css">
+<title>PAULYON Lab Hub | Transformation numérique</title>
+
+<meta name="description" content="PAULYON Lab Hub : produits, services et transformation numérique.">
+<meta name="keywords" content="PAULYON, Haïti, produits, services, technologie">
+<meta name="author" content="PAULYON">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="assets/img/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components.css">
@@ -27,48 +27,74 @@
 <link rel="stylesheet" href="css/produits.css">
 <link rel="stylesheet" href="css/services.css">
 <link rel="stylesheet" href="css/media.css">
+
 </head>
+
 <body>
 
-  <div class="overlay" id="overlay"></div>
+<div id="overlay"></div>
 
-  <div id="header-container"></div>
+<div id="header-container"></div>
 
-  <main class="main-content">
-    <header class="topbar">
-      <button class="hamburger" id="hamburger-btn" aria-label="Menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
+<main class="main-content">
 
-      <a href="cart.html" class="cart-icon">
-        <i class="fa-solid fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-      </a>
-    </header>
+<header class="topbar">
 
-    <div id="spa-content">
-      <section id="accueil" class="hero-section">
-        <h1 data-i18n="h1-accueil">Bienvenue chez PAULYON</h1>
-        <p data-i18n="p-slogan">Nous transformons le néant en chef-d'œuvre.</p>
-      </section>
+<button
+class="hamburger"
+id="hamburger-btn"
+aria-label="Menu"
+aria-controls="sidebar"
+aria-expanded="false">
 
-      <section id="products-section" class="content-section">
-        <h2 data-i18n="h2-produits">Nos Produits</h2>
-        <div class="cards-container products-grid"></div>
-      </section>
+<i class="fa-solid fa-bars"></i>
 
-      <section id="services-section" class="content-section">
-        <h2 data-i18n="h2-services">Nos Services</h2>
-        <div class="cards-container services-grid"></div>
-      </section>
+</button>
 
-      <section id="contact-section" class="content-section">
-        <h2 data-i18n="h2-contact">Contactez-nous</h2>
-        <div class="contact-methods"></div>
-      </section>
-    </div>
-  </main>
+<a href="cart.html" class="cart-icon">
 
-  <script src="script.js"></script>
+<i class="fa-solid fa-shopping-cart"></i>
+<span class="cart-count">0</span>
+
+</a>
+
+</header>
+
+<section id="accueil" class="hero-section">
+
+<h1 data-i18n="h1-accueil"></h1>
+<p data-i18n="p-slogan"></p>
+
+</section>
+
+<section id="products-section" class="content-section">
+
+<h2 data-i18n="h2-produits"></h2>
+
+<div class="cards-container products-grid"></div>
+
+</section>
+
+<section id="services-section" class="content-section">
+
+<h2 data-i18n="h2-services"></h2>
+
+<div class="cards-container services-grid"></div>
+
+</section>
+
+<section id="contact-section" class="content-section">
+
+<h2 data-i18n="h2-contact"></h2>
+
+<div class="contact-methods"></div>
+
+</section>
+
+</main>
+
+<script src="script.js" defer></script>
+
 </body>
+
 </html>
