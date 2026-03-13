@@ -44,7 +44,7 @@
     {
       "id": 2,
       "name": "Bijoux Personnalisés",
-      "price": ,
+      "price":000 ,
       "description": "Création de bijoux uniques (colliers, bracelets, bagues).",
       "imagePath": "assets/img/bijoux.jpg",
       "iconClass": "fa-solid fa-ring",
@@ -53,7 +53,7 @@
     {
       "id": 3,
       "name": "Produits Cosmétiques",
-      "price": ,
+      "price":000 ,
       "description": "Maquillage, soins de la peau et parfums de qualité supérieure.",
       "imagePath": "assets/img/cosmetiques.jpg",
       "iconClass": "fa-solid fa-bottle-droplet",
@@ -62,7 +62,7 @@
     {
       "id": 4,
       "name": "Appareils Électroniques",
-      "price": ,
+      "price":000 ,
       "description": "Gadgets et équipements électroniques modernes et fiables.",
       "imagePath": "assets/img/electronique.jpg",
       "iconClass": "fa-solid fa-laptop",
