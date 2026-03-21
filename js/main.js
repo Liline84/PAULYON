@@ -19,8 +19,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const headerHTML = await fetch("header.html").then(res => res.text());
         document.getElementById("header-container").innerHTML = headerHTML;
+        /* =========================
+        Charger le footer
+        ========================= */
 
-
+        const footerHTML = await fetch("footer.html").then(res => res.text());
+        document.getElementById("footer-container").innerHTML = footerHTML;
         /* =========================
         2️⃣ Charger les données JSON
         ========================= */
