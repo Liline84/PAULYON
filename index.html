@@ -1,1 +1,100 @@
-<h1 style="color:red">TEST OK</h1>
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PAULYON Lab Hub | Transformation numérique</title>
+
+<meta name="description" content="PAULYON Lab Hub : produits, services et transformation numérique.">
+<meta name="keywords" content="PAULYON, Haïti, produits, services, technologie">
+<meta name="author" content="PAULYON">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="assets/img/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/forme.css">
+<link rel="stylesheet" href="css/produits.css">
+<link rel="stylesheet" href="css/services.css">
+<link rel="stylesheet" href="css/media.css">
+
+</head>
+
+<body>
+
+<div id="overlay"></div>
+
+<div id="header-container"></div>
+
+<main class="main-content">
+
+<header class="topbar">
+
+<button
+class="hamburger"
+id="hamburger-btn"
+aria-label="Menu"
+aria-controls="sidebar"
+aria-expanded="false">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<a href="cart.html" class="cart-icon">
+
+<i class="fa-solid fa-shopping-cart"></i>
+<span class="cart-count">0</span>
+
+</a>
+
+</header>
+
+<section id="accueil" class="hero-section">
+
+<h1 data-i18n="h1-accueil"></h1>
+<p data-i18n="p-slogan"></p>
+
+</section>
+
+<section id="products-section" class="content-section">
+
+<h2 data-i18n="h2-produits"></h2>
+
+<div class="cards-container products-grid"></div>
+
+</section>
+
+<section id="services-section" class="content-section">
+
+<h2 data-i18n="h2-services"></h2>
+
+<div class="cards-container services-grid"></div>
+
+</section>
+
+<section id="contact-section" class="content-section">
+
+<h2 data-i18n="h2-contact"></h2>
+
+<div class="contact-methods"></div>
+
+</section>
+
+</main>
+
+<script type="module" src="js/main.js"></script>
+
+</body>
+
+</html>
