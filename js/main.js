@@ -1,3 +1,11 @@
+import { state } from './state.js';
+import { attachNavigationListeners } from './ui.js';
+import { setLanguage } from './i18n.js';
+import { renderProductCards } from './produits.js';
+import { renderServiceCards } from './services.js';
+import { applyGeneralSettings } from './parametres.js';
+import { addToCart } from './cart.js';
+
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const headerHTML = await fetch("/header.html").then(res => res.text());
