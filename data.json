@@ -1,7 +1,7 @@
 {
   "generalSettings": {
     "siteName": "PAULYON's Lab Hub",
-    "copyrightYear": 2025,
+    "copyrightYear": 2026,
     "currentCurrency": "HTG",
     "whatsappNumber": "+50941172815",
     "emailContact": "contact.paulyon@gmail.com",
@@ -62,7 +62,7 @@
     {
       "id": 4,
       "name": "Appareils Électroniques",
-      "price":000 ,
+      "price":200 ,
       "description": "Gadgets et équipements électroniques modernes et fiables.",
       "imagePath": "assets/img/electronique.jpg",
       "iconClass": "fa-solid fa-laptop",
