@@ -1,75 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contactez-nous</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/forme.css">
-  <link rel="stylesheet" href="css/produits.css">
-  <link rel="stylesheet" href="css/services.css">
-  <link rel="stylesheet" href="css/media.css">
+<title>Contact</title>
 
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-  />
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
 </head>
 
-<body id="contact-page">
-  <div id="header"></div>
+<body>
 
-  <main>
-    <section id="contact">
-      <h2 id="h2-contact">Contactez-nous</h2>
-      <p id="p-contact-email">
-        Envoyez-nous un message à
-        <a href="mailto:contact.paulyon@gmail.com">contact.paulyon@gmail.com</a> !
-      </p>
-      <p id="p-contact-whatsapp">
-        Vous pouvez également nous contacter directement via<a href="https://wa.me/50941172815">WhatsApp</a>.
-      </p>
+<nav class="navbar">
+<a href="index.html">Accueil</a>
+<a href="products.html">Produits</a>
+<a href="services.html">Services</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-      <form action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST">
-        <label for="input-name" class="visually-hidden">Nom</label>
-        <input type="text" name="name" placeholder="Nom" required id="input-name" />
+<main>
+<h2>Contact</h2>
 
-        <label for="input-email" class="visually-hidden">Email</label>
-        <input type="email" name="_replyto" placeholder="Email" required id="input-email" />
+<form>
+<input type="text" placeholder="Nom" required>
+<input type="email" placeholder="Email" required>
+<textarea placeholder="Message"></textarea>
+<button>Envoyer</button>
+</form>
 
-        <label for="input-message" class="visually-hidden">Message</label>
-        <textarea name="message" placeholder="Message" required id="input-message"></textarea>
+</main>
 
-        <button type="submit" id="btn-submit">Envoyer</button>
-      </form>
-    </section>
-  </main>
-
-  <div id="footer"></div>
-
-  <script src="main.js"></script>
-  <script>
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('header').innerHTML = data;
-        if (typeof initMenuHandlers === 'function') initMenuHandlers();
-        if (typeof runMainAppLogic === 'function') runMainAppLogic();
-      });
-
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
-  </script>
 </body>
 </html>
