@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Paramètres</title> 
- <link rel="stylesheet" href="css/normalize.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Paramètres</title>
+
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/forme.css">
-<link rel="stylesheet" href="css/produits.css">
-<link rel="stylesheet" href="css/services.css">
-<link rel="stylesheet" href="css/media.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
+
 <body>
 
-  <div id="header"></div>
+<nav class="navbar">
+<a href="index.html">Accueil</a>
+<a href="products.html">Produits</a>
+<a href="services.html">Services</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-  <main>
-    <section id="parametres">
-      <h2>Paramètres</h2>
+<main>
 
-      <div class="settings-section">
-        <h3>Langue</h3>
-        <ul>
-          <li><button class="lang-btn" data-lang="fr">Français (FR)</button></li>
-          <li><button class="lang-btn" data-lang="en">English (EN)</button></li>
-          <li><button class="lang-btn" data-lang="es">Español (ES)</button></li>
-          <li><button class="lang-btn" data-lang="ht">Kreyòl (HT)</button></li>
-        </ul>
-      </div>
+<h2>Paramètres</h2>
 
-      <div class="settings-section">
+<button onclick="toggleTheme()">Changer thème</button>
+
+</main>
+
+<script>
+function toggleTheme(){
+document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>      <div class="settings-section">
         <h3>Thème</h3>
         <button id="toggle-theme">Changer le thème clair/sombre</button>
       </div>
