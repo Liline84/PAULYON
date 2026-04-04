@@ -1,60 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Nos Services</title>
-     <link rel="stylesheet" href="css/normalize.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Services</title>
+
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/header.css">
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/forme.css">
-<link rel="stylesheet" href="css/produits.css">
-<link rel="stylesheet" href="css/services.css">
-<link rel="stylesheet" href="css/media.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-RXf+QSDCUQs7aeMY5a8u8H6fS6Z1FfZL1L9ZdzgGu/N1SXTdt3xUHP5Xr6b+DV8B+m1z+RmcrHY9E4RFiWvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body id="services-page">
 
-    <div id="header"></div>
+<body>
 
-    <main>
-        <section id="services">
-            <h2 id="h2-services">Nos Services</h2>
+<nav class="navbar">
+<a href="index.html">Accueil</a>
+<a href="products.html">Produits</a>
+<a href="services.html">Services</a>
+<a href="contact.html">Contact</a>
+</nav>
 
-            <div class="dashboard-grid" id="services-list-container">
-                </div>
-        </section>
-    </main>
+<main>
+<h2>Nos Services</h2>
+<div class="dashboard-grid"></div>
+</main>
 
-    <div id="footer"></div>
-
-   <script src="script.js"></script>
-<script>
-    // Charger header et footer via fetch
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('header').innerHTML = data;
-        
-        // 1. Initialisation du menu
-        if (typeof initMenuHandlers === 'function') {
-            initMenuHandlers(); 
-        }
-        
-        // 2. Exécution de la logique principale (traduction, data)
-        if (typeof runMainAppLogic === 'function') {
-             runMainAppLogic(); 
-        }
-      });
-      
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
-</script>
 </body>
 </html>
