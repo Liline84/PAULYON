@@ -180,21 +180,66 @@ a:hover {
     color: var(--cyber); 
 }
 
-/* Sidebar (Glassmorphism + Cyber) */
-.sidebar {
+/* 1. Reset du contenu principal (plus de marge à gauche) */
+
+/* 2. Style du bouton Hamburger */
+.hamburger {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px;
-    height: 100vh;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(18px);
-    border-right: 1px solid rgba(255,255,255,0.08);
+    top: 15px;
+    left: 20px;
+    z-index: 2000;
     display: flex;
     flex-direction: column;
-    z-index: 1000;
-    transition: transform var(--transition-speed) ease;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
+
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+}
+
+/* 3. Le Menu Mobile (Caché par défaut) */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -300px; /* Caché à gauche */
+    width: 280px;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(15px);
+    z-index: 1500;
+    padding-top: 80px;
+    transition: left 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+    border-right: 2px solid var(--lux-gold);
+}
+
+.mobile-menu.active {
+    left: 0; /* Affiche le menu */
+}
+
+/* Style spécial Version Pro dans le menu */
+.pro-link {
+    color: var(--lux-gold) !important;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+}
+
+/* Overlay (fond sombre quand ouvert) */
+.overlay.visible {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+
 
 .site-logo a {
     font-weight: 700;
@@ -260,19 +305,13 @@ a:hover {
     z-index: 900;
 }
 
-.hamburger {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text-color);
-    cursor: pointer;
-    display: none; /* Masqué sur Desktop */
-}
+
 
 /* ===================================================
    4. LAYOUT PRINCIPAL & SECTIONS
 =================================================== */
 .main-content {
+    margin-left: 0 !important;
     margin-left: 260px;
     min-height: 100vh;
     transition: margin-left var(--transition-speed);
