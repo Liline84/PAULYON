@@ -30,7 +30,7 @@ function toggleSidebar() {
 
 // Ferme tous les menus ouverts (indispensable pour les clics à l'extérieur)
 function closeAllMenus() {
-    document.getElementById("mobileMenu")?.classList.remove("active");
+    document.getElementById("sidebar")?.classList.remove("active");
     document.getElementById("menuOverlay")?.classList.remove("visible", "active");
     document.querySelectorAll(".dropdown-content").forEach(d => d.classList.remove("show"));
 }
@@ -96,10 +96,11 @@ function renderProductCards() {
 
     container.innerHTML = state.dataConfig.products.map(product => `
         <div class="data-card product-card">
-            <i class="${product.iconClass} ${product.colorClass} icon"></i>
+        <div class="category-icon">
+            <i class="${product.iconClass} ${product.colorClass}"></i></div>
             <img src="${product.imagePath}" alt="${product.name}" style="width:100%; border-radius:8px; margin-bottom:15px;">
             <h3>${product.name}</h3>
-            <span class="badge version-badge">${product.price || 'À confirmer'} ${state.dataConfig.generalSettings.currentCurrency}</span>
+            <div class="price">${product.price || 'À confirmer'} ${state.dataConfig.generalSettings.currentCurrency}</div>
             <button class="btn btn-primary btn-add-cart" data-name="${product.name}" data-price="${product.price || 0}" style="margin-top:15px;">
                 <i class="fa-solid fa-cart-plus"></i> Ajouter
             </button>
