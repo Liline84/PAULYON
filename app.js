@@ -16,30 +16,32 @@ const state = {
  * ============================================================================
  */
 
-// Gère l'ouverture et la fermeture du menu latéral
+// Gère l'ouverture et la fermeture délicate du menu latéral
 function toggleSidebar() {
-    const nav = document.getElementById("main-nav");
+    const nav = document.getElementById("mobileMenu");
     nav?.classList.toggle("active");
     
-    // Gère les différents overlays (backdrop mobile ou overlay flou)
-    document.querySelector(".mobile-backdrop")?.classList.toggle("visible");
-    document.getElementById("overlay")?.classList.toggle("visible");
+    // Gère l'apparition gracieuse de l'overlay flou
+    const overlay = document.getElementById("menuOverlay");
+    overlay?.classList.toggle("visible");
+    overlay?.classList.toggle("active"); // Si tu utilises la classe .active dans ton CSS
 }
 
-// Ferme tous les menus ouverts (utile pour les clics à l'extérieur)
+// Ferme tous les menus ouverts (indispensable pour les clics à l'extérieur)
 function closeAllMenus() {
-    document.getElementById("main-nav")?.classList.remove("active");
-    document.querySelector(".mobile-backdrop")?.classList.remove("visible");
+    document.getElementById("mobileMenu")?.classList.remove("active");
+    document.getElementById("menuOverlay")?.classList.remove("visible", "active");
     document.querySelectorAll(".dropdown-content").forEach(d => d.classList.remove("show"));
 }
 
-// Attache les événements de clic pour la navigation
+// Attache les événements de clic pour la navigation avec précision
 function attachNavigationListeners() {
-    const menuToggle = document.querySelector(".menu-toggle");
+    const menuToggle = document.getElementById("hamburgerBtn");
     menuToggle?.addEventListener("click", toggleSidebar);
     
-    document.querySelector(".mobile-backdrop")?.addEventListener("click", closeAllMenus);
+    document.getElementById("menuOverlay")?.addEventListener("click", closeAllMenus);
 }
+
 
 /**
  * ============================================================================
