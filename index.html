@@ -7,91 +7,84 @@
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
-    <header class="navbar">
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <header class="topbar">
+        <div class="logo">PAULYON</div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
+    </header>
 
-        <ul class="nav-links desktop-only">
-            <li><a href="index.html">Accueil</a></li>
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="menu-header">
+            <h2>Menu</h2>
+            <button id="closeBtn" class="close-btn"><i class="fa fa-times"></i></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html"><i class="fa fa-home"></i> Accueil</a></li>
             
-            <li class="dropdown">
-                <a href="#">Boutique <i class="fa fa-chevron-down"></i></a>
-                <ul class="dropdown-menu">
+            <li class="has-submenu">
+                <a href="#" class="submenu-toggle"><i class="fa fa-box"></i> Boutique <i class="fa fa-chevron-down arrow"></i></a>
+                <ul class="submenu">
                     <li><a href="products.html">Produits</a></li>
                     <li><a href="services.html">Services</a></li>
                 </ul>
             </li>
             
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html"><i class="fa fa-envelope"></i> Contact</a></li>
             
-            <li class="dropdown">
-                <a href="#"><i class="fa fa-gear"></i></a>
-                <ul class="dropdown-menu">
-                    <li><a href="settings.html">Paramètres</a></li>
+            <li class="has-submenu">
+                <a href="#" class="submenu-toggle"><i class="fa fa-gear"></i> Paramètres <i class="fa fa-chevron-down arrow"></i></a>
+                <ul class="submenu">
+                    <li><a href="settings.html">Général</a></li>
                     <li><a href="#">Langue</a></li>
                 </ul>
             </li>
         </ul>
-    </header>
+    </nav>
 
-    
     <div class="overlay" id="menuOverlay"></div>
 
-    <section class="hero">
-        <h1>Bienvenue chez PAULYON</h1>
-        <p>Transformation digitale & solutions modernes</p>
-    </section>
+    <main class="main-content">
+        <section class="hero">
+            <h1>Bienvenue chez PAULYON</h1>
+            <p>Transformation digitale & solutions modernes</p>
+        </section>
 
-    <section>
-        <h2>Produits</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>Produit 1</h3>
-                <p>Description rapide</p>
-                <a href="products.html">Voir plus</a>
-            </div>
-            
-            </div>
-    </section>
-
-    <section>
-        <h2>Services</h2>
-        <div class="cards">
-            <div class="card">
-                <h3>Service 1</h3>
-                <p>Description rapide</p>
-                <a href="services.html">Voir plus</a>
-            </div>
-            
-        </div>
-    </section>
+        </main>
 
     <footer>
-        <p>© 2026 PAULYON | All right reserved</p>
+        <p>© 2026 PAULYON | All rights reserved</p>
     </footer>
 
     <script>
-        const btn = document.getElementById('hamburgerBtn');
-        const menu = document.getElementById('mobileMenu');
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
         const overlay = document.getElementById('menuOverlay');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('active');
-            overlay.classList.toggle('visible');
-        });
+        // Ouvrir et fermer le menu principal
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
 
-        overlay.addEventListener('click', () => {
-            menu.classList.remove('active');
-            overlay.classList.remove('visible');
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Gérer les sous-menus (Boutique, Paramètres)
+        const submenuToggles = document.querySelectorAll('.submenu-toggle');
+        submenuToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.parentElement.classList.toggle('active');
+            });
         });
     </script>
     <script type="module" src="app.js"></script>
-  
 </body>
 </html>
