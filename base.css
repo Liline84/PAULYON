@@ -170,24 +170,29 @@ a:hover {
 }
 
 /**
+/**
  * ============================================================================
- * 💎 SECTION 5 : COMPOSANTS (Cartes de produits, Boutons)
+ * 💎 SECTION 5 : COMPOSANTS (Cartes, Boutons, Badges) - EFFET CYBER LUXE
  * ============================================================================
  */
+
+/* Conteneur principal des cartes */
 .cards-container, 
 .dashboard-grid {
     display: grid;
-    gap: 25px;
+    gap: 30px; /* Plus d'espace pour l'élégance */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    padding: 20px 0;
+    padding: 30px 20px;
 }
 
+/* 🏆 LA CARTE DE LUXE (Effet Glassmorphism) */
 .data-card {
-    background: linear-gradient(145deg, #1e1e1e, #121212); 
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background: rgba(30, 41, 59, 0.4); /* Fond semi-transparent */
+    backdrop-filter: blur(12px); /* Flou d'arrière-plan professionnel */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Bordure subtile et claire */
+    padding: 30px; /* Espace intérieur accru */
+    border-radius: 16px; /* Coins plus arrondis et doux */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Ombre portée profonde */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
@@ -195,44 +200,63 @@ a:hover {
     text-align: center;
 }
 
+/* Effet au survol : la carte s'anime et s'éclaire */
 .data-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--cyber);
-    box-shadow: 0 15px 35px rgba(34, 211, 238, 0.2);
+    transform: translateY(-10px) scale(1.02); /* Élévation et léger zoom */
+    border-color: var(--primary-color); /* La bordure s'illumine */
+    box-shadow: 0 20px 40px rgba(0, 191, 255, 0.25); /* Glow de fond */
 }
 
+/* Style de l'image du produit */
 .data-card img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    height: 220px; /* Hauteur fixe pour l'uniformité */
+    object-fit: cover; /* L'image s'adapte sans déformation */
+    border-radius: 10px; /* Coins légèrement arrondis */
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color var(--transition-speed);
+/* Icône de catégorie (le T-shirt vert dans l'image) */
+.data-card .category-icon {
+    font-size: 2rem;
+    padding: 15px;
+    background: rgba(234, 179, 8, 0.08); /* Fond doré très léger */
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 1px solid rgba(234, 179, 8, 0.2);
 }
 
+/* Titres des cartes */
+.data-card h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+/* Prix de luxe (le gros texte bleu) */
+.data-card .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 0 8px rgba(0, 191, 255, 0.6);
+    margin: 15px 0;
+}
+
+/* Boutons d'action */
 .btn-primary { 
     background-color: var(--primary-color); 
     color: var(--background-color); 
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
 }
 
 .btn-primary:hover { 
     background-color: var(--secondary-color); 
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
 }
 
-.badge.version-badge {
-    background: linear-gradient(135deg, var(--lux-gold), var(--neon));
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 20px;
-}
 
 /**
  * ============================================================================
