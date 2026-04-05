@@ -109,6 +109,19 @@ a:hover {
     flex: 1; 
 }
 
+/*----Sidebar overlay for mobile-------*/
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 90;
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+/*--------------------------------------------*/
 .nav-item {
     display: flex;
     align-items: center;
