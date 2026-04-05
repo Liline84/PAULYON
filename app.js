@@ -19,7 +19,7 @@ const state = {
 
 // Gère l'ouverture et la fermeture délicate du menu latéral
 function toggleSidebar() {
-    const nav = document.getElementById("mobileMenu");
+    const nav = document.getElementById("sidebar");
     nav?.classList.toggle("active");
     
     // Gère l'apparition gracieuse de l'overlay flou
