@@ -184,31 +184,6 @@
     </div>
 </footer>
 
-    <script>
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        const closeBtn = document.getElementById('closeBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('menuOverlay');
-
-        // Ouvrir et fermer le menu principal
-        function toggleMenu() {
-            mobileMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        hamburgerBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
-
-        // Gérer les sous-menus (Boutique, Paramètres)
-        const submenuToggles = document.querySelectorAll('.submenu-toggle');
-        submenuToggles.forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                this.parentElement.classList.toggle('active');
-            });
-        });
-    </script>
     <script type="module" src="app.js"></script>
 </body>
 </html>
