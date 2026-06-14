@@ -1,3 +1,7 @@
+// A mettre dans app.js ou en bas de index.html
+if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light-theme');
+}
 /**
  * ============================================================================
  * 📦 BLOC 1 : ÉTAT GLOBAL DE L'APPLICATION (STATE)
