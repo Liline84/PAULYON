@@ -1,135 +1,211 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paramètres - PAULYON's Lab Hub</title>
-    
-    <link rel="stylesheet" href="base.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paramètres — PAULYON Lab Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="base.css">
 </head>
 <body>
+<div class="shell">
 
-    <div class="shell">
-        
-        <div id="header-container"></div>
-
-        <div class="main-wrap">
-            
-            <main class="page-content">
-                
-                <div class="page-hero">
-                    <div>
-                        <div class="breadcrumb">
-                            <a href="index.html">Accueil</a> <span>/</span> <span class="text-cyan">Paramètres</span>
-                        </div>
-                        <h1>Paramètres</h1>
-                        <p>Gérez vos préférences, la langue et l'apparence du site.</p>
-                    </div>
-                </div>
-
-                <section class="section pt-0">
-                    <div class="settings-grid">
-
-                        <div class="settings-panel">
-                            <div class="settings-panel-head">
-                                <div class="settings-panel-icon"><i class="fa-solid fa-moon"></i></div>
-                                <div>
-                                    <h3>Apparence</h3>
-                                    <p>Personnalisez le thème de l'application</p>
-                                </div>
-                            </div>
-                            <div class="settings-panel-body">
-                                <div class="settings-row">
-                                    <div class="settings-row-label">
-                                        <strong>Mode Sombre</strong>
-                                        <span>Activer ou désactiver le thème sombre</span>
-                                    </div>
-                                    <label class="toggle">
-                                        <input type="checkbox" id="toggle-theme" checked>
-                                        <span class="toggle-slider"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="settings-panel">
-                            <div class="settings-panel-head">
-                                <div class="settings-panel-icon"><i class="fa-solid fa-globe"></i></div>
-                                <div>
-                                    <h3>Langue</h3>
-                                    <p>Choisissez votre langue préférée</p>
-                                </div>
-                            </div>
-                            <div class="settings-panel-body">
-                                <div class="lang-grid">
-                                    <button class="lang-btn active" data-lang="fr">Français (FR)</button>
-                                    <button class="lang-btn" data-lang="en">English (EN)</button>
-                                    <button class="lang-btn" data-lang="es">Español (ES)</button>
-                                    <button class="lang-btn" data-lang="ht">Kreyòl (HT)</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-
-            </main>
-
-            <div id="footer-container"></div>
-            
-        </div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="/logo.jpg" alt="Paulyon" onerror="this.style.display='none'">
+      <div class="brand-text"><h2>Paulyon</h2><span>by Paulyon team</span></div>
     </div>
+    <nav class="sidebar-nav">
+      <a href="index.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75 12 3l9 6.75V21a.75.75 0 0 1-.75.75h-4.5V15h-6v6.75H3.75A.75.75 0 0 1 3 21V9.75Z"/></svg>Accueil</a>
+      <div class="nav-label">Boutique</div>
+      <a href="products.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z"/></svg>Produits</a>
+      <a href="services.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>Services</a>
+      <div class="nav-label">Gestion</div>
+      <a href="settings.html" class="nav-item active"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>Paramètres</a>
+      <div class="nav-label">Assistance</div>
+      <a href="contact.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>Contactez-nous</a>
+    </nav>
+    <div class="sidebar-footer">Made with ♥ and code</div>
+  </aside>
 
-    <script src="app.js"></script>
+  <div class="main-wrap">
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // 1. GESTION DE LA LANGUE (Effet visuel + Fonctionnement)
-            const langBtns = document.querySelectorAll('.lang-btn');
-            
-            // Si une langue est déjà en mémoire, on active le bon bouton
-            const currentLang = localStorage.getItem('lang') || 'fr';
-            langBtns.forEach(btn => {
-                if (btn.getAttribute('data-lang') === currentLang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+        <span class="topbar-title" data-i18n="h1-parametres">Paramètres</span>
+      </div>
+      <div class="topbar-right">
+        <div class="status-pill">
+          <div class="live-dot"></div>
+          <span data-i18n="status-online">System Online</span>
+        </div>
+      </div>
+    </header>
 
-            // Action au clic sur une langue
-            langBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Retire la classe 'active' de tous les boutons
-                    langBtns.forEach(b => b.classList.remove('active'));
-                    // Ajoute la classe 'active' au bouton cliqué
-                    this.classList.add('active');
+    <div class="page-content">
 
-                    // Récupère le code de la langue (fr, en, etc.)
-                    const lang = this.getAttribute('data-lang');
-                    
-                    // Appelle la fonction de ton fichier app.js
-                    if (typeof setLanguage === 'function') {
-                        setLanguage(lang);
-                    }
-                });
-            });
+      <div class="page-hero">
+          <div>
+              <div class="breadcrumb">
+                  <a href="index.html">Accueil</a> <span>/</span> <span class="text-cyan">Paramètres</span>
+              </div>
+              <h1>Paramètres</h1>
+              <p>Gérez vos préférences, la langue et l'apparence du site.</p>
+          </div>
+      </div>
 
-            // 2. GESTION DU THÈME
-            const themeToggle = document.getElementById('toggle-theme');
-            if (themeToggle) {
-                themeToggle.addEventListener('change', function() {
-                    if(this.checked) {
-                        document.body.classList.remove('light-theme');
-                    } else {
-                        document.body.classList.add('light-theme');
-                    }
-                });
-            }
+      <section class="section pt-0">
+          <div class="settings-grid">
 
-        });
-    </script>
+              <div class="settings-panel">
+                  <div class="settings-panel-head">
+                      <div class="settings-panel-icon"><i class="fa-solid fa-moon"></i></div>
+                      <div>
+                          <h3>Apparence</h3>
+                          <p>Personnalisez le thème de l'application</p>
+                      </div>
+                  </div>
+                  <div class="settings-panel-body">
+                      <div class="settings-row">
+                          <div class="settings-row-label">
+                              <strong>Mode Sombre</strong>
+                              <span>Activer ou désactiver le thème sombre</span>
+                          </div>
+                          <label class="toggle">
+                              <input type="checkbox" id="toggle-theme">
+                              <span class="toggle-slider"></span>
+                          </label>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="settings-panel">
+                  <div class="settings-panel-head">
+                      <div class="settings-panel-icon"><i class="fa-solid fa-globe"></i></div>
+                      <div>
+                          <h3>Langue</h3>
+                          <p>Choisissez votre langue préférée</p>
+                      </div>
+                  </div>
+                  <div class="settings-panel-body">
+                      <div class="lang-grid">
+                          <button class="lang-btn active" data-lang="fr">Français (FR)</button>
+                          <button class="lang-btn" data-lang="en">English (EN)</button>
+                          <button class="lang-btn" data-lang="es">Español (ES)</button>
+                          <button class="lang-btn" data-lang="ht">Kreyòl (HT)</button>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+      </section>
+
+      <footer>
+        <div class="footer-inner">
+          <div class="footer-col">
+            <h4>PAULYON</h4>
+            <p data-i18n="p-footer-mission">Votre partenaire pour la transformation numérique et la création de produits sur mesure en Haïti.</p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://wa.me/50941172815" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <p><a href="products.html">Produits</a></p>
+            <p><a href="services.html">Services</a></p>
+            <p><a href="contact.html">Contact</a></p>
+            <p><a href="settings.html">Paramètres</a></p>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <p><a href="mailto:contact.paulyon@gmail.com"><i class="fas fa-envelope" style="margin-right:6px;color:var(--cyan)"></i>contact.paulyon@gmail.com</a></p>
+            <p><a href="https://wa.me/50941172815" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="margin-right:6px;color:var(--green)"></i>WhatsApp</a></p>
+            <p style="margin-top:8px;color:var(--t3);font-size:12px"><i class="fas fa-map-marker-alt" style="margin-right:6px"></i>Ruelle Flora, Cap-Haïtien, Haïti</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p data-i18n="footer-copyright">&copy; 2026 PAULYON. Tous droits réservés.</p>
+          <p style="color:var(--t3);font-size:12px">Made with ♥ in Haïti</p>
+        </div>
+      </footer>
+
+    </div></div></div><script type="module" src="app.js"></script>
+<script>
+  // 1. Sidebar toggle (Menu Mobile)
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('sidebarOverlay');
+  const hamburger = document.getElementById('hamburgerBtn');
+
+  function toggleSidebar() {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+  }
+
+  hamburger?.addEventListener('click', toggleSidebar);
+  overlay?.addEventListener('click', toggleSidebar);
+
+  // 2. Logique des Paramètres (Thème & Langue)
+  document.addEventListener("DOMContentLoaded", () => {
+      
+      // --- GESTION DU THÈME AVEC SAUVEGARDE ---
+      const themeToggle = document.getElementById('toggle-theme');
+      
+      // Vérifier si un thème clair était déjà sauvegardé
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+          document.body.classList.add('light-theme');
+          themeToggle.checked = false; // Le bouton est décoché pour le mode clair
+      } else {
+          themeToggle.checked = true; // Mode sombre par défaut
+      }
+
+      if (themeToggle) {
+          themeToggle.addEventListener('change', function() {
+              if(this.checked) {
+                  // Mode Sombre
+                  document.body.classList.remove('light-theme');
+                  localStorage.setItem('theme', 'dark');
+              } else {
+                  // Mode Clair
+                  document.body.classList.add('light-theme');
+                  localStorage.setItem('theme', 'light');
+              }
+          });
+      }
+
+      // --- GESTION DE LA LANGUE VISUELLE ---
+      const langBtns = document.querySelectorAll('.lang-btn');
+      const currentLang = localStorage.getItem('lang') || 'fr';
+      
+      langBtns.forEach(btn => {
+          if (btn.getAttribute('data-lang') === currentLang) {
+              btn.classList.add('active');
+          } else {
+              btn.classList.remove('active');
+          }
+
+          btn.addEventListener('click', function() {
+              langBtns.forEach(b => b.classList.remove('active'));
+              this.classList.add('active');
+              
+              const lang = this.getAttribute('data-lang');
+              // L'appel à setLanguage doit se faire via ton app.js si la fonction est exportée/globale.
+              // Sinon on sauvegarde juste pour le moment
+              localStorage.setItem('lang', lang);
+              location.reload(); // Recharge la page pour appliquer la langue depuis app.js
+          });
+      });
+  });
+</script>
 </body>
 </html>
