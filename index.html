@@ -1,195 +1,219 @@
+sh
+cat > /home/claude/paulyon/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAULYON Lab Hub</title>
-    <meta name="description" content="PAULYON — Transformation digitale, produits de qualité et services sur mesure depuis Cap-Haïtien." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="base.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAULYON Lab Hub — Accueil</title>
+  <meta name="description" content="PAULYON — Transformation digitale, produits et services modernes en Haïti.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="base.css">
 </head>
 <body>
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-    <div class="dashboard">
+<div class="shell">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-logo">
-                    <img src="images/logo.png" alt="Logo PAULYON" width="40" height="40" onerror="this.style.display='none'" />
-                </div>
-                <div class="sidebar-brand">
-                    <h2>PAULYON</h2>
-                    <span>Lab Hub</span>
-                </div>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="index.html" class="nav-item active">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75 12 3l9 6.75V21a.75.75 0 0 1-.75.75h-4.5V15h-6v6.75H3.75A.75.75 0 0 1 3 21V9.75Z"/></svg>
-                    Accueil
-                </a>
-                <div class="nav-label">Boutique</div>
-                <a href="products.html" class="nav-item">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z"/></svg>
-                    Produits
-                </a>
-                <a href="services.html" class="nav-item">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>
-                    Services
-                </a>
-                <div class="nav-label">Gestion</div>
-                <a href="settings.html" class="nav-item">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>
-                    Paramètres
-                </a>
-                <div class="nav-label">Assistance</div>
-                <a href="contact.html" class="nav-item">
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
-                    Nous contacter
-                </a>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="text-badge">Made with ♥ and code</div>
-            </div>
-        </aside>
-
-        <!-- MAIN -->
-        <main class="main-content">
-            <header class="topbar">
-                <div class="topbar-left">
-                    <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu">
-                        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
-                    </button>
-                    <span class="topbar-title">PAULYON Lab Hub</span>
-                </div>
-                <div class="topbar-right">
-                    <div class="status-pill">
-                        <div class="live-dot"></div>
-                        <span>En ligne</span>
-                    </div>
-                </div>
-            </header>
-
-            <!-- HERO -->
-            <section class="hero">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="dot"></span>
-                        Ouvert &amp; disponible
-                    </div>
-                    <h1>
-                        Nous transformons<br>
-                        le néant en<br>
-                        <span>chef-d'œuvre.</span>
-                    </h1>
-                    <p class="hero-sub">
-                        Produits de qualité, services digitaux et solutions sur mesure —
-                        livrés avec passion depuis Cap-Haïtien.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="products.html" class="btn btn-primary">
-                            <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-                            Voir nos produits
-                        </a>
-                        <a href="contact.html" class="btn btn-outline">
-                            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-                            Nous contacter
-                        </a>
-                    </div>
-                    <div class="hero-stats">
-                        <div>
-                            <div class="hero-stat-value">4+</div>
-                            <div class="hero-stat-label">Catégories produits</div>
-                        </div>
-                        <div>
-                            <div class="hero-stat-value">3</div>
-                            <div class="hero-stat-label">Services digitaux</div>
-                        </div>
-                        <div>
-                            <div class="hero-stat-value">7</div>
-                            <div class="hero-stat-label">Langues disponibles</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="content-section">
-
-                <!-- Aperçu Produits -->
-                <section id="products-section" style="margin-bottom:52px;">
-                    <div class="section-header">
-                        <div>
-                            <h2 data-i18n="h2-produits">Nos Produits</h2>
-                            <p>Vêtements, bijoux, cosmétiques &amp; électronique</p>
-                        </div>
-                        <a href="products.html" class="btn btn-ghost" style="font-size:13px;">
-                            Tout voir <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <div class="cards-container"></div>
-                </section>
-
-                <!-- Aperçu Services -->
-                <section id="services-section">
-                    <div class="section-header">
-                        <div>
-                            <h2 data-i18n="h2-services">Nos Services</h2>
-                            <p>Design graphique, développement web &amp; programmation</p>
-                        </div>
-                        <a href="services.html" class="btn btn-ghost" style="font-size:13px;">
-                            Tout voir <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <div class="cards-container"></div>
-                </section>
-
-            </div>
-
-            <footer>
-                <div class="footer-content">
-                    <div class="footer-col">
-                        <h4>À propos de PAULYON</h4>
-                        <p>PAULYON est votre partenaire pour la transformation numérique et la création de produits sur mesure depuis Cap-Haïtien.</p>
-                        <div class="footer-bottom">
-                            <p data-i18n="footer-copyright">© 2026 PAULYON. Tous droits réservés.</p>
-                        </div>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Navigation</h4>
-                        <p><a href="index.html">Accueil</a></p>
-                        <p><a href="products.html">Produits</a></p>
-                        <p><a href="services.html">Services</a></p>
-                        <p><a href="contact.html">Contact</a></p>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Nous contacter</h4>
-                        <p><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:contact.paulyon@gmail.com">contact.paulyon@gmail.com</a></p>
-                        <p><i class="fab fa-whatsapp" aria-hidden="true"></i><a href="https://wa.me/50941172815" target="_blank" rel="noopener">WhatsApp</a></p>
-                        <p><i class="fas fa-map-marker-alt" aria-hidden="true"></i><a href="https://www.google.com/maps/search/?api=1&query=Ruelle+Flora,+Cap-Ha%C3%AFtien,+Haiti" target="_blank" rel="noopener">Cap-Haïtien, Haïti</a></p>
-                        <div class="social-icons">
-                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </main>
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <img src="/logo.jpg" alt="Paulyon" onerror="this.style.display='none'">
+      <div class="brand-text"><h2>Paulyon</h2><span>by Paulyon team</span></div>
     </div>
+    <nav class="sidebar-nav">
+      <a href="index.html"    class="nav-item active"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75 12 3l9 6.75V21a.75.75 0 0 1-.75.75h-4.5V15h-6v6.75H3.75A.75.75 0 0 1 3 21V9.75Z"/></svg>Accueil</a>
+      <div class="nav-label">Boutique</div>
+      <a href="products.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z"/></svg>Produits</a>
+      <a href="services.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg>Services</a>
+      <div class="nav-label">Gestion</div>
+      <a href="settings.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>Paramètres</a>
+      <div class="nav-label">Assistance</div>
+      <a href="contact.html" class="nav-item"><svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>Contactez-nous</a>
+    </nav>
+    <div class="sidebar-footer">Made with ♥ and code</div>
+  </aside>
 
-    <script>
-        const hamburger = document.getElementById('hamburgerBtn');
-        const sidebar   = document.getElementById('sidebar');
-        const overlay   = document.getElementById('sidebarOverlay');
-        function openSidebar()  { sidebar.classList.add('active'); overlay.classList.add('active'); }
-        function closeSidebar() { sidebar.classList.remove('active'); overlay.classList.remove('active'); }
-        function toggleSidebar() { sidebar.classList.contains('active') ? closeSidebar() : openSidebar(); }
-        hamburger?.addEventListener('click', toggleSidebar);
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
-    </script>
-    <script type="module" src="app.js"></script>
+  <!-- MAIN -->
+  <div class="main-wrap">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+        </button>
+        <span class="topbar-title" data-i18n="h1-accueil">Accueil</span>
+      </div>
+      <div class="topbar-right">
+        <div class="status-pill">
+          <div class="live-dot"></div>
+          <span data-i18n="status-online">System Online</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- ===== HERO ===== -->
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="hero-badge">
+            <i class="fa-solid fa-bolt"></i>
+            PAULYON Lab Hub
+          </div>
+          <h1 data-i18n="h1-accueil">
+            Du néant à<br><span>l'excellence digitale</span>
+          </h1>
+          <p data-i18n="p-slogan">
+            Produits de qualité, services créatifs et solutions numériques sur mesure.
+            Livraison partout en Haïti.
+          </p>
+          <div class="hero-cta">
+            <a href="products.html" class="btn btn-primary">
+              <i class="fa-solid fa-bag-shopping"></i> Voir les produits
+            </a>
+            <a href="contact.html" class="btn btn-ghost">
+              Nous contacter
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bande d'images hero -->
+      <!-- 💡 REMPLACEZ LES PLACEHOLDERS PAR VOS VRAIES IMAGES -->
+      <div class="hero-img-strip">
+        <div class="hero-img-placeholder">
+          <!-- Remplacer par : <img src="images/hero-1.jpg" alt="Produits Paulyon"> -->
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          <span>Photo boutique</span>
+        </div>
+        <div class="hero-img-placeholder">
+          <!-- Remplacer par : <img src="images/hero-2.jpg" alt="Services Paulyon"> -->
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          <span>Photo atelier</span>
+        </div>
+        <div class="hero-img-placeholder">
+          <!-- Remplacer par : <img src="images/hero-3.jpg" alt="Equipe Paulyon"> -->
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          <span>Photo équipe</span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="section" style="padding-top:0">
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="stat-label">Produits</span>
+            <span class="stat-value">4</span>
+            <span class="stat-sub">Catégories disponibles</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Services</span>
+            <span class="stat-value">3</span>
+            <span class="stat-sub">En ligne maintenant</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Langues</span>
+            <span class="stat-value">7</span>
+            <span class="stat-sub">FR · EN · HT · ES · ZH · AR · RU</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">WhatsApp</span>
+            <span class="stat-value" style="font-size:18px">+509</span>
+            <span class="stat-sub">Commande directe</span>
+          </div>
+        </div>
+
+        <!-- Aperçu Produits -->
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="h2-produits">Nos Produits</h2>
+            <p>Sélection de qualité, à prix juste</p>
+          </div>
+          <a href="products.html">Voir tout <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cards-grid" id="home-products">
+          <!-- Cartes injectées par app.js -->
+          <!-- Fallback statique si JS désactivé -->
+          <noscript>
+            <div class="card"><div class="card-img"><span>Vêtements</span></div><div class="card-body"><p class="card-name">Vêtements</p><a href="products.html" class="btn btn-ghost btn-sm">Voir</a></div></div>
+          </noscript>
+        </div>
+
+        <!-- Aperçu Services -->
+        <div class="section-head mt-8">
+          <div>
+            <h2 data-i18n="h2-services">Nos Services</h2>
+            <p>Créatifs, digitaux, sur mesure</p>
+          </div>
+          <a href="services.html">Voir tout <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cards-grid" id="home-services">
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-inner">
+          <div class="footer-col">
+            <h4>PAULYON</h4>
+            <p data-i18n="p-footer-mission">Votre partenaire pour la transformation numérique et la création de produits sur mesure en Haïti.</p>
+            <div class="footer-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://wa.me/50941172815" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <p><a href="products.html">Produits</a></p>
+            <p><a href="services.html">Services</a></p>
+            <p><a href="contact.html">Contact</a></p>
+            <p><a href="settings.html">Paramètres</a></p>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <p><a href="mailto:contact.paulyon@gmail.com"><i class="fas fa-envelope" style="margin-right:6px;color:var(--cyan)"></i>contact.paulyon@gmail.com</a></p>
+            <p><a href="https://wa.me/50941172815" target="_blank" rel="noopener"><i class="fab fa-whatsapp" style="margin-right:6px;color:var(--green)"></i>WhatsApp</a></p>
+            <p style="margin-top:8px;color:var(--t3);font-size:12px"><i class="fas fa-map-marker-alt" style="margin-right:6px"></i>Ruelle Flora, Cap-Haïtien, Haïti</p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p data-i18n="footer-copyright">&copy; 2026 PAULYON. Tous droits réservés.</p>
+          <p style="color:var(--t3);font-size:12px">Made with ♥ in Haïti</p>
+        </div>
+      </footer>
+
+    </div><!-- /page-content -->
+  </div><!-- /main-wrap -->
+</div><!-- /shell -->
+
+<script type="module" src="app.js"></script>
+<script>
+  // Sidebar toggle (accessible globalement pour le bouton hamburger)
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('sidebarOverlay');
+  const hamburger = document.getElementById('hamburgerBtn');
+
+  function toggleSidebar() {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+  }
+
+  hamburger?.addEventListener('click', toggleSidebar);
+  overlay?.addEventListener('click', toggleSidebar);
+</script>
 </body>
 </html>
+HTMLEOF
+echo "index.html OK"
+
+Sortie
+index.html OK
+Terminé
