@@ -35,11 +35,11 @@ button, input, optgroup, select, textarea {
   --text-secondary: #a1a1aa;
   --text-muted:     #71717a;
 
-  /* Accent vert */
-  --accent:       #22c55e;
-  --accent-hover: #16a34a;
-  --accent-dim:   rgba(34, 197, 94, 0.12);
-  --accent-glow:  rgba(34, 197, 94, 0.25);
+  /* Accent bleue */
+  --accent:       #0052cc; /* Bleu électrique de base, profond et vif */
+  --accent-hover: #0066ff; /* Plus clair et lumineux au survol */
+  --accent-dim:   rgba(0, 82, 204, 0.15); /* Teinte douce pour les fonds */
+  --accent-glow:  rgba(0, 102, 255, 0.35); /* Effet de lueur (glow) plus prononcé */;
 
   /* Cyan */
   --cyber:  #22d3ee;
