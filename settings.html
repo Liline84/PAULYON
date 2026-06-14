@@ -1,142 +1,135 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Paramètres</title>
-
-<link rel="stylesheet" href="base.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres - PAULYON's Lab Hub</title>
+    
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
 
-<nav class="navbar">
-
-<div class="logo">PAULYON</div>
-
-<ul class="nav-links">
-
-<li><a href="index.html">Accueil</a></li>
-
-<li class="dropdown">
-<a href="#">Boutique <i class="fa fa-chevron-down"></i></a>
-
-<ul class="dropdown-menu">
-<li><a href="products.html">Produits</a></li>
-<li><a href="services.html">Services</a></li>
-</ul>
-</li>
-
-<li><a href="contact.html">Contact</a></li>
-
-<li class="dropdown">
-<a href="#"><i class="fa fa-gear"></i></a>
-
-<ul class="dropdown-menu">
-<li><a href="settings.html">Paramètres</a></li>
-<li><a href="#">Langue</a></li>
-</ul>
-</li>
-
-</ul>
-
-</nav>
-
-<main>
-
-<h2>Paramètres</h2>
-
-<button onclick="toggleTheme()">Changer thème</button>
-
-</main>
-
-<script>
-function toggleTheme(){
-document.body.classList.toggle("dark");
-}
-</script>
-
-</body>
-</html>      <div class="settings-section">
-        <h3>Thème</h3>
-        <button id="toggle-theme">Changer le thème clair/sombre</button>
-      </div>
-    </section>
-  </main>
-
-  <div id="footer"></div>
-<script src="script.js"></script>
-<script>
-    // Variable pour stocker la fonction setLanguage après son chargement
-    let setLanguageFromScript;
-
-    // Charger header et footer dynamiquement
-    fetch('header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('header').innerHTML = data;
+    <div class="shell">
         
-        // 1. Initialisation du menu
-        if (typeof initMenuHandlers === 'function') {
-            initMenuHandlers(); traductio.json
-        }
-        
-        // 2. Exécution de la logique principale (traduction, data)
-        if (typeof runMainAppLogic === 'function') {
-             // runMainAppLogic renvoie la fonction setLanguage pour l'utiliser ici
-             // Je ne peux pas modifier la façon dont runMainAppLogic retourne des valeurs car je n'ai pas le code complet,
-             // nous allons donc nous fier à la fonction setLanguage globale si elle existe (ou la définir).
-             runMainAppLogic(); 
-        }
-        
-        // *************************************************************************
-        // Règle générale : Si vous utilisez des fonctions définies dans script.js
-        // (comme setLanguage), assurez-vous qu'elles sont disponibles globalement
-        // pour être appelées ici.
-        // *************************************************************************
-        
-        // 3. Réattacher les gestionnaires d'événements spécifiques à cette page
-        attachSettingsListeners();
-      });
-      
-    fetch('footer.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('footer').innerHTML = data;
-      });
+        <div id="header-container"></div>
 
+        <div class="main-wrap">
+            
+            <main class="page-content">
+                
+                <div class="page-hero">
+                    <div>
+                        <div class="breadcrumb">
+                            <a href="index.html">Accueil</a> <span>/</span> <span class="text-cyan">Paramètres</span>
+                        </div>
+                        <h1>Paramètres</h1>
+                        <p>Gérez vos préférences, la langue et l'apparence du site.</p>
+                    </div>
+                </div>
 
-    function attachSettingsListeners() {
-        // GESTION DE LA LANGUE (Harmonisée avec script.js)
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            // Retirer les anciens gestionnaires pour éviter les doubles exécutions
-            btn.removeEventListener('click', handleLangClick); 
-            btn.addEventListener('click', handleLangClick);
+                <section class="section pt-0">
+                    <div class="settings-grid">
+
+                        <div class="settings-panel">
+                            <div class="settings-panel-head">
+                                <div class="settings-panel-icon"><i class="fa-solid fa-moon"></i></div>
+                                <div>
+                                    <h3>Apparence</h3>
+                                    <p>Personnalisez le thème de l'application</p>
+                                </div>
+                            </div>
+                            <div class="settings-panel-body">
+                                <div class="settings-row">
+                                    <div class="settings-row-label">
+                                        <strong>Mode Sombre</strong>
+                                        <span>Activer ou désactiver le thème sombre</span>
+                                    </div>
+                                    <label class="toggle">
+                                        <input type="checkbox" id="toggle-theme" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-panel">
+                            <div class="settings-panel-head">
+                                <div class="settings-panel-icon"><i class="fa-solid fa-globe"></i></div>
+                                <div>
+                                    <h3>Langue</h3>
+                                    <p>Choisissez votre langue préférée</p>
+                                </div>
+                            </div>
+                            <div class="settings-panel-body">
+                                <div class="lang-grid">
+                                    <button class="lang-btn active" data-lang="fr">Français (FR)</button>
+                                    <button class="lang-btn" data-lang="en">English (EN)</button>
+                                    <button class="lang-btn" data-lang="es">Español (ES)</button>
+                                    <button class="lang-btn" data-lang="ht">Kreyòl (HT)</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </main>
+
+            <div id="footer-container"></div>
+            
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. GESTION DE LA LANGUE (Effet visuel + Fonctionnement)
+            const langBtns = document.querySelectorAll('.lang-btn');
+            
+            // Si une langue est déjà en mémoire, on active le bon bouton
+            const currentLang = localStorage.getItem('lang') || 'fr';
+            langBtns.forEach(btn => {
+                if (btn.getAttribute('data-lang') === currentLang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Action au clic sur une langue
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Retire la classe 'active' de tous les boutons
+                    langBtns.forEach(b => b.classList.remove('active'));
+                    // Ajoute la classe 'active' au bouton cliqué
+                    this.classList.add('active');
+
+                    // Récupère le code de la langue (fr, en, etc.)
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Appelle la fonction de ton fichier app.js
+                    if (typeof setLanguage === 'function') {
+                        setLanguage(lang);
+                    }
+                });
+            });
+
+            // 2. GESTION DU THÈME
+            const themeToggle = document.getElementById('toggle-theme');
+            if (themeToggle) {
+                themeToggle.addEventListener('change', function() {
+                    if(this.checked) {
+                        document.body.classList.remove('light-theme');
+                    } else {
+                        document.body.classList.add('light-theme');
+                    }
+                });
+            }
+
         });
-        
-        // GESTION DU THÈME (Basique)
-        const themeBtn = document.getElementById('toggle-theme');
-        if (themeBtn) {
-             themeBtn.removeEventListener('click', handleThemeClick); 
-             themeBtn.addEventListener('click', handleThemeClick);
-        }
-    }
-
-    function handleLangClick() {
-        const lang = this.getAttribute('data-lang');
-        // On suppose que setLanguage est une fonction globale (dans script.js)
-        if (typeof setLanguage === 'function') {
-             setLanguage(lang);
-             alert(`Langue changée en : ${lang.toUpperCase()}`);
-        } else {
-             alert(`Erreur : La fonction setLanguage n'est pas disponible.`);
-        }
-    }
-
-    function handleThemeClick() {
-         document.body.classList.toggle('dark-theme');
-    }
-</script>
+    </script>
 </body>
 </html>
