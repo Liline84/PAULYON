@@ -54,7 +54,30 @@ img { border-style:none; max-width:100%; display:block; }
   /* Max width content */
   --max-w: 1280px;
 }
+/* ============================================================================
+   🌞 MODIFICATIONS POUR LE THÈME CLAIR (LIGHT THEME)
+   ============================================================================ */
+.light-theme {
+  /* Backgrounds inversés (Clairs) */
+  --bg:           #f8fafc; /* Fond principal blanc cassé */
+  --bg-1:         #ffffff; /* Sidebar blanche */
+  --bg-2:         #f1f5f9; /* Éléments et inputs gris clair */
+  --bg-card:      #ffffff; /* Cartes blanches */
+  --bg-elevated:  #e2e8f0; /* Éléments surélevés */
 
+  /* Borders ajustées pour le blanc */
+  --bdr:          #e2e8f0; /* Bordures grises discrètes */
+  --bdr-h:        #cbd5e1; /* Bordures au survol */
+
+  /* Textes inversés (Sombres) */
+  --t1:  #0f172a; /* Texte principal presque noir */
+  --t2:  #475569; /* Texte secondaire gris foncé */
+  --t3:  #94a3b8; /* Texte atténué gris clair */
+
+  /* Ajustement mineur des opacités d'accents pour lisibilité sur fond clair */
+  --cyan-dim:    rgba(6, 182, 212, 0.08);
+  --cyan-glow:   rgba(6, 182, 212, 0.15);
+}
 /* ============================================================================
    BASE
    ============================================================================ */
@@ -1120,3 +1143,22 @@ footer {
 .text-muted { color: var(--t3); }
 .mt-4 { margin-top: 16px; }
 .mt-8 { margin-top: 32px; }
+
+/* Applique une transition fluide sur les changements de couleurs du thème */
+body, 
+.sidebar, 
+.main-wrap, 
+.topbar, 
+.card, 
+.settings-panel, 
+.settings-panel-head,
+.settings-row,
+.form-group input, 
+.form-group textarea,
+.lang-btn {
+  transition: background-color var(--tr), 
+              color var(--tr), 
+              border-color var(--tr), 
+              box-shadow var(--tr),
+              transform var(--tr);
+}
