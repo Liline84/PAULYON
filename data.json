@@ -19,51 +19,41 @@
   ],
   "products": [
     {
-      "id": 1,
-      "name": "Vêtements (Homme & Femme)",
-      "price": 0,
-      "description": "T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.",
-      "imagePath": "assets/img/vetements.jpg",
-      "iconClass": "fa-solid fa-shirt",
-      "colorClass": "icon-blue"
-    },
-    {
-      "id": 2,
-      "name": "Bijoux Personnalisés",
-      "price": 1000,
-      "description": "Création de bijoux uniques (colliers, bracelets, bagues).",
-      "imagePath": "assets/img/bijoux.jpg",
-      "iconClass": "fa-solid fa-ring",
-      "colorClass": "icon-purple"
-    },
-    {
-      "id": 3,
-      "name": "Produits Cosmétiques",
-      "price": 1000,
-      "description": "Maquillage, soins de la peau et parfums de qualité supérieure.",
-      "imagePath": "assets/img/cosmetiques.jpg",
-      "iconClass": "fa-solid fa-bottle-droplet",
-      "colorClass": "icon-green"
-    },
-    {
-      "id": 4,
-      "name": "Appareils Électroniques",
-      "price": 200,
-      "description": "Gadgets et équipements électroniques modernes et fiables.",
-      "imagePath": "assets/img/electronique.jpg",
+      "name": "Ordinateur HP EliteBook",
+      "description": "Processeur i7, 16 Go RAM, 512 Go SSD. Idéal pour le développement et la bureautique.",
+      "price": 45000,
+      "category": "hardware",
+      "imagePath": "images/hp-elitebook.png",
       "iconClass": "fa-solid fa-laptop",
-      "colorClass": "icon-yellow"
+      "colorClass": "text-blue",
+      "badge": "🔥 Populaire"
+    },
+    {
+      "name": "Clé USB 64 Go",
+      "description": "Haute vitesse USB 3.0, coque métallique résistante.",
+      "price": 1250,
+      "category": "accessories",
+      "imagePath": "images/usb-drive.png",
+      "iconClass": "fa-solid fa-hard-drive",
+      "colorClass": "text-gray",
+      "badge": "Promo"
     }
   ],
   "services": [
     {
-      "id": 101,
-      "title": "Conception Graphique",
-      "price": 750.00,
-      "details": "Design créatif pour tous vos supports marketing : logos, flyers, tasses, bidons, calendriers, et plus.",
-      "status": "online", 
-      "iconClass": "fa-solid fa-paintbrush",
-      "colorClass": "icon-blue-light"
+      "title": "Développement Application Web",
+      "details": "Création de plateformes sur mesure adaptées à vos besoins métier (CRM, ERP, E-commerce).",
+      "price": 75000,
+      "iconClass": "fa-solid fa-code",
+      "colorClass": "text-cyan"
+    },
+    {
+      "title": "Conception d'Identité Visuelle",
+      "details": "Création de logos professionnels, chartes graphiques et supports de communication.",
+      "price": 15000,
+      "iconClass": "fa-solid fa-palette",
+      "colorClass": "text-purple"
     }
   ]
 }
+
