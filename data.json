@@ -38,6 +38,23 @@
       "colorClass": "text-gray",
       "badge": "Promo"
     }
+    {"name": "Vêtements (Homme & Femme)",
+      "description": "T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.",
+      "price": 0,
+      "category": "fashion",
+      "imagePath": "images/vetements.jpg",
+      "iconClass": "fa-solid fa-shirt",
+      "colorClass": "text-gray"
+    },
+    {
+      "name": "Bijoux Personnalisés",
+      "description": "Création de bijoux uniques — colliers, bracelets, bagues.",
+      "price": 1000,
+      "category": "accessories",
+      "imagePath": "images/bijoux.jpg",
+      "iconClass": "fa-solid fa-ring",
+      "colorClass": "text-yellow"
+    }
   ],
   "services": [
     {
