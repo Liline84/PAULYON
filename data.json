@@ -23,7 +23,7 @@
       "description": "Processeur i7, 16 Go RAM, 512 Go SSD. Idéal pour le développement et la bureautique.",
       "price": 45000,
       "category": "hardware",
-      "imagePath": "images/hp-elitebook.png",
+      "imagePath": "images/hp-celeron.webp",
       "iconClass": "fa-solid fa-laptop",
       "colorClass": "text-blue",
       "badge": "🔥 Populaire"
