@@ -37,7 +37,7 @@
       "iconClass": "fa-solid fa-hard-drive",
       "colorClass": "text-gray",
       "badge": "Promo"
-    }
+    },
     {"name": "Vêtements (Homme & Femme)",
       "description": "T-shirts, hoodies, et autres vêtements personnalisés de haute qualité.",
       "price": 0,
@@ -54,7 +54,7 @@
       "imagePath": "images/bijoux.jpg",
       "iconClass": "fa-solid fa-ring",
       "colorClass": "text-yellow"
-    }
+    },
   ],
   "services": [
     {
