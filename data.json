@@ -33,7 +33,7 @@
       "description": "Haute vitesse USB 3.0, coque métallique résistante.",
       "price": 1250,
       "category": "accessories",
-      "imagePath": "images/usb-drive.png",
+      "imagePath": "images/usb-drive.webp",
       "iconClass": "fa-solid fa-hard-drive",
       "colorClass": "text-gray",
       "badge": "Promo"
